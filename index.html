@@ -12,9 +12,9 @@
             background-color: #fcfcfc; /* Very light, soft background */
         }
         /* Custom Pastel/Brand Colors (Using Tailwind defaults for simplicity and re-use) */
-        /* Updated brand-primary to a brighter, more vibrant pink/magenta */
-        .brand-primary { color: #f43f5e; } /* Bright Rose Pink */
-        .brand-bg-light { background-color: #fce7f3; } /* Very Light Pink/Purple */
+        /* Updated brand-primary to a brighter, more vibrant Orange (REPLACED PINK) */
+        .brand-primary { color: #f97316; } /* Bright Orange (Tailwind orange-600) */
+        .brand-bg-light { background-color: #fff7ed; } /* Very Light Orange/Yellow (Tailwind orange-50) */
         .brand-text-dark { color: #374151; } /* Dark Gray-Blue for professionalism */
         .brand-accent-blue { background-color: #67e8f9; } /* Light Cyan/Mint */
 
@@ -26,6 +26,24 @@
             .logo-large {
                 font-size: 3rem; /* Equivalent to text-5xl */
             }
+        }
+        /* Utility class for YouTube/Map responsiveness */
+        .aspect-w-16 { --tw-aspect-w: 16; }
+        .aspect-h-9 { --tw-aspect-h: 9; }
+        .aspect-w-16 > *,
+        .aspect-h-9 > * {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .aspect-w-16 {
+            padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+        }
+        .aspect-container {
+            position: relative;
+            width: 100%;
         }
     </style>
 </head>
@@ -41,18 +59,20 @@
     <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 z-50 bg-white shadow-lg transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo/Title --><!-- Applied logo-large class for bigger text and updated color to brand-primary --><a href="#hero" class="logo-large font-extrabold brand-primary hover:text-pink-600 transition duration-300">
+                <!-- Logo/Title --><!-- Applied logo-large class for bigger text and updated color to brand-primary --><a href="#hero" class="logo-large font-extrabold brand-primary hover:text-orange-600 transition duration-300">
                     ToyAnime <span class="brand-primary">Con</span>
                 </a>
                 
                 <!-- Navigation Links (Desktop) --><nav class="hidden md:flex space-x-8 font-medium">
                     <a href="#about" class="text-gray-600 hover:brand-primary transition duration-300">About</a>
                     <a href="#guests" class="text-gray-600 hover:brand-primary transition duration-300">Guests</a>
+                    <a href="#vendors" class="text-gray-600 hover:brand-primary transition duration-300">Vendors</a>
                     <a href="#tickets" class="text-gray-600 hover:brand-primary transition duration-300">Tickets</a>
+                    <a href="#media" class="text-gray-600 hover:brand-primary transition duration-300">Media</a>
                     <a href="#news" class="text-gray-600 hover:brand-primary transition duration-300">News</a>
                 </nav>
 
-                <!-- Ticket CTA --><!-- Updated button color to match new brand-primary --><a href="#tickets" class="hidden md:block bg-rose-500 text-white px-4 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                <!-- Ticket CTA --><!-- Updated button color to match new brand-primary --><a href="#tickets" class="hidden md:block bg-orange-500 text-white px-4 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
                     Buy Tickets
                 </a>
                 
@@ -66,9 +86,11 @@
             <nav class="flex flex-col space-y-2 p-4 font-medium">
                 <a href="#about" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">About</a>
                 <a href="#guests" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">Guests</a>
+                <a href="#vendors" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">Vendors</a>
                 <a href="#tickets" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">Tickets</a>
+                <a href="#media" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">Media</a>
                 <a href="#news" class="block text-gray-600 hover:bg-gray-50 p-2 rounded transition duration-300">News</a>
-                <!-- Updated button color to match new brand-primary --><a href="#tickets" class="block bg-rose-500 text-white text-center py-2 rounded-lg font-semibold mt-2">Buy Tickets</a>
+                <!-- Updated button color to match new brand-primary --><a href="#tickets" class="block bg-orange-500 text-white text-center py-2 rounded-lg font-semibold mt-2">Buy Tickets</a>
             </nav>
         </div>
     </header>
@@ -82,9 +104,9 @@
                         AnimeVerse
                     </h1>
                     <p class="text-xl text-gray-600 font-medium mb-8">
-                        The ultimate celebration of Japanese toys, anime, and pop culture in the US. Get ready for exclusive merch, creators, and fun!
+                        The ultimate celebration of Japanese anime, toys, and pop culture. Get ready for exclusive merch, creators, and fun!
                     </p>
-                    <!-- Updated button color to match new brand-primary --><a href="#tickets" class="inline-block bg-rose-500 text-white px-8 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
+                    <!-- Updated button color to match new brand-primary --><a href="#tickets" class="inline-block bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105">
                         Get Your Pass Now!
                     </a>
                 </div>
@@ -94,7 +116,7 @@
                         src="images/mascot.jpg" 
                         alt="ToyAnime Convention Official Mascot" 
                         class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-4 border-white transform hover:rotate-2 transition duration-500"
-                        onerror="this.src='https://placehold.co/300x300/FFC0CB/374151?text=MASCOT+NOT+FOUND'"
+                        onerror="this.src='https://placehold.co/300x300/f97316/374151?text=MASCOT+NOT+FOUND'"
                     >
                 </div>
             </div>
@@ -105,7 +127,7 @@
                 <h2 class="text-4xl font-bold text-center brand-text-dark mb-16">The ToyAnime Experience</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1: Exclusive Merch --><div class="rounded-2xl p-6 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 text-center border-t-4 border-pink-400">
+                    <!-- Card 1: Exclusive Merch (Color changed to orange) --><div class="rounded-2xl p-6 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 text-center border-t-4 border-orange-400">
                         <div class="text-4xl mb-4 brand-primary">
                             <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8v2m0 4v2m-6-8h2m-2 4h2m10-4h2m-2 4h2M9 5h6a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2V7a2 2 0 012-2z"></path></svg>
                         </div>
@@ -144,10 +166,10 @@
                 <p class="text-center text-xl text-gray-700 mb-16">The lineup is growing! Follow us for updates on Voice Actors, Artists, and Cosplayers.</p>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-                    <!-- Guest Card (Mock) --><div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-                        <img src="https://placehold.co/150x150/FFD1DC/374151?text=VA+Star" onerror="this.src='https://placehold.co/150x150/FFD1DC/374151?text=VA+Star'" alt="Guest A" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
+                    <!-- Guest Card (Mock) (Color changed to orange) --><div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+                        <img src="https://placehold.co/150x150/FFD1DC/374151?text=VA+Star" onerror="this.src='https://placehold.co/150x150/f97316/374151?text=VA+Star'" alt="Guest A" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
                         <h4 class="font-bold text-lg brand-text-dark">Sarah Chen</h4>
-                        <p class="text-sm text-pink-600 font-medium">Voice Actress</p>
+                        <p class="text-sm text-orange-600 font-medium">Voice Actress</p>
                     </div>
                     <div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100">
                         <img src="https://placehold.co/150x150/ADD8E6/374151?text=Artist+Icon" onerror="this.src='https://placehold.co/150x150/ADD8E6/374151?text=Artist+Icon'" alt="Guest B" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
@@ -159,12 +181,12 @@
                         <h4 class="font-bold text-lg brand-text-dark">Nova Cosplay</h4>
                         <p class="text-sm text-purple-600 font-medium">Featured Cosplayer</p>
                     </div>
-                     <div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100 hidden lg:block">
-                        <img src="https://placehold.co/150x150/FFC0CB/374151?text=Writer" onerror="this.src='https://placehold.co/150x150/FFC0CB/374151?text=Writer'" alt="Guest D" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
+                    <div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100 hidden lg:block">
+                        <img src="https://placehold.co/150x150/FFC0CB/374151?text=Writer" onerror="this.src='https://placehold.co/150x150/f97316/374151?text=Writer'" alt="Guest D" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
                         <h4 class="font-bold text-lg brand-text-dark">Mia Flores</h4>
-                        <p class="text-sm text-pink-600 font-medium">Anime Writer</p>
+                        <p class="text-sm text-orange-600 font-medium">Anime Writer</p>
                     </div>
-                     <div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100 hidden lg:block">
+                    <div class="text-center bg-white p-4 rounded-xl shadow-lg border border-gray-100 hidden lg:block">
                         <img src="https://placehold.co/150x150/90EE90/374151?text=Director" onerror="this.src='https://placehold.co/150x150/90EE90/374151?text=Director'" alt="Guest E" class="w-full h-auto rounded-full mx-auto mb-3 border-4 border-white">
                         <h4 class="font-bold text-lg brand-text-dark">John Smith</h4>
                         <p class="text-sm text-green-600 font-medium">Animation Director</p>
@@ -172,19 +194,55 @@
                 </div>
                 
                 <div class="text-center mt-12">
-                     <button onclick="showMessage('Full guest list and schedule will be released soon!')" class="bg-indigo-600 text-white px-8 py-3 rounded-full text-md font-bold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <button onclick="showMessage('Full guest list and schedule will be released soon!')" class="bg-indigo-600 text-white px-8 py-3 rounded-full text-md font-bold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
                         View All Guests
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Tickets Section --><section id="tickets" class="py-20 md:py-32">
+        <!-- VENDORS SECTION (NEW: 出展者情報ページ) --><section id="vendors" class="py-20 md:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-center brand-text-dark mb-12">Vendor & Artist Information</h2>
+                <p class="text-center text-xl text-gray-700 mb-16">Join the largest gathering of anime and toy creators!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Vendor Table Card (Color changed to orange) --><div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-orange-500 hover:shadow-2xl transition duration-500">
+                        <div class="text-4xl mb-4 text-orange-600">
+                             <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold brand-text-dark mb-3">Exhibitor Booths</h3>
+                        <p class="text-gray-600 mb-4">Secure a large space for retail sales and major product launches.</p>
+                        <a href="#" onclick="showMessage('Exhibitor application opens Jan 2026.')" class="text-sm font-semibold text-orange-600 hover:underline">Apply Now &rarr;</a>
+                    </div>
+                    
+                    <!-- Artist Alley Card --><div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-cyan-500 hover:shadow-2xl transition duration-500">
+                        <div class="text-4xl mb-4 text-cyan-600">
+                            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold brand-text-dark mb-3">Artist Alley Tables</h3>
+                        <p class="text-gray-600 mb-4">Dedicated space for independent artists to sell custom work and commissions.</p>
+                        <a href="#" onclick="showMessage('Artist Alley applications open in October.')" class="text-sm font-semibold text-cyan-600 hover:underline">Check Guidelines &rarr;</a>
+                    </div>
+
+                     <!-- Load-in & Rules Card --><div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-indigo-500 hover:shadow-2xl transition duration-500">
+                        <div class="text-4xl mb-4 text-indigo-600">
+                            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.504A9 9 0 0012 3c-4.64 0-8.232 4.093-6.16 8.57.348.75.5 1.5.5 2.5v5h12v-5c0-1 .152-1.75.5-2.5 2.072-4.477-1.55-8.57-6.16-8.57z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold brand-text-dark mb-3">Rules & Regulations</h3>
+                        <p class="text-gray-600 mb-4">Review all necessary documents regarding setup, sales tax, and convention policies.</p>
+                        <a href="#" onclick="showMessage('All vendors must adhere to the 2026 Exhibitor Handbook.')" class="text-sm font-semibold text-indigo-600 hover:underline">Download Handbook &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tickets Section --><section id="tickets" class="py-20 md:py-32 brand-bg-light">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-bold text-center brand-text-dark mb-16">Get Your Tickets</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <!-- General Admission --><div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-pink-500">
+                    <!-- General Admission (Color changed to orange) --><div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-orange-500">
                         <h3 class="text-3xl font-bold brand-primary mb-2">General Admission</h3>
                         <p class="text-gray-500 mb-6">The essential access to the full convention experience.</p>
                         <p class="text-5xl font-extrabold brand-text-dark mb-6">$55 <span class="text-xl font-medium">/ Day</span></p>
@@ -193,7 +251,7 @@
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Creator Alley Access</li>
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Official Convention Guide</li>
                         </ul>
-                        <button onclick="showMessage('General Admission sales open December 1st, 2025.')" class="w-full bg-pink-500 text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition duration-300">
+                        <button onclick="showMessage('General Admission sales open December 1st, 2025.')" class="w-full bg-orange-500 text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition duration-300">
                             Pre-Register Now
                         </button>
                     </div>
@@ -208,7 +266,7 @@
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Exclusive Lanyard Design</li>
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Guaranteed entry all weekend</li>
                         </ul>
-                         <button onclick="showMessage('Weekend Passes are the most popular option and sell out quickly!')" class="w-full bg-indigo-600 text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition duration-300">
+                        <button onclick="showMessage('Weekend Passes are the most popular option and sell out quickly!')" class="w-full bg-indigo-600 text-white py-3 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition duration-300">
                             Secure Your Weekend Pass
                         </button>
                     </div>
@@ -230,12 +288,83 @@
             </div>
         </section>
 
+        <!-- LOCATION & MEDIA SECTION (NEW: 地図, カレンダー, 写真, 動画) --><section id="media" class="py-20 md:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-center brand-text-dark mb-16">Location & Media Showcase</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                    <!-- Map & Calendar Column -->
+                    <div>
+                        <!-- 1. Map (地図) -->
+                        <h3 class="text-3xl font-bold brand-text-dark mb-6 border-b pb-2 border-orange-300">Venue Map</h3>
+                        <p class="text-gray-600 mb-4">Find us at the Downtown Convention Center.</p>
+                        <div class="aspect-container aspect-w-16 aspect-h-9 w-full h-80 rounded-xl overflow-hidden shadow-xl mb-12">
+                            <!-- Google Maps Embed Placeholder -->
+                            <iframe 
+                                src="https://maps.google.com/maps?q=Convention%20Center%20Anime%20Event&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+
+                        <!-- 2. Calendar/Schedule (カレンダー) -->
+                        <h3 class="text-3xl font-bold brand-text-dark mb-6 border-b pb-2 border-orange-300">Event Schedule</h3>
+                        <div class="bg-gray-50 p-6 rounded-xl shadow-lg">
+                            <ul class="space-y-4">
+                                <li class="p-3 bg-white rounded-lg shadow flex items-center border-l-4 border-orange-500">
+                                    <span class="font-bold w-24 text-gray-700">Day 1:</span> Main Exhibition Hall opens (9:00 AM)
+                                </li>
+                                <li class="p-3 bg-white rounded-lg shadow flex items-center border-l-4 border-indigo-500">
+                                    <span class="font-bold w-24 text-gray-700">Day 2:</span> Featured Guest Panel (2:00 PM)
+                                </li>
+                                <li class="p-3 bg-white rounded-lg shadow flex items-center border-l-4 border-cyan-500">
+                                    <span class="font-bold w-24 text-gray-700">Day 3:</span> Cosplay Competition Finale (5:00 PM)
+                                </li>
+                            </ul>
+                            <a href="#" onclick="showMessage('Full schedule available 1 month prior to event.')" class="mt-4 inline-block text-orange-600 font-medium hover:underline">View Full Schedule &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Photos & Video Column -->
+                    <div>
+                        <!-- 3. Event Images (イベントのイメージの写真) -->
+                        <h3 class="text-3xl font-bold brand-text-dark mb-6 border-b pb-2 border-orange-300">Photo Gallery</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-12">
+                            <img src="https://placehold.co/400x300/f97316/ffffff?text=EVENT+PHOTO+1" alt="Event photo 1" class="w-full h-auto rounded-lg shadow-md object-cover">
+                            <img src="https://placehold.co/400x300/ffbb58/374151?text=EVENT+PHOTO+2" alt="Event photo 2" class="w-full h-auto rounded-lg shadow-md object-cover">
+                            <img src="https://placehold.co/400x300/ff9916/ffffff?text=EVENT+PHOTO+3" alt="Event photo 3" class="w-full h-auto rounded-lg shadow-md object-cover col-span-2">
+                        </div>
+
+                        <!-- 4. Video (動画) -->
+                        <h3 class="text-3xl font-bold brand-text-dark mb-6 border-b pb-2 border-orange-300">Promotional Video</h3>
+                        <div class="aspect-container aspect-w-16 aspect-h-9 w-full rounded-xl overflow-hidden shadow-xl">
+                            <!-- YouTube Embed Placeholder -->
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=P81gV7zGj1p-1e3T" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- News/Updates Section --><section id="news" class="py-20 md:py-32 bg-gray-50">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-bold text-center brand-text-dark mb-12">Latest Updates</h2>
                 
                 <div class="space-y-4">
-                    <!-- News Item 1 --><a href="#" onclick="showMessage('News Detail: Venue Announcement')" class="block bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex justify-between items-center border-l-4 border-pink-500">
+                    <!-- News Item 1 (Color changed to orange) --><a href="#" onclick="showMessage('News Detail: Venue Announcement')" class="block bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex justify-between items-center border-l-4 border-orange-500">
                         <div>
                             <span class="text-sm font-semibold brand-primary mr-3">OCT 25, 2025</span>
                             <span class="text-gray-700 font-medium">VENUE ANNOUNCEMENT: We are moving to the downtown Convention Center!</span>
@@ -268,10 +397,10 @@
             <p class="text-gray-400 mb-6">Contact: info@toyanimecon.com</p>
             
             <div class="flex justify-center space-x-6 mb-6">
-                <!-- Social Media Icons (Mock) --><a href="#" onclick="showMessage('Linking to X (Twitter)...')" class="text-gray-300 hover:text-rose-400 transition duration-300">
+                <!-- Social Media Icons (Mock) (Color changed to orange) --><a href="#" onclick="showMessage('Linking to X (Twitter)...')" class="text-gray-300 hover:text-orange-400 transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
                 </a>
-                <a href="#" onclick="showMessage('Linking to Instagram...')" class="text-gray-300 hover:text-rose-400 transition duration-300">
+                <a href="#" onclick="showMessage('Linking to Instagram...')" class="text-gray-300 hover:text-orange-400 transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58 1.28-.058 1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
                 </a>
             </div>
