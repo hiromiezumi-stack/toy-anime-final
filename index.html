@@ -1,523 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeVerse Convention: Where Passion Meets Art</title>
+    <title>ToyAnime Fes: Vivid Pop Edition</title>
     
-    <!-- Load Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS CDNをロード --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font: Inter (remains, but sizes adjusted for a modern look) --><style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap'); /* For bolder headings */
+    <!-- カスタムスタイル＆ビビッドカラー定義 --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap'); 
+
+        /* Custom Colors - Vivid Pop Theme (Black & Blue/Cyan) */
+        :root {
+            --color-primary: #00FFFF; /* Vivid Cyan/Aqua */
+            --color-secondary: #FF00FF; /* Vivid Magenta (Accent) */
+            --color-bg-dark: #0A0A0A; /* Deep Black */
+            --color-text-light: #E5E7EB; /* Light Gray for dark backgrounds */
+        }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc; /* Very light, soft background */
-            color: #374151; /* Default dark text */
-        }
-
-        /* Custom Colors - Deeper Orange, Darker Tones */
-        :root {
-            --color-primary: #ea580c; /* Deeper, more sophisticated orange (Tailwind orange-600/700-ish) */
-            --color-secondary: #0f172a; /* Dark Navy/Charcoal for text and backgrounds (Tailwind slate-900) */
-            --color-accent: #67e8f9; /* Light Cyan/Mint for highlights */
-            --color-light-bg: #fff7ed; /* Very Light Orange/Cream */
-            --color-text-light: #d1d5db; /* Light Gray for dark backgrounds */
+            background-color: var(--color-bg-dark); 
+            color: var(--color-text-light);
         }
 
         .text-primary { color: var(--color-primary); }
         .bg-primary { background-color: var(--color-primary); }
-        .border-primary { border-color: var(--color-primary); }
+        .text-secondary-accent { color: var(--color-secondary); }
         
-        .text-secondary { color: var(--color-secondary); }
-        .bg-secondary { background-color: var(--color-secondary); }
-
-        .text-accent { color: var(--color-accent); }
-        .bg-light-bg { background-color: var(--color-light-bg); }
-
-        /* Larger logo text */
+        /* ロゴスタイル */
         .logo-large {
-            font-family: 'Montserrat', sans-serif; /* Use Montserrat for the logo for impact */
-            font-size: 2.25rem; /* text-4xl */
-            line-height: 1; /* Tighter line height */
-        }
-        @media (min-width: 768px) {
-            .logo-large {
-                font-size: 2.75rem; /* text-5xl-ish */
-            }
-        }
-        @media (min-width: 1024px) {
-            .logo-large {
-                font-size: 3.25rem; /* text-6xl-ish */
-            }
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
         }
 
-        /* Utility class for YouTube/Map responsiveness */
-        .aspect-w-16 { --tw-aspect-w: 16; }
-        .aspect-h-9 { --tw-aspect-h: 9; }
-        .aspect-w-16 > *,
-        .aspect-h-9 > * {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-        }
-        .aspect-w-16 {
-            padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
-        }
-        .aspect-container {
-            position: relative;
-            width: 100%;
+        /* Heroセクションのタイトルスタイル */
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* ネオンエフェクト */
         }
 
-        /* --- Scroll Reveal Animation Styles --- */
+        /* --- Scroll Reveal Animation Styles (Vivid) --- */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             will-change: opacity, transform;
         }
         .scroll-reveal.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .scroll-reveal:nth-child(1) { transition-delay: 0s; }
-        .scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
-        .scroll-reveal:nth-child(3) { transition-delay: 0.2s; }
-        .scroll-reveal:nth-child(4) { transition-delay: 0.3s; }
-        .scroll-reveal:nth-child(5) { transition-delay: 0.4s; }
-        .scroll-reveal:nth-child(6) { transition-delay: 0.5s; }
-
-        /* Header Specific Styles for Sophistication */
-        #header {
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        #header.scrolled {
-            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            backdrop-filter: blur(10px); /* Frosted glass effect */
-        }
-        #header .nav-link:hover {
-            color: var(--color-primary);
-            transform: translateY(-2px); /* Subtle lift on hover */
-        }
-        #header .cta-button {
-            transition: all 0.3s ease;
-        }
-        #header .cta-button:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 15px rgba(234, 88, 12, 0.4);
-        }
-
-        /* Hero section specific styles */
-        .hero-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-        }
-        .mascot-image {
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        .mascot-image:hover {
-            transform: rotate(2deg) scale(1.05);
-            box-shadow: 0 20px 30px -5px rgba(234, 88, 12, 0.5), 0 10px 15px -5px rgba(234, 88, 12, 0.1);
-        }
-        
-        /* Card hover effects */
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
     </style>
 </head>
-<body class="text-secondary">
+<body class="text-gray-100">
 
-    <!-- Message Box Display Logic --><div id="message-box" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-[999] p-4">
-        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform transition-all duration-300 scale-95" id="message-content-box">
-            <p id="message-text" class="text-xl font-semibold text-secondary mb-5"></p>
-            <button onclick="closeMessage()" class="bg-primary text-white px-7 py-2.5 rounded-full font-semibold hover:opacity-90 transition duration-300 transform hover:scale-105">Close</button>
+    <!-- メッセージボックス (ポップなスタイルに更新) --><div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-[999] p-4">
+        <div class="bg-gray-900 p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform transition-all duration-300 scale-95 border-4 border-primary" id="message-content-box">
+            <p id="message-text" class="text-xl font-bold text-white mb-5"></p>
+            <button onclick="closeMessage()" class="bg-secondary-accent text-gray-900 px-7 py-2.5 rounded-full font-bold hover:opacity-90 transition duration-300 transform hover:scale-110 shadow-lg">CLOSE</button>
         </div>
     </div>
 
-    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 z-50 bg-white transition-all duration-300">
+    <!-- ヘッダー (スティッキーナビゲーション) --><header id="header" class="sticky top-0 z-50 bg-black bg-opacity-90 transition-all duration-300 shadow-xl border-b border-primary" style="backdrop-filter: blur(5px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo/Title --><a href="#hero" class="logo-large font-extrabold text-primary hover:text-orange-700 transition duration-300">
-                    AnimeVerse <span class="text-secondary">Con</span>
+                <!-- ロゴ/タイトル --><a href="#" class="logo-large font-extrabold text-primary hover:text-cyan-400 transition duration-300">
+                    TOYANIME <span class="text-secondary-accent">FES</span>
                 </a>
                 
-                <!-- Navigation Links (Desktop) --><nav class="hidden md:flex space-x-10 font-medium text-lg">
-                    <a href="#about" class="nav-link text-gray-700 hover:text-primary transition duration-300">About</a>
-                    <a href="#guests" class="nav-link text-gray-700 hover:text-primary transition duration-300">Guests</a>
-                    <a href="#vendors" class="nav-link text-gray-700 hover:text-primary transition duration-300">Vendors</a>
-                    <a href="#tickets" class="nav-link text-gray-700 hover:text-primary transition duration-300">Tickets</a>
-                    <a href="#media" class="nav-link text-gray-700 hover:text-primary transition duration-300">Media</a>
-                    <a href="#news" class="nav-link text-gray-700 hover:text-primary transition duration-300">News</a>
+                <!-- ナビゲーションリンク (デスクトップ) - 別ページ遷移を想定し、#リンクに設定 --><nav class="hidden md:flex space-x-10 font-bold text-lg">
+                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">ABOUT</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">UPCOMING EVENTS</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">MEDIA</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">NEWS</a>
                 </nav>
 
-                <!-- Ticket CTA --><a href="#tickets" class="hidden md:block bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl cta-button">
-                    Get Tickets
+                <!-- チケットCTAボタン --><a href="#" onclick="showMessage('Ticket sales portal opens soon!')" class="hidden md:block bg-secondary-accent text-black px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button">
+                    GET TICKETS
                 </a>
                 
-                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-primary focus:outline-none">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <!-- モバイルメニューボタン --><button id="mobile-menu-btn" class="md:hidden text-primary hover:text-secondary-accent focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 pb-4">
-            <nav class="flex flex-col space-y-3 p-4 font-medium text-lg">
-                <a href="#about" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">About</a>
-                <a href="#guests" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">Guests</a>
-                <a href="#vendors" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">Vendors</a>
-                <a href="#tickets" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">Tickets</a>
-                <a href="#media" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">Media</a>
-                <a href="#news" class="block text-gray-700 hover:bg-gray-50 p-3 rounded transition duration-300">News</a>
-                <a href="#tickets" class="block bg-primary text-white text-center py-3 rounded-lg font-semibold mt-4">Get Tickets</a>
+        <!-- モバイルメニュー --><div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800 pb-4">
+            <nav class="flex flex-col space-y-3 p-4 font-bold text-lg">
+                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">ABOUT</a>
+                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">UPCOMING EVENTS</a>
+                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">MEDIA</a>
+                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">NEWS</a>
+                <a href="#" onclick="showMessage('Ticket sales portal opens soon!')" class="block bg-secondary-accent text-black text-center py-3 rounded-lg font-bold mt-4 shadow-lg">GET TICKETS</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section (Centered Title, Animated Background) --><section id="hero" class="relative overflow-hidden pt-28 pb-20 md:pt-40 md:pb-32 bg-light-bg text-center">
-            <!-- Animated Background Pattern (Subtle Anime-inspired) --><div class="absolute inset-0 z-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23f97316\' fill-opacity=\'0.2\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zm0 20v-4H4v4H0v2h4v4h2v-4h4v-2H6zM36 4v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 4v-4H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        <!-- Hero Section (ToyAnime Fes Mission) - 短く、黒背景にビビッドな色 --><section id="hero" class="relative overflow-hidden pt-36 pb-28 md:pt-48 md:pb-36 text-center bg-secondary-dark border-b-8 border-secondary-accent">
             
             <div class="max-w-6xl mx-auto px-4 relative z-10">
-                <p class="text-xl font-medium text-primary mb-4 uppercase tracking-widest scroll-reveal">Spring 2026</p>
-                <h1 class="hero-title text-6xl lg:text-8xl text-secondary leading-tight scroll-reveal" style="transition-delay: 0.1s;">
-                    AnimeVerse
+                <p class="text-2xl font-bold text-primary mb-6 uppercase tracking-widest scroll-reveal">WELCOME TO</p>
+                <h1 class="hero-title text-8xl lg:text-9xl text-primary leading-none scroll-reveal" style="transition-delay: 0.1s;">
+                    TOYANIME
                 </h1>
-                <!-- NEW SUBTITLE -->
-                <p class="text-2xl font-semibold text-primary mb-6 scroll-reveal" style="transition-delay: 0.15s;">
-                    ToyAnime Event
+                <p class="hero-subtitle text-4xl font-bold text-secondary-accent uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
+                    FES
                 </p>
-                <p class="text-xl md:text-2xl text-gray-700 font-light max-w-3xl mx-auto mb-10 scroll-reveal" style="transition-delay: 0.2s;">
-                    The ultimate celebration of Japanese anime, manga, toys, and pop culture. Immerse yourself in a world of exclusive merchandise, legendary creators, and unforgettable experiences.
-                </p>
-                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6 mb-12 scroll-reveal" style="transition-delay: 0.3s;">
-                    <a href="#tickets" class="inline-block bg-primary text-white px-9 py-4 rounded-full text-xl font-bold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                        Secure Your Pass
-                    </a>
-                    <a href="#about" class="inline-block border-2 border-primary text-primary px-9 py-4 rounded-full text-xl font-bold hover:bg-primary hover:text-white transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                        Learn More
-                    </a>
+
+                <!-- ミッションステートメント -->
+                <div class="max-w-4xl mx-auto mb-20 p-8 border-4 border-primary rounded-2xl shadow-2xl bg-black bg-opacity-70 scroll-reveal" style="transition-delay: 0.3s;">
+                    <h2 class="text-3xl font-bold text-secondary-accent mb-4 uppercase">OUR MISSION</h2>
+                    <p class="text-xl md:text-2xl text-gray-200 font-light leading-relaxed">
+                        To ignite the passion for Japanese pop culture, fostering a vibrant community where creators, collectors, and fans connect over the art of toys, anime, and design.
+                    </p>
                 </div>
 
-                <!-- Mascot Image (LARGER & Hover Effect) --><div class="mt-16 flex justify-center scroll-reveal" style="transition-delay: 0.4s;">
+                <!-- Mascot Image (短くするために下に配置し、ホバーエフェクト維持) --><div class="flex justify-center scroll-reveal" style="transition-delay: 0.4s;">
                     <img 
                         src="images/mascot.jpg" 
-                        alt="AnimeVerse Official Mascot" 
-                        class="mascot-image w-72 h-72 md:w-96 md:h-96 rounded-full object-cover shadow-2xl border-4 border-white transform transition duration-500"
-                        onerror="this.src='https://placehold.co/300x300/ea580c/ffffff?text=MASCOT+NOT+FOUND'"
+                        alt="ToyAnime Fes Official Mascot" 
+                        class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-primary transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
+                        onerror="this.src='https://placehold.co/300x300/111827/00FFFF?text=MASCOT+NOT+FOUND'"
                     >
                 </div>
             </div>
         </section>
 
-        <!-- About Section: Key Features --><section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-secondary mb-16 scroll-reveal">The AnimeVerse Experience</h2>
+        <!-- フッター --><footer class="bg-black text-white py-12 border-t border-primary">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h3 class="text-3xl font-extrabold text-primary mb-4">TOYANIME FES</h3>
+                <p class="text-gray-500 text-lg mb-8">Contact: info@toyanimefes.com | Follow the hype!</p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
-                    <!-- Card 1: Exclusive Merch --><div class="rounded-2xl p-8 bg-white shadow-lg border-t-4 border-primary transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/FFC0CB/0f172a?text=Char1" alt="Character" class="absolute -top-12 -left-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-primary">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8v2m0 4v2m-6-8h2m-2 4h2m10-4h2m-2 4h2M9 5h6a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2V7a2 2 0 012-2z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Exclusive Merch & Figures</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Discover convention-exclusive figures, limited edition collectibles, and unreleased prototypes from top Japanese and international manufacturers.
-                        </p>
-                    </div>
-
-                    <!-- Card 2: Creator Alley --><div class="rounded-2xl p-8 bg-white shadow-lg border-t-4 border-accent transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/ADD8E6/0f172a?text=Char2" alt="Character" class="absolute -top-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-accent">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3v-1a3 3 0 013-3h7a3 3 0 013 3z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Meet The Creators</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Get autographs, commissions, and network with hundreds of independent artists, voice actors, illustrators, and industry professionals.
-                        </p>
-                    </div>
-
-                    <!-- Card 3: Panels & Screenings --><div class="rounded-2xl p-8 bg-white shadow-lg border-t-4 border-indigo-500 transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/DDA0DD/0f172a?text=Char3" alt="Character" class="absolute -bottom-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-indigo-500">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Panels & Screenings</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Enjoy dynamic panel discussions, exclusive footage premieres, and workshops covering everything from animation to cosplay creation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Guests Section --><section id="guests" class="py-20 md:py-32 bg-light-bg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-secondary mb-12 scroll-reveal">Featured Guests</h2>
-                <p class="text-center text-xl text-gray-700 max-w-3xl mx-auto mb-16 scroll-reveal">The lineup is growing! Stay tuned for announcements on celebrity Voice Actors, revered Manga Artists, and celebrated Cosplayers joining us.</p>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
-                    <!-- Guest Card (Character-style image with pink border) --><div class="text-center bg-white p-6 rounded-xl shadow-md border border-gray-100 transition duration-300 transform card-hover scroll-reveal">
-                        <!-- Using w-full so no size change needed here, but keeping placeholder style consistent -->
-                        <img src="https://placehold.co/180x180/FFD1DC/0f172a?text=Anime+Girl" alt="Guest A" class="w-full h-auto rounded-full mx-auto mb-4 border-4 border-pink-400 object-cover">
-                        <h4 class="font-bold text-xl text-secondary">Sarah Chen</h4>
-                        <p class="text-md text-primary font-medium">Voice Actress</p>
-                    </div>
-                    <div class="text-center bg-white p-6 rounded-xl shadow-md border border-gray-100 transition duration-300 transform card-hover scroll-reveal">
-                        <img src="https://placehold.co/180x180/ADD8E6/0f172a?text=Anime+Boy" alt="Guest B" class="w-full h-auto rounded-full mx-auto mb-4 border-4 border-pink-400 object-cover">
-                        <h4 class="font-bold text-xl text-secondary">Kenji Ito</h4>
-                        <p class="text-md text-accent font-medium">Manga Artist</p>
-                    </div>
-                    <div class="text-center bg-white p-6 rounded-xl shadow-md border border-gray-100 transition duration-300 transform card-hover hidden sm:block scroll-reveal">
-                        <img src="https://placehold.co/180x180/DDA0DD/0f172a?text=Anime+Chibi" alt="Guest C" class="w-full h-auto rounded-full mx-auto mb-4 border-4 border-pink-400 object-cover">
-                        <h4 class="font-bold text-xl text-secondary">Nova Cosplay</h4>
-                        <p class="text-md text-indigo-500 font-medium">Featured Cosplayer</p>
-                    </div>
-                    <div class="text-center bg-white p-6 rounded-xl shadow-md border border-gray-100 transition duration-300 transform card-hover hidden lg:block scroll-reveal">
-                        <img src="https://placehold.co/180x180/FFC0CB/0f172a?text=Anime+Girl" alt="Guest D" class="w-full h-auto rounded-full mx-auto mb-4 border-4 border-pink-400 object-cover">
-                        <h4 class="font-bold text-xl text-secondary">Mia Flores</h4>
-                        <p class="text-md text-primary font-medium">Anime Writer</p>
-                    </div>
-                    <div class="text-center bg-white p-6 rounded-xl shadow-md border border-gray-100 transition duration-300 transform card-hover hidden lg:block scroll-reveal">
-                        <img src="https://placehold.co/180x180/90EE90/0f172a?text=Anime+Boy" alt="Guest E" class="w-full h-auto rounded-full mx-auto mb-4 border-4 border-pink-400 object-cover">
-                        <h4 class="font-bold text-xl text-secondary">John Smith</h4>
-                        <p class="text-md text-green-600 font-medium">Animation Director</p>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12 scroll-reveal">
-                    <button onclick="showMessage('Full guest list and schedule will be released soon!')" class="bg-indigo-600 text-white px-9 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                        View All Guests
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- VENDORS SECTION --><section id="vendors" class="py-20 md:py-32 bg-white relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-secondary mb-12 scroll-reveal">Vendor & Artist Information</h2>
-                <p class="text-center text-xl text-gray-700 max-w-3xl mx-auto mb-16 scroll-reveal">Join the largest gathering of anime and toy creators! Find opportunities below.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
-                    <!-- Vendor Table Card --><div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-primary transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/FFD1DC/0f172a?text=VendorChar1" alt="Character" class="absolute -top-12 -left-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-primary">
-                             <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Exhibitor Booths</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Secure a large space for retail sales and major product launches. Ideal for established brands.</p>
-                        <a href="#" onclick="showMessage('Exhibitor application opens Jan 2026.')" class="text-lg font-semibold text-primary hover:underline transition duration-300">Apply Now &rarr;</a>
-                    </div>
-                    
-                    <!-- Artist Alley Card --><div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-accent transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/ADD8E6/0f172a?text=VendorChar2" alt="Character" class="absolute -top-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-accent">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Artist Alley Tables</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Dedicated space for independent artists to sell custom work, prints, and unique commissions.</p>
-                        <a href="#" onclick="showMessage('Artist Alley applications open in October.')" class="text-lg font-semibold text-accent hover:underline transition duration-300">Check Guidelines &rarr;</a>
-                    </div>
-
-                    <!-- Load-in & Rules Card --><div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-indigo-500 transition duration-500 transform card-hover text-center scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/DDA0DD/0f172a?text=VendorChar3" alt="Character" class="absolute -bottom-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <div class="text-5xl mb-5 text-indigo-500">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.504A9 9 0 0012 3c-4.64 0-8.232 4.093-6.16 8.57.348.75.5 1.5.5 2.5v5h12v-5c0-1 .152-1.75.5-2.5 2.072-4.477-1.55-8.57-6.16-8.57z"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-secondary mb-3">Rules & Regulations</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Review all necessary documents regarding booth setup, sales policies, and convention rules.</p>
-                        <a href="#" onclick="showMessage('All vendors must adhere to the 2026 Exhibitor Handbook.')" class="text-lg font-semibold text-indigo-600 hover:underline transition duration-300">Download Handbook &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tickets Section --><section id="tickets" class="py-20 md:py-32 bg-light-bg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-secondary mb-16 scroll-reveal">Choose Your AnimeVerse Experience</h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <!-- General Admission --><div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-primary relative transition duration-300 card-hover scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/FFC0CB/0f172a?text=TicketChar1" alt="Character" class="absolute -top-12 -left-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <h3 class="text-3xl font-bold text-primary mb-3">General Admission</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">The essential access to the full convention experience.</p>
-                        <div class="flex items-baseline mb-6">
-                            <p class="text-6xl font-extrabold text-secondary mr-2">$55</p>
-                            <span class="text-xl font-medium text-gray-500">/ Day</span>
-                        </div>
-                        <ul class="space-y-3 text-gray-700 mb-8 text-lg">
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Access to all Exhibits & Panels</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Creator Alley Access</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Official Convention Guide</li>
-                        </ul>
-                        <button onclick="showMessage('General Admission sales open December 1st, 2025.')" class="w-full bg-primary text-white py-4 rounded-xl text-xl font-bold shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                            Pre-Register Now
-                        </button>
-                    </div>
-                    
-                    <!-- Weekend Pass (Highlight) --><div class="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-indigo-600 relative transition duration-300 transform scale-105 md:scale-100 card-hover scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/ADD8E6/0f172a?text=TicketChar2" alt="Character" class="absolute -top-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <span class="inline-block bg-yellow-400 text-gray-900 text-sm font-bold px-4 py-1.5 rounded-full mb-3 shadow-md">BEST VALUE</span>
-                        <h3 class="text-3xl font-bold text-indigo-600 mb-3">Weekend Pass (3-Day)</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">Uninterrupted access to the full weekend of events and fun.</p>
-                        <div class="flex items-baseline mb-6">
-                            <p class="text-6xl font-extrabold text-secondary mr-2">$140</p>
-                            <span class="text-xl font-medium text-gray-500">/ 3 Days</span>
-                        </div>
-                        <ul class="space-y-3 text-gray-700 mb-8 text-lg">
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> **Save $25 compared to daily tickets!**</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Exclusive Lanyard Design</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Guaranteed entry all weekend</li>
-                        </ul>
-                        <button onclick="showMessage('Weekend Passes are the most popular option and sell out quickly!')" class="w-full bg-indigo-600 text-white py-4 rounded-xl text-xl font-bold shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                            Secure Your Weekend Pass
-                        </button>
-                    </div>
-
-                    <!-- Ultimate Platinum --><div class="bg-white p-8 rounded-2xl shadow-lg border-t-8 border-yellow-500 relative transition duration-300 card-hover scroll-reveal">
-                        <!-- Icon Updated Size and Position --><img src="https://placehold.co/80x80/DDA0DD/0f172a?text=TicketChar3" alt="Character" class="absolute -bottom-12 -right-10 w-24 h-24 rounded-full object-cover border-2 border-white shadow-md hidden lg:block">
-                        <h3 class="text-3xl font-bold text-yellow-600 mb-3">Platinum VIP Access</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">The ultimate fan experience with priority access and exclusive perks.</p>
-                        <div class="flex items-baseline mb-6">
-                            <p class="text-6xl font-extrabold text-secondary mr-2">$300</p>
-                            <span class="text-xl font-medium text-gray-500">/ Limited</span>
-                        </div>
-                        <ul class="space-y-3 text-gray-700 mb-8 text-lg">
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> **Priority Entry (30 mins early)**</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Exclusive Guest Meet-and-Greet Slot</li>
-                            <li class="flex items-center"><svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Limited Edition Merch Box</li>
-                        </ul>
-                        <button onclick="showMessage('Platinum passes are extremely limited and go on sale in November.')" class="w-full bg-yellow-500 text-secondary py-4 rounded-xl text-xl font-bold shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 hover:-translate-y-1">
-                            Check Availability
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- LOCATION & MEDIA SECTION --><section id="media" class="py-20 md:py-32 bg-secondary text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-white mb-16 scroll-reveal">Location & Media Showcase</h2>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-                    <!-- Map & Calendar Column --><div class="scroll-reveal">
-                        <!-- 1. Map --><h3 class="text-4xl font-bold text-white mb-6 border-b pb-3 border-gray-700">Venue Map</h3>
-                        <p class="text-gray-300 text-lg mb-6">Find us at the Downtown Convention Center, a state-of-the-art facility perfect for AnimeVerse.</p>
-                        <div class="aspect-container aspect-w-16 aspect-h-9 w-full h-80 rounded-xl overflow-hidden shadow-xl mb-12 border border-gray-700">
-                            <!-- Google Maps Embed Placeholder --><iframe 
-                                src="https://maps.google.com/maps?q=Convention%20Center%20Anime%20Event&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-
-                        <!-- 2. Calendar/Schedule --><h3 class="text-4xl font-bold text-white mb-6 border-b pb-3 border-gray-700">Event Schedule</h3>
-                        <div class="bg-gray-800 p-7 rounded-xl shadow-lg">
-                            <ul class="space-y-4">
-                                <li class="p-4 bg-gray-900 rounded-lg shadow flex items-center border-l-4 border-primary">
-                                    <span class="font-bold w-28 text-gray-200 text-lg">Day 1:</span> <span class="text-gray-300 text-lg">Main Exhibition Hall opens (9:00 AM)</span>
-                                </li>
-                                <li class="p-4 bg-gray-900 rounded-lg shadow flex items-center border-l-4 border-indigo-500">
-                                    <span class="font-bold w-28 text-gray-200 text-lg">Day 2:</span> <span class="text-gray-300 text-lg">Featured Guest Panel (2:00 PM)</span>
-                                </li>
-                                <li class="p-4 bg-gray-900 rounded-lg shadow flex items-center border-l-4 border-accent">
-                                    <span class="font-bold w-28 text-gray-200 text-lg">Day 3:</span> <span class="text-gray-300 text-lg">Cosplay Competition Finale (5:00 PM)</span>
-                                </li>
-                            </ul>
-                            <a href="#" onclick="showMessage('Full schedule available 1 month prior to event.')" class="mt-6 inline-block text-primary text-lg font-medium hover:underline transition duration-300">View Full Schedule &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Photos & Video Column --><div class="scroll-reveal">
-                        <!-- 3. Event Images --><h3 class="text-4xl font-bold text-white mb-6 border-b pb-3 border-gray-700">Photo Gallery</h3>
-                        <div class="grid grid-cols-2 gap-5 mb-12">
-                            <img src="https://placehold.co/400x300/ea580c/ffffff?text=EVENT+PHOTO+1" alt="Event photo 1" class="w-full h-auto rounded-lg shadow-md object-cover">
-                            <img src="https://placehold.co/400x300/f97316/374151?text=EVENT+PHOTO+2" alt="Event photo 2" class="w-full h-auto rounded-lg shadow-md object-cover">
-                            <img src="https://placehold.co/400x300/fb923c/0f172a?text=EVENT+PHOTO+3" alt="Event photo 3" class="w-full h-auto rounded-lg shadow-md object-cover col-span-2">
-                        </div>
-
-                        <!-- 4. Video --><h3 class="text-4xl font-bold text-white mb-6 border-b pb-3 border-gray-700">Promotional Video</h3>
-                        <div class="aspect-container aspect-w-16 aspect-h-9 w-full rounded-xl overflow-hidden shadow-xl border border-gray-700">
-                            <!-- YouTube Embed Placeholder --><iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=P81gV7zGj1p-1e3T" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- News/Updates Section --><section id="news" class="py-20 md:py-32 bg-light-bg">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-5xl font-extrabold text-center text-secondary mb-12 scroll-reveal">Latest Updates</h2>
-                <p class="text-center text-xl text-gray-700 max-w-3xl mx-auto mb-16 scroll-reveal">Stay informed with the freshest news and announcements from AnimeVerse Convention.</p>
-                
-                <div class="space-y-6 relative z-10">
-                    <!-- News Item 1 --><a href="#" onclick="showMessage('News Detail: Venue Announcement')" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col md:flex-row items-start md:items-center border-l-4 border-primary transform card-hover scroll-reveal">
-                        <!-- Icon Updated Size --><img src="https://placehold.co/70x70/FFD1DC/0f172a?text=NewsChar1" alt="News Character" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm mr-6 mb-4 md:mb-0 flex-shrink-0">
-                        <div class="flex-grow">
-                            <span class="text-md font-semibold text-primary block mb-1 md:inline mr-3">OCT 25, 2025</span>
-                            <span class="text-lg text-gray-700 font-medium leading-relaxed">VENUE ANNOUNCEMENT: We are moving to the spectacular Downtown Convention Center! Get ready for an even bigger experience.</span>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500 ml-auto mt-4 md:mt-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <!-- ソーシャルメディアアイコン --><a href="#" onclick="showMessage('Linking to X (Twitter)...')" class="text-gray-400 hover:text-primary transition duration-300 transform hover:scale-125">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
                     </a>
-                    <!-- News Item 2 --><a href="#" onclick="showMessage('News Detail: Creator Alley Applications')" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col md:flex-row items-start md:items-center border-l-4 border-accent transform card-hover scroll-reveal">
-                        <!-- Icon Updated Size --><img src="https://placehold.co/70x70/ADD8E6/0f172a?text=NewsChar2" alt="News Character" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm mr-6 mb-4 md:mb-0 flex-shrink-0">
-                        <div class="flex-grow">
-                            <span class="text-md font-semibold text-accent block mb-1 md:inline mr-3">OCT 10, 2025</span>
-                            <span class="text-lg text-gray-700 font-medium leading-relaxed">CREATOR ALLEY: Applications for independent artist booths are officially open! Don't miss your chance to showcase.</span>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500 ml-auto mt-4 md:mt-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                    <!-- News Item 3 --><a href="#" onclick="showMessage('News Detail: Website Launch')" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col md:flex-row items-start md:items-center border-l-4 border-indigo-500 transform card-hover scroll-reveal">
-                        <!-- Icon Updated Size --><img src="https://placehold.co/70x70/DDA0DD/0f172a?text=NewsChar3" alt="News Character" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm mr-6 mb-4 md:mb-0 flex-shrink-0">
-                        <div class="flex-grow">
-                            <span class="text-md font-semibold text-indigo-500 block mb-1 md:inline mr-3">SEP 01, 2025</span>
-                            <span class="text-lg text-gray-700 font-medium leading-relaxed">OFFICIAL LAUNCH: The brand new AnimeVerse Convention 2026 website is now live! Explore all the new features.</span>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500 ml-auto mt-4 md:mt-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <a href="#" onclick="showMessage('Linking to Instagram...')" class="text-gray-400 hover:text-secondary-accent transition duration-300 transform hover:scale-110">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58 1.28-.058 1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
                     </a>
                 </div>
+                <p class="text-sm text-gray-700">© 2025 ToyAnime Fes. All Rights Reserved.</p>
             </div>
-        </section>
+        </footer>
 
     </main>
 
-    <!-- Footer --><footer class="bg-secondary text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 class="text-3xl font-extrabold text-white mb-4">AnimeVerse Convention</h3>
-            <p class="text-gray-400 text-lg mb-8">Contact: info@animeversecon.com</p>
-            
-            <div class="flex justify-center space-x-8 mb-8">
-                <!-- Social Media Icons (Mock) --><a href="#" onclick="showMessage('Linking to X (Twitter)...')" class="text-gray-300 hover:text-primary transition duration-300 transform hover:scale-110">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
-                </a>
-                <a href="#" onclick="showMessage('Linking to Instagram...')" class="text-gray-300 hover:text-primary transition duration-300 transform hover:scale-110">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58 1.28-.058 1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
-                </a>
-            </div>
-            <p class="text-sm text-gray-500">© 2025 AnimeVerse Convention. All Rights Reserved.</p>
-        </div>
-    </footer>
-
     <script>
-        // Message Box Display Logic
+        // メッセージボックスのロジック
         function showMessage(text) {
             const messageBox = document.getElementById('message-box');
             const messageText = document.getElementById('message-text');
@@ -527,12 +163,10 @@
             messageBox.classList.remove('hidden');
             messageBox.classList.add('flex');
             
-            // Animation for appearance
             messageContentBox.classList.remove('scale-95');
             messageContentBox.classList.add('scale-100');
         }
 
-        // Message Box Close Function
         function closeMessage() {
             const messageBox = document.getElementById('message-box');
             const messageContentBox = document.getElementById('message-content-box');
@@ -543,18 +177,17 @@
             setTimeout(() => {
                 messageBox.classList.remove('flex');
                 messageBox.classList.add('hidden');
-            }, 300); // Matches CSS transition duration
+            }, 300);
         }
         
-        // Mobile Menu Toggle Function
+        // モバイルメニューのトグル
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
-            // Toggle body scroll when mobile menu is open
             document.body.classList.toggle('overflow-hidden');
         });
 
-        // Close mobile menu when a link is clicked
+        // モバイルメニューのリンククリック時の動作
         document.querySelectorAll('#mobile-menu a').forEach(item => {
             item.addEventListener('click', () => {
                 document.getElementById('mobile-menu').classList.add('hidden');
@@ -562,11 +195,11 @@
             });
         });
 
-        /* --- Scroll Reveal Logic --- */
+        /* --- スクロール表示ロジック --- */
         const observerOptions = {
             root: null,
             rootMargin: "0px",
-            threshold: 0.15 // Trigger when 15% of the element is visible
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -581,11 +214,9 @@
         function setupScrollReveal() {
             document.querySelectorAll('.scroll-reveal').forEach(el => {
                 const rect = el.getBoundingClientRect();
-                if (rect.top <= (window.innerHeight || document.documentElement.clientHeight)) {
-                    // If already in viewport on load, make visible immediately
+                if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) + 50) {
                     el.classList.add('is-visible');
                 } else {
-                    // Otherwise, observe for scrolling into view
                     observer.observe(el);
                 }
             });
@@ -594,10 +225,10 @@
         document.addEventListener('DOMContentLoaded', setupScrollReveal);
         window.addEventListener('load', setupScrollReveal);
 
-        /* --- Header Scroll Effect --- */
+        /* --- ヘッダースクロールエフェクト --- */
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
-            if (window.scrollY > 50) { // Adjust scroll threshold as needed
+            if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
