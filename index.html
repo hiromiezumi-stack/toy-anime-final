@@ -56,32 +56,45 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* ポップアップを画面幅いっぱいに使うためのカスタムスタイル */
+        .page-modal {
+            max-width: 90vw;
+            width: 800px; /* PCでの最大幅 */
+            max-height: 90vh;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body class="text-gray-100">
 
-    <!-- メッセージボックス (ポップなスタイルに更新) --><div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-[999] p-4">
-        <div class="bg-gray-900 p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform transition-all duration-300 scale-95 border-4 border-primary" id="message-content-box">
-            <p id="message-text" class="text-xl font-bold text-white mb-5"></p>
-            <button onclick="closeMessage()" class="bg-secondary-accent text-gray-900 px-7 py-2.5 rounded-full font-bold hover:opacity-90 transition duration-300 transform hover:scale-110 shadow-lg">CLOSE</button>
+    <!-- メッセージボックス (ポップアップウィンドウとしてリッチコンテンツを表示) --><div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-[999] p-4">
+        <!-- message-content-box をページモーダルとして拡張 -->
+        <div class="bg-gray-900 rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary page-modal" id="message-content-box">
+            <!-- ページコンテンツはJSで挿入される -->
+            <div id="page-content" class="p-8">
+                <!-- コンテンツがここに挿入されます -->
+            </div>
+            <div class="p-5 text-center border-t border-gray-800">
+                <button onclick="closeMessage()" class="bg-secondary-accent text-black px-7 py-2.5 rounded-full font-bold hover:opacity-90 transition duration-300 transform hover:scale-110 shadow-lg">CLOSE PAGE</button>
+            </div>
         </div>
     </div>
 
     <!-- ヘッダー (スティッキーナビゲーション) --><header id="header" class="sticky top-0 z-50 bg-black bg-opacity-90 transition-all duration-300 shadow-xl border-b border-primary" style="backdrop-filter: blur(5px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- ロゴ/タイトル --><a href="#" class="logo-large font-extrabold text-primary hover:text-cyan-400 transition duration-300">
+                <!-- ロゴ/タイトル --><a href="javascript:void(0)" onclick="location.reload()" class="logo-large font-extrabold text-primary hover:text-cyan-400 transition duration-300">
                     TOYANIME <span class="text-secondary-accent">FES</span>
                 </a>
                 
-                <!-- ナビゲーションリンク (デスクトップ) - 別ページ遷移を想定し、#リンクに設定 --><nav class="hidden md:flex space-x-10 font-bold text-lg">
-                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">ABOUT</a>
-                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">UPCOMING EVENTS</a>
-                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">MEDIA</a>
-                    <a href="#" class="nav-link text-gray-300 hover:text-primary transition duration-300">NEWS</a>
+                <!-- ナビゲーションリンク (デスクトップ) - JS関数でポップアップを開くように変更 --><nav class="hidden md:flex space-x-10 font-bold text-lg">
+                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-link text-gray-300 hover:text-primary transition duration-300">ABOUT</a>
+                    <a href="javascript:void(0)" onclick="showPage('events')" class="nav-link text-gray-300 hover:text-primary transition duration-300">UPCOMING EVENTS</a>
+                    <a href="javascript:void(0)" onclick="showPage('media')" class="nav-link text-gray-300 hover:text-primary transition duration-300">MEDIA</a>
+                    <a href="javascript:void(0)" onclick="showPage('news')" class="nav-link text-gray-300 hover:text-primary transition duration-300">NEWS</a>
                 </nav>
 
-                <!-- チケットCTAボタン --><a href="#" onclick="showMessage('Ticket sales portal opens soon!')" class="hidden md:block bg-secondary-accent text-black px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button">
+                <!-- チケットCTAボタン --><a href="javascript:void(0)" onclick="showPage('tickets')" class="hidden md:block bg-secondary-accent text-black px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button">
                     GET TICKETS
                 </a>
                 
@@ -93,11 +106,11 @@
         
         <!-- モバイルメニュー --><div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800 pb-4">
             <nav class="flex flex-col space-y-3 p-4 font-bold text-lg">
-                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">ABOUT</a>
-                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">UPCOMING EVENTS</a>
-                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">MEDIA</a>
-                <a href="#" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">NEWS</a>
-                <a href="#" onclick="showMessage('Ticket sales portal opens soon!')" class="block bg-secondary-accent text-black text-center py-3 rounded-lg font-bold mt-4 shadow-lg">GET TICKETS</a>
+                <a href="javascript:void(0)" onclick="showPage('about')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">ABOUT</a>
+                <a href="javascript:void(0)" onclick="showPage('events')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">UPCOMING EVENTS</a>
+                <a href="javascript:void(0)" onclick="showPage('media')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">MEDIA</a>
+                <a href="javascript:void(0)" onclick="showPage('news')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">NEWS</a>
+                <a href="javascript:void(0)" onclick="showPage('tickets')" class="block bg-secondary-accent text-black text-center py-3 rounded-lg font-bold mt-4 shadow-lg">GET TICKETS</a>
             </nav>
         </div>
     </header>
@@ -153,20 +166,187 @@
     </main>
 
     <script>
-        // メッセージボックスのロジック
-        function showMessage(text) {
+        // ページコンテンツのデータ構造
+        const pageContent = {
+            'about': {
+                title: 'ABOUT TOYANIME FES',
+                content: `
+                    <div class="space-y-6">
+                        <h2 class="text-4xl font-extrabold text-primary mb-4">The Ultimate Pop Culture Experience</h2>
+                        <img src="https://placehold.co/800x300/111827/00FFFF?text=TOYANIME+FES+VISION" alt="About Image" class="rounded-xl shadow-lg border border-secondary-accent w-full">
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            ToyAnime Fes is not just an event; it's a convergence of creativity, commerce, and community. We bring together the world's leading toy manufacturers, independent anime artists, and voice actors for an unforgettable three-day celebration. Our goal is to provide a platform that honors both the history and the future of Japanese pop culture globally.
+                        </p>
+                        <h3 class="text-3xl font-bold text-secondary-accent mt-6">Core Values</h3>
+                        <ul class="list-disc list-inside text-gray-300 text-lg space-y-2 pl-4">
+                            <li>Community First: Fostering a welcoming and inclusive environment.</li>
+                            <li>Innovation: Showcasing the latest technology and artistic trends.</li>
+                            <li>Exclusivity: Providing access to rare merchandise and key industry figures.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'events': {
+                title: 'UPCOMING EVENTS & SCHEDULE',
+                content: `
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold text-primary mb-4">Don't Miss the Hype!</h2>
+                        <p class="text-gray-300 text-lg">Our schedule is packed with exclusive panels, premieres, and competitions. Mark your calendars!</p>
+
+                        <div class="bg-black p-6 rounded-xl border border-primary space-y-4">
+                            <h3 class="text-2xl font-bold text-primary border-b pb-2">Day 1: Creator Showcase</h3>
+                            <div class="flex justify-between text-gray-200">
+                                <p class="font-bold">10:00 AM</p>
+                                <p>Main Stage: Opening Ceremony & Toy Reveal</p>
+                            </div>
+                            <div class="flex justify-between text-gray-200">
+                                <p class="font-bold">2:00 PM</p>
+                                <p>Panel: Meet the Voice Actors of Cyber-Samurai Z</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-black p-6 rounded-xl border border-secondary-accent space-y-4">
+                            <h3 class="text-2xl font-bold text-secondary-accent border-b pb-2">Day 2: Competition Day</h3>
+                            <div class="flex justify-between text-gray-200">
+                                <p class="font-bold">1:00 PM</p>
+                                <p>Gallery Hall: Live Sketch Battle Finale</p>
+                            </div>
+                            <div class="flex justify-between text-gray-200">
+                                <p class="font-bold">5:00 PM</p>
+                                <p>Main Stage: Grand Cosplay Championship</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'media': {
+                title: 'MEDIA GALLERY & PROMO',
+                content: `
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold text-primary mb-4">Past Event Highlights</h2>
+                        
+                        <!-- Video Placeholder -->
+                        <div class="aspect-video w-full rounded-xl overflow-hidden border-4 border-secondary-accent">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                title="Media Video" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <h3 class="text-3xl font-bold text-secondary-accent">Photo Archives</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <img src="https://placehold.co/200x200/FF00FF/0A0A0A?text=COSPLAY" alt="Photo 1" class="w-full h-full object-cover rounded-lg border-2 border-primary">
+                            <img src="https://placehold.co/200x200/00FFFF/0A0A0A?text=MERCH" alt="Photo 2" class="w-full h-full object-cover rounded-lg border-2 border-secondary-accent">
+                            <img src="https://placehold.co/200x200/FF00FF/0A0A0A?text=PANEL" alt="Photo 3" class="w-full h-full object-cover rounded-lg border-2 border-primary">
+                        </div>
+                    </div>
+                `
+            },
+            'news': {
+                title: 'LATEST NEWS & UPDATES',
+                content: `
+                    <div class="space-y-6">
+                        <h2 class="text-4xl font-extrabold text-primary mb-4">Breaking FES Announcements</h2>
+                        
+                        <!-- News Item 1 -->
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-secondary-accent flex items-start space-x-4">
+                            <span class="text-xl font-bold text-secondary-accent flex-shrink-0">NEW!</span>
+                            <div>
+                                <p class="text-lg font-bold text-gray-100">MAJOR GUEST ANNOUNCEMENT: The creator of 'Star Runner' is coming!</p>
+                                <span class="text-sm text-gray-500">October 28, 2025</span>
+                            </div>
+                        </div>
+
+                        <!-- News Item 2 -->
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-primary flex items-start space-x-4">
+                            <span class="text-xl font-bold text-primary flex-shrink-0">INFO</span>
+                            <div>
+                                <p class="text-lg font-bold text-gray-100">Venue Map Released: Check out the new layout for Creator Alley.</p>
+                                <span class="text-sm text-gray-500">October 15, 2025</span>
+                            </div>
+                        </div>
+
+                        <!-- News Item 3 -->
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-secondary-accent flex items-start space-x-4">
+                            <span class="text-xl font-bold text-secondary-accent flex-shrink-0">ALERT</span>
+                            <div>
+                                <p class="text-lg font-bold text-gray-100">Ticket Wave 2 Selling Out Fast! Secure yours before the price increase.</p>
+                                <span class="text-sm text-gray-500">October 1, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'tickets': {
+                title: 'GET TICKETS NOW',
+                content: `
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold text-primary mb-6">Select Your Access Pass</h2>
+                        <p class="text-gray-300 text-xl font-bold border-b border-primary pb-4">Early Bird Prices are closing soon!</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Pass 1: General -->
+                            <div class="p-6 rounded-xl bg-black border-4 border-primary shadow-xl">
+                                <h3 class="text-3xl font-bold text-primary mb-2">Standard Access</h3>
+                                <p class="text-gray-500 mb-4">Full day access to the main hall and panels.</p>
+                                <p class="text-5xl font-extrabold text-white mb-6">$65 <span class="text-xl text-gray-400">/ Day</span></p>
+                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-primary text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300">
+                                    BUY STANDARD PASS
+                                </button>
+                            </div>
+                            
+                            <!-- Pass 2: VIP -->
+                            <div class="p-6 rounded-xl bg-black border-4 border-secondary-accent shadow-xl transform scale-105">
+                                <span class="inline-block bg-secondary-accent text-black text-sm font-bold px-3 py-1 rounded-full mb-3">VIP HYPE</span>
+                                <h3 class="text-3xl font-bold text-secondary-accent mb-2">ULTRA VIP PASS</h3>
+                                <p class="text-gray-500 mb-4">Priority entry, exclusive merch, and meet-and-greets.</p>
+                                <p class="text-5xl font-extrabold text-white mb-6">$250 <span class="text-xl text-gray-400">/ 3-Day</span></p>
+                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-secondary-accent text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300">
+                                    SECURE VIP PASS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function showPage(pageName) {
+            const data = pageContent[pageName];
+            if (!data) return;
+
+            const pageContentDiv = document.getElementById('page-content');
+            
+            // ポップアップコンテンツを生成
+            const htmlContent = `
+                <div class="text-center mb-6">
+                    <h1 class="text-5xl font-extrabold hero-title text-primary border-b-4 border-secondary-accent pb-2 mb-4">${data.title}</h1>
+                </div>
+                ${data.content}
+            `;
+
+            pageContentDiv.innerHTML = htmlContent;
+            
+            // ポップアップを表示
             const messageBox = document.getElementById('message-box');
-            const messageText = document.getElementById('message-text');
             const messageContentBox = document.getElementById('message-content-box');
             
-            messageText.textContent = text;
             messageBox.classList.remove('hidden');
             messageBox.classList.add('flex');
             
             messageContentBox.classList.remove('scale-95');
             messageContentBox.classList.add('scale-100');
+            
+            // ポップアップを開いたときに、背景のスクロールを無効にする
+            document.body.classList.add('overflow-hidden');
         }
 
+
+        // メッセージボックスのロジック (リッチなポップアップ表示のためにshowMessage関数は使用しない)
         function closeMessage() {
             const messageBox = document.getElementById('message-box');
             const messageContentBox = document.getElementById('message-content-box');
@@ -177,7 +357,24 @@
             setTimeout(() => {
                 messageBox.classList.remove('flex');
                 messageBox.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden'); // スクロールを元に戻す
             }, 300);
+        }
+
+        // 汎用的なメッセージ表示用関数 (CTAボタンなどで使用)
+        function showMessage(text) {
+            const pageContentDiv = document.getElementById('page-content');
+            pageContentDiv.innerHTML = `<p class="text-center text-2xl font-bold text-white">${text}</p>`;
+
+            const messageBox = document.getElementById('message-box');
+            const messageContentBox = document.getElementById('message-content-box');
+            
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('flex');
+            
+            messageContentBox.classList.remove('scale-95');
+            messageContentBox.classList.add('scale-100');
+            document.body.classList.add('overflow-hidden');
         }
         
         // モバイルメニューのトグル
@@ -190,8 +387,9 @@
         // モバイルメニューのリンククリック時の動作
         document.querySelectorAll('#mobile-menu a').forEach(item => {
             item.addEventListener('click', () => {
+                // showPage()が呼ばれた後、メニューを閉じる
                 document.getElementById('mobile-menu').classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
+                // showPage内でbody.classList.add('overflow-hidden')が呼ばれるため、ここでは何もしない
             });
         });
 
