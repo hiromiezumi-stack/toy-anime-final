@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToyAnime Fes: Vivid Pop Edition</title>
+    <title>ToyAnime Fes: Vivid Pop Multitone Edition</title>
     
-    <!-- Tailwind CSS CDNをロード --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- カスタムスタイル＆ビビッドカラー定義 --><style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap'); 
+    <!-- Custom Styles & Vivid Color Definitions --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@700;900&display=swap');
+        
 
-        /* Custom Colors - Vivid Pop Theme (Black & Blue/Cyan) */
+        /* Custom Colors - Vivid Pop Multitone Theme */
         :root {
-            --color-primary: #00FFFF; /* Vivid Cyan/Aqua */
-            --color-secondary: #FF00FF; /* Vivid Magenta (Accent) */
-            --color-bg-dark: #0A0A0A; /* Deep Black */
-            --color-text-light: #E5E7EB; /* Light Gray for dark backgrounds */
+            --color-primary-cyan: #00FFFF; /* Vivid Cyan/Aqua */
+            --color-secondary-magenta: #FF00FF; /* Vivid Magenta (Accent 1) */
+            --color-accent-green: #00FF00; /* Electric Green (Accent 2) */
+            --color-accent-yellow: #FFFF00; /* Vivid Yellow (Accent 3) */
+            --color-bg-dark: #222222; /* Deep Charcoal Gray (Updated from black) */
+            --color-bg-medium: #1a1a1a; /* Darker Gray for modal/header */
+            --color-text-light: #E5E7EB; 
         }
 
         body {
@@ -25,27 +28,63 @@
             color: var(--color-text-light);
         }
 
-        .text-primary { color: var(--color-primary); }
-        .bg-primary { background-color: var(--color-primary); }
-        .text-secondary-accent { color: var(--color-secondary); }
+        .text-primary { color: var(--color-primary-cyan); }
+        .bg-primary { background-color: var(--color-primary-cyan); }
+        .text-magenta { color: var(--color-secondary-magenta); }
+        .bg-magenta { background-color: var(--color-secondary-magenta); }
+        .text-green { color: var(--color-accent-green); }
+        .bg-green { background-color: var(--color-accent-green); }
+        .text-yellow { color: var(--color-accent-yellow); }
+        .bg-yellow { background-color: var(--color-accent-yellow); }
         
-        /* ロゴスタイル */
+        /* Logo Style */
         .logo-large {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
             line-height: 1;
             letter-spacing: -0.05em;
         }
 
-        /* Heroセクションのタイトルスタイル */
+        /* Hero Section Title Style */
         .hero-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             letter-spacing: -0.05em;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* ネオンエフェクト */
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7); /* Neon Effect */
+        }
+        .hero-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
         }
 
-        /* --- Scroll Reveal Animation Styles (Vivid) --- */
+        /* Popup Styles */
+        .page-modal {
+            max-width: 90vw;
+            width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: var(--color-bg-medium); /* Darker gray for modal */
+        }
+        
+        /* Event Dropdown Hover Animation */
+        .nav-link-dropdown {
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+        .dropdown-menu {
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .group:hover .dropdown-menu {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Scroll Reveal (for visual appeal) */
         .scroll-reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -56,106 +95,146 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* ポップアップを画面幅いっぱいに使うためのカスタムスタイル */
-        .page-modal {
-            max-width: 90vw;
-            width: 800px; /* PCでの最大幅 */
-            max-height: 90vh;
-            overflow-y: auto;
-        }
     </style>
 </head>
 <body class="text-gray-100">
 
-    <!-- メッセージボックス (ポップアップウィンドウとしてリッチコンテンツを表示) --><div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-[999] p-4">
-        <!-- message-content-box をページモーダルとして拡張 -->
-        <div class="bg-gray-900 rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary page-modal" id="message-content-box">
-            <!-- ページコンテンツはJSで挿入される -->
+    <!-- Rich Content Popup Overlay (z-index adjusted to be above header) -->
+    <!-- Added onclick="closeMessage()" to the overlay for background click functionality -->
+    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[1000] p-4 hidden" onclick="closeMessage()">
+        <!-- Added onclick="event.stopPropagation()" to prevent closing when clicking inside the modal -->
+        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary-cyan page-modal" id="message-content-box" onclick="event.stopPropagation()">
             <div id="page-content" class="p-8">
-                <!-- コンテンツがここに挿入されます -->
             </div>
-            <div class="p-5 text-center border-t border-gray-800">
-                <button onclick="closeMessage()" class="bg-secondary-accent text-black px-7 py-2.5 rounded-full font-bold hover:opacity-90 transition duration-300 transform hover:scale-110 shadow-lg">CLOSE PAGE</button>
-            </div>
+            <!-- Removed the CLOSE PAGE button -->
         </div>
     </div>
 
-    <!-- ヘッダー (スティッキーナビゲーション) --><header id="header" class="sticky top-0 z-50 bg-black bg-opacity-90 transition-all duration-300 shadow-xl border-b border-primary" style="backdrop-filter: blur(5px);">
+    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 z-50 bg-medium bg-opacity-95 transition-all duration-300 shadow-xl border-b border-primary-cyan" style="background-color: var(--color-bg-medium); backdrop-filter: blur(5px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- ロゴ/タイトル --><a href="javascript:void(0)" onclick="location.reload()" class="logo-large font-extrabold text-primary hover:text-cyan-400 transition duration-300">
-                    TOYANIME <span class="text-secondary-accent">FES</span>
+                <!-- Logo/Title --><a href="javascript:void(0)" onclick="location.reload()" class="logo-large font-extrabold text-primary hover:text-cyan-400 transition duration-300">
+                    TOYANIME <span class="text-magenta">FES</span>
                 </a>
                 
-                <!-- ナビゲーションリンク (デスクトップ) - JS関数でポップアップを開くように変更 --><nav class="hidden md:flex space-x-10 font-bold text-lg">
-                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-link text-gray-300 hover:text-primary transition duration-300">ABOUT</a>
-                    <a href="javascript:void(0)" onclick="showPage('events')" class="nav-link text-gray-300 hover:text-primary transition duration-300">UPCOMING EVENTS</a>
-                    <a href="javascript:void(0)" onclick="showPage('media')" class="nav-link text-gray-300 hover:text-primary transition duration-300">MEDIA</a>
-                    <a href="javascript:void(0)" onclick="showPage('news')" class="nav-link text-gray-300 hover:text-primary transition duration-300">NEWS</a>
+                <!-- Navigation Links (Desktop) --><nav class="hidden md:flex space-x-10 font-bold text-lg">
+                    <a href="javascript:void(0)" onclick="showPage('about')" class="nav-link text-gray-300 hover:text-primary transition duration-300 nav-link-dropdown">ABOUT</a>
+                    
+                    <!-- EVENT Dropdown Container --><div class="relative group">
+                        <a href="javascript:void(0)" onclick="showPage('events')" class="nav-link text-gray-300 hover:text-primary transition duration-300 nav-link-dropdown">EVENT</a>
+                        <div class="absolute dropdown-menu bg-medium border-2 border-primary-cyan shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium);">
+                            <a href="javascript:void(0)" onclick="showPage('tickets')" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS</a>
+                            <a href="javascript:void(0)" onclick="showPage('vendors')" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-green transition duration-150">VENDORS</a>
+                            <a href="javascript:void(0)" onclick="showPage('guests')" class="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow transition duration-150 rounded-b-md">GUESTS</a>
+                        </div>
+                    </div>
+                    
+                    <a href="javascript:void(0)" onclick="showPage('media')" class="nav-link text-gray-300 hover:text-primary transition duration-300 nav-link-dropdown">MEDIA</a>
+                    <a href="javascript:void(0)" onclick="showPage('news')" class="nav-link text-gray-300 hover:text-primary transition duration-300 nav-link-dropdown">NEWS</a>
                 </nav>
 
-                <!-- チケットCTAボタン --><a href="javascript:void(0)" onclick="showPage('tickets')" class="hidden md:block bg-secondary-accent text-black px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button">
+                <!-- Tickets CTA Button --><a href="javascript:void(0)" onclick="showPage('tickets')" class="hidden md:block bg-magenta text-black px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
                     GET TICKETS
                 </a>
                 
-                <!-- モバイルメニューボタン --><button id="mobile-menu-btn" class="md:hidden text-primary hover:text-secondary-accent focus:outline-none">
+                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-primary hover:text-magenta focus:outline-none">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         
-        <!-- モバイルメニュー --><div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800 pb-4">
+        <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden bg-medium border-t border-gray-800 pb-4" style="background-color: var(--color-bg-medium);">
             <nav class="flex flex-col space-y-3 p-4 font-bold text-lg">
                 <a href="javascript:void(0)" onclick="showPage('about')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">ABOUT</a>
-                <a href="javascript:void(0)" onclick="showPage('events')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">UPCOMING EVENTS</a>
+                
+                <!-- Mobile Event Dropdown -->
+                <div>
+                    <a href="javascript:void(0)" id="mobile-event-link" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300 flex justify-between items-center">
+                        EVENT
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 bg-gray-900 rounded-b-lg border-l-2 border-primary-cyan">
+                        <a href="javascript:void(0)" onclick="showPage('tickets')" class="block px-4 py-2 text-sm text-gray-400 hover:text-magenta transition duration-150">TICKETS</a>
+                        <a href="javascript:void(0)" onclick="showPage('vendors')" class="block px-4 py-2 text-sm text-gray-400 hover:text-green transition duration-150">VENDORS</a>
+                        <a href="javascript:void(0)" onclick="showPage('guests')" class="block px-4 py-2 text-sm text-gray-400 hover:text-yellow transition duration-150">GUESTS</a>
+                    </div>
+                </div>
+
                 <a href="javascript:void(0)" onclick="showPage('media')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">MEDIA</a>
                 <a href="javascript:void(0)" onclick="showPage('news')" class="block text-gray-300 hover:bg-gray-900 p-3 rounded transition duration-300">NEWS</a>
-                <a href="javascript:void(0)" onclick="showPage('tickets')" class="block bg-secondary-accent text-black text-center py-3 rounded-lg font-bold mt-4 shadow-lg">GET TICKETS</a>
+                <a href="javascript:void(0)" onclick="showPage('tickets')" class="block bg-magenta text-black text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">GET TICKETS</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section (ToyAnime Fes Mission) - 短く、黒背景にビビッドな色 --><section id="hero" class="relative overflow-hidden pt-36 pb-28 md:pt-48 md:pb-36 text-center bg-secondary-dark border-b-8 border-secondary-accent">
+        <!-- Hero Section (Mission and Map) --><section id="hero" class="relative overflow-hidden pt-36 pb-28 md:pt-48 md:pb-36 text-center bg-secondary-dark border-b-8 border-magenta" style="background-color: var(--color-bg-dark);">
             
             <div class="max-w-6xl mx-auto px-4 relative z-10">
-                <p class="text-2xl font-bold text-primary mb-6 uppercase tracking-widest scroll-reveal">WELCOME TO</p>
-                <h1 class="hero-title text-8xl lg:text-9xl text-primary leading-none scroll-reveal" style="transition-delay: 0.1s;">
+                <p class="text-2xl font-bold text-green mb-6 uppercase tracking-widest scroll-reveal">WELCOME TO</p>
+                <h1 class="hero-title text-8xl lg:text-9xl text-primary-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
                     TOYANIME
                 </h1>
-                <p class="hero-subtitle text-4xl font-bold text-secondary-accent uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
-                    FES
+                <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
+                    ーToyAnime Fesー
                 </p>
 
-                <!-- ミッションステートメント -->
-                <div class="max-w-4xl mx-auto mb-20 p-8 border-4 border-primary rounded-2xl shadow-2xl bg-black bg-opacity-70 scroll-reveal" style="transition-delay: 0.3s;">
-                    <h2 class="text-3xl font-bold text-secondary-accent mb-4 uppercase">OUR MISSION</h2>
-                    <p class="text-xl md:text-2xl text-gray-200 font-light leading-relaxed">
-                        To ignite the passion for Japanese pop culture, fostering a vibrant community where creators, collectors, and fans connect over the art of toys, anime, and design.
-                    </p>
-                </div>
+                <!-- Hero Bottom Layout: Mascot + CTA and Map -->
+                <div class="max-w-6xl mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                    
+                    <!-- Left: Mascot, Mission, CTA -->
+                    <div class="flex flex-col items-center scroll-reveal">
+                        <!-- Mission Statement -->
+                        <div class="mb-8 p-6 border-4 border-primary-cyan rounded-2xl shadow-2xl bg-black bg-opacity-70 w-full" style="background-color: rgba(0,0,0,0.6);">
+                            <h2 class="text-2xl font-bold text-magenta mb-3 uppercase font-['Orbitron']">CORE OPERATIVE</h2>
+                            <p class="text-lg md:text-xl text-gray-200 font-light leading-relaxed">
+                                Initiate culture sync: Unify global fans, empower next-gen creators, and deploy exclusive content. This is a high-priority mission.
+                            </p>
+                        </div>
+                        
+                        <!-- Mascot Image -->
+                        <img 
+                            src="images/mascot.jpg" 
+                            alt="ToyAnime Fes Official Mascot" 
+                            class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-magenta transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
+                            onerror="this.src='https://placehold.co/250x250/222222/00FFFF?text=MASCOT+FES'"
+                        >
 
-                <!-- Mascot Image (短くするために下に配置し、ホバーエフェクト維持) --><div class="flex justify-center scroll-reveal" style="transition-delay: 0.4s;">
-                    <img 
-                        src="images/mascot.jpg" 
-                        alt="ToyAnime Fes Official Mascot" 
-                        class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-primary transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
-                        onerror="this.src='https://placehold.co/300x300/111827/00FFFF?text=MASCOT+NOT+FOUND'"
-                    >
+                        <!-- Tickets CTA (Main) -->
+                        <a href="javascript:void(0)" onclick="showPage('tickets')" class="mt-8 bg-green text-black px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
+                            SECURE ACCESS PROTOCOL
+                        </a>
+                    </div>
+
+                    <!-- Right: Map -->
+                    <div class="scroll-reveal lg:mt-0 mt-10" style="transition-delay: 0.5s;">
+                        <h2 class="text-3xl font-bold text-primary-cyan mb-4 uppercase text-left font-['Orbitron']">DEPLOYMENT ZONE</h2>
+                        <p class="text-gray-400 text-lg mb-4 text-left">Location: Tokyo International Convention Center. Target coordinates locked.</p>
+                        <div class="aspect-video w-full h-80 rounded-xl overflow-hidden border-4 border-secondary-magenta shadow-2xl">
+                            <iframe 
+                                src="https://maps.google.com/maps?q=Tokyo%20International%20Convention%20Center&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- フッター --><footer class="bg-black text-white py-12 border-t border-primary">
+        <!-- Footer --><footer class="bg-medium text-white py-12 border-t border-primary-cyan" style="background-color: var(--color-bg-medium);">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h3 class="text-3xl font-extrabold text-primary mb-4">TOYANIME FES</h3>
+                <h3 class="text-3xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">TOYANIME FES</h3>
                 <p class="text-gray-500 text-lg mb-8">Contact: info@toyanimefes.com | Follow the hype!</p>
                 
                 <div class="flex justify-center space-x-8 mb-8">
-                    <!-- ソーシャルメディアアイコン --><a href="#" onclick="showMessage('Linking to X (Twitter)...')" class="text-gray-400 hover:text-primary transition duration-300 transform hover:scale-125">
+                    <!-- Social Media Icon 1 (Directs to Media Page) --><a href="javascript:void(0)" onclick="showPage('media')" class="text-gray-400 hover:text-primary-cyan transition duration-300 transform hover:scale-125">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
                     </a>
-                    <a href="#" onclick="showMessage('Linking to Instagram...')" class="text-gray-400 hover:text-secondary-accent transition duration-300 transform hover:scale-110">
+                    <!-- Social Media Icon 2 (Directs to Media Page) --><a href="javascript:void(0)" onclick="showPage('media')" class="text-gray-400 hover:text-magenta transition duration-300 transform hover:scale-110">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58 1.28-.058 1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
                     </a>
                 </div>
@@ -166,150 +245,194 @@
     </main>
 
     <script>
-        // ページコンテンツのデータ構造
+        // Page Content Data Structure (with updated colors)
         const pageContent = {
             'about': {
                 title: 'ABOUT TOYANIME FES',
                 content: `
                     <div class="space-y-6">
-                        <h2 class="text-4xl font-extrabold text-primary mb-4">The Ultimate Pop Culture Experience</h2>
-                        <img src="https://placehold.co/800x300/111827/00FFFF?text=TOYANIME+FES+VISION" alt="About Image" class="rounded-xl shadow-lg border border-secondary-accent w-full">
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">MISSION BRIEF: FES ORIGINS</h2>
+                        <img src="https://placehold.co/900x300/1a1a1a/00FFFF?text=CULTURE+DEPLOYMENT+ZONE" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full">
                         <p class="text-gray-300 text-lg leading-relaxed">
-                            ToyAnime Fes is not just an event; it's a convergence of creativity, commerce, and community. We bring together the world's leading toy manufacturers, independent anime artists, and voice actors for an unforgettable three-day celebration. Our goal is to provide a platform that honors both the history and the future of Japanese pop culture globally.
+                            ToyAnime Fes is the nexus point for pop culture synchronization. We execute the mission of unifying global fandoms, empowering creators, and deploying exclusive content. This initiative transcends mere entertainment; it is a critical operation to honor the legacy and future of Japanese visual arts and toy design worldwide.
                         </p>
-                        <h3 class="text-3xl font-bold text-secondary-accent mt-6">Core Values</h3>
+                        <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">OPERATIONAL GOALS</h3>
                         <ul class="list-disc list-inside text-gray-300 text-lg space-y-2 pl-4">
-                            <li>Community First: Fostering a welcoming and inclusive environment.</li>
-                            <li>Innovation: Showcasing the latest technology and artistic trends.</li>
-                            <li>Exclusivity: Providing access to rare merchandise and key industry figures.</li>
+                            <li class="text-yellow">Unify Zone-A Fandoms: Ensure high engagement and positive community interaction.</li>
+                            <li class="text-green">Creator Empowerment: Offer a lucrative platform for independent artists.</li>
+                            <li class="text-magenta">Exclusive Content Deployment: Guarantee access to unreleased products and premieres.</li>
                         </ul>
                     </div>
                 `
             },
             'events': {
-                title: 'UPCOMING EVENTS & SCHEDULE',
+                title: 'FES EVENT SCHEDULE',
                 content: `
                     <div class="space-y-8">
-                        <h2 class="text-4xl font-extrabold text-primary mb-4">Don't Miss the Hype!</h2>
-                        <p class="text-gray-300 text-lg">Our schedule is packed with exclusive panels, premieres, and competitions. Mark your calendars!</p>
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">THREE-DAY ACTION PLAN</h2>
+                        <p class="text-gray-300 text-lg">Confirmed schedule highlights. Prioritize your objectives.</p>
 
-                        <div class="bg-black p-6 rounded-xl border border-primary space-y-4">
-                            <h3 class="text-2xl font-bold text-primary border-b pb-2">Day 1: Creator Showcase</h3>
-                            <div class="flex justify-between text-gray-200">
-                                <p class="font-bold">10:00 AM</p>
-                                <p>Main Stage: Opening Ceremony & Toy Reveal</p>
+                        <div class="bg-black p-6 rounded-xl border border-primary-cyan space-y-4">
+                            <h3 class="text-2xl font-bold text-primary-cyan border-b pb-2 font-['Orbitron']">DAY 1: OPENING SALVO</h3>
+                            <div class="flex justify-between text-gray-200 border-b border-gray-900 pb-2">
+                                <p class="font-bold text-yellow">10:00 HR</p>
+                                <p>Main Stage: Protocol Start & Exclusive Toy Reveal</p>
                             </div>
                             <div class="flex justify-between text-gray-200">
-                                <p class="font-bold">2:00 PM</p>
-                                <p>Panel: Meet the Voice Actors of Cyber-Samurai Z</p>
+                                <p class="font-bold text-yellow">14:00 HR</p>
+                                <p>Panel: Voice Actor Meetup - Cyber-Samurai Z Analysis</p>
                             </div>
                         </div>
 
-                        <div class="bg-black p-6 rounded-xl border border-secondary-accent space-y-4">
-                            <h3 class="text-2xl font-bold text-secondary-accent border-b pb-2">Day 2: Competition Day</h3>
-                            <div class="flex justify-between text-gray-200">
-                                <p class="font-bold">1:00 PM</p>
-                                <p>Gallery Hall: Live Sketch Battle Finale</p>
+                        <div class="bg-black p-6 rounded-xl border border-magenta space-y-4">
+                            <h3 class="text-2xl font-bold text-magenta border-b pb-2 font-['Orbitron']">DAY 2: FIELD OPERATIONS</h3>
+                            <div class="flex justify-between text-gray-200 border-b border-gray-900 pb-2">
+                                <p class="font-bold text-yellow">13:00 HR</p>
+                                <p>Gallery Hall: Live Sketch Battle Final Round</p>
                             </div>
                             <div class="flex justify-between text-gray-200">
-                                <p class="font-bold">5:00 PM</p>
-                                <p>Main Stage: Grand Cosplay Championship</p>
-                            </div>
+                                <p class="font-bold text-yellow">17:00 HR</p>
+                                <p>Main Stage: Grand Cosplay Championship Deployment</p>
+                            </p>
                         </div>
                     </div>
                 `
             },
             'media': {
-                title: 'MEDIA GALLERY & PROMO',
+                title: 'MEDIA DEPLOYMENT',
                 content: `
                     <div class="space-y-8">
-                        <h2 class="text-4xl font-extrabold text-primary mb-4">Past Event Highlights</h2>
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-6 font-['Orbitron']">SECURE NETWORK LINKS</h2>
                         
-                        <!-- Video Placeholder -->
-                        <div class="aspect-video w-full rounded-xl overflow-hidden border-4 border-secondary-accent">
-                            <iframe 
-                                width="100%" 
-                                height="100%" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="Media Video" 
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
+                        <div class="grid grid-cols-2 gap-6">
+                            <!-- Social Link 1: X (Twitter) -->
+                            <a href="#" target="_blank" onclick="showMessage('Opening X/Twitter feed...')" class="p-6 bg-black border-4 border-green rounded-xl text-center hover:scale-[1.05] transition duration-300">
+                                <p class="text-5xl text-green mb-2 font-['Orbitron']">X / TWITTER</p>
+                                <p class="text-lg font-bold text-gray-300">@ToyAnimeFes</p>
+                            </a>
+                            <!-- Social Link 2: Instagram -->
+                            <a href="#" target="_blank" onclick="showMessage('Opening Instagram page...')" class="p-6 bg-black border-4 border-yellow rounded-xl text-center hover:scale-[1.05] transition duration-300">
+                                <p class="text-5xl text-yellow mb-2 font-['Orbitron']">INSTAGRAM</p>
+                                <p class="text-lg font-bold text-gray-300">/toyanimefes</p>
+                            </a>
                         </div>
-
-                        <h3 class="text-3xl font-bold text-secondary-accent">Photo Archives</h3>
+                        
+                        <h3 class="text-3xl font-bold text-magenta mt-6 border-b border-gray-800 pb-2 font-['Orbitron']">ARCHIVED VISUALS</h3>
                         <div class="grid grid-cols-3 gap-4">
-                            <img src="https://placehold.co/200x200/FF00FF/0A0A0A?text=COSPLAY" alt="Photo 1" class="w-full h-full object-cover rounded-lg border-2 border-primary">
-                            <img src="https://placehold.co/200x200/00FFFF/0A0A0A?text=MERCH" alt="Photo 2" class="w-full h-full object-cover rounded-lg border-2 border-secondary-accent">
-                            <img src="https://placehold.co/200x200/FF00FF/0A0A0A?text=PANEL" alt="Photo 3" class="w-full h-full object-cover rounded-lg border-2 border-primary">
+                            <img src="https://placehold.co/200x200/FF00FF/0A0A0A?text=COSPLAY" alt="Photo 1" class="w-full h-full object-cover rounded-lg border-2 border-magenta">
+                            <img src="https://placehold.co/200x200/00FFFF/0A0A0A?text=MERCH" alt="Photo 2" class="w-full h-full object-cover rounded-lg border-2 border-primary-cyan">
+                            <img src="https://placehold.co/200x200/00FF00/0A0A0A?text=PANEL" alt="Photo 3" class="w-full h-full object-cover rounded-lg border-2 border-green">
                         </div>
                     </div>
                 `
             },
             'news': {
-                title: 'LATEST NEWS & UPDATES',
+                title: 'FES NEWS BULLETIN',
                 content: `
                     <div class="space-y-6">
-                        <h2 class="text-4xl font-extrabold text-primary mb-4">Breaking FES Announcements</h2>
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">CRITICAL DATA PACKETS</h2>
                         
                         <!-- News Item 1 -->
-                        <div class="p-4 bg-black rounded-lg border-l-4 border-secondary-accent flex items-start space-x-4">
-                            <span class="text-xl font-bold text-secondary-accent flex-shrink-0">NEW!</span>
-                            <div>
-                                <p class="text-lg font-bold text-gray-100">MAJOR GUEST ANNOUNCEMENT: The creator of 'Star Runner' is coming!</p>
-                                <span class="text-sm text-gray-500">October 28, 2025</span>
-                            </div>
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-magenta shadow-md">
+                            <p class="text-lg font-bold text-gray-100">STATUS: Guest Acquisition Complete. The creator of 'Star Runner' is confirmed.</p>
+                            <span class="text-sm text-gray-500 text-yellow">October 28, 2025 // ACCESS LEVEL ALPHA</span>
                         </div>
 
                         <!-- News Item 2 -->
-                        <div class="p-4 bg-black rounded-lg border-l-4 border-primary flex items-start space-x-4">
-                            <span class="text-xl font-bold text-primary flex-shrink-0">INFO</span>
-                            <div>
-                                <p class="text-lg font-bold text-gray-100">Venue Map Released: Check out the new layout for Creator Alley.</p>
-                                <span class="text-sm text-gray-500">October 15, 2025</span>
-                            </div>
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-primary-cyan shadow-md">
+                            <p class="text-lg font-bold text-gray-100">DATA: Zone Map Released. New layout for Artist Alley deployment verified.</p>
+                            <span class="text-sm text-gray-500 text-yellow">October 15, 2025 // ACCESS LEVEL BETA</span>
                         </div>
 
                         <!-- News Item 3 -->
-                        <div class="p-4 bg-black rounded-lg border-l-4 border-secondary-accent flex items-start space-x-4">
-                            <span class="text-xl font-bold text-secondary-accent flex-shrink-0">ALERT</span>
-                            <div>
-                                <p class="text-lg font-bold text-gray-100">Ticket Wave 2 Selling Out Fast! Secure yours before the price increase.</p>
-                                <span class="text-sm text-gray-500">October 1, 2025</span>
-                            </div>
+                        <div class="p-4 bg-black rounded-lg border-l-4 border-green shadow-md">
+                            <p class="text-lg font-bold text-gray-100">ALERT: Ticket Wave 2 Critical. Inventory decreasing rapidly. Recommend immediate procurement.</p>
+                            <span class="text-sm text-gray-500 text-yellow">October 1, 2025 // ACCESS LEVEL GAMMA</span>
                         </div>
                     </div>
                 `
             },
             'tickets': {
-                title: 'GET TICKETS NOW',
+                title: 'ACCESS PROTOCOL',
                 content: `
                     <div class="space-y-8">
-                        <h2 class="text-4xl font-extrabold text-primary mb-6">Select Your Access Pass</h2>
-                        <p class="text-gray-300 text-xl font-bold border-b border-primary pb-4">Early Bird Prices are closing soon!</p>
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-6 font-['Orbitron']">INITIATE ACCESS PURCHASE</h2>
+                        <p class="text-gray-300 text-xl font-bold border-b border-primary-cyan pb-4">Secure your entry code before lockdown.</p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Pass 1: General -->
-                            <div class="p-6 rounded-xl bg-black border-4 border-primary shadow-xl">
-                                <h3 class="text-3xl font-bold text-primary mb-2">Standard Access</h3>
-                                <p class="text-gray-500 mb-4">Full day access to the main hall and panels.</p>
-                                <p class="text-5xl font-extrabold text-white mb-6">$65 <span class="text-xl text-gray-400">/ Day</span></p>
-                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-primary text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300">
+                            <div class="p-6 rounded-xl bg-black border-4 border-green shadow-xl">
+                                <h3 class="text-3xl font-bold text-green mb-2 font-['Orbitron']">STANDARD ACCESS</h3>
+                                <p class="text-gray-500 mb-4">Daily permission for zone entry and main operations.</p>
+                                <p class="text-5xl font-extrabold text-white mb-6">$65 <span class="text-xl text-gray-400">/ UNIT</span></p>
+                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-green text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-green">
                                     BUY STANDARD PASS
                                 </button>
                             </div>
                             
                             <!-- Pass 2: VIP -->
-                            <div class="p-6 rounded-xl bg-black border-4 border-secondary-accent shadow-xl transform scale-105">
-                                <span class="inline-block bg-secondary-accent text-black text-sm font-bold px-3 py-1 rounded-full mb-3">VIP HYPE</span>
-                                <h3 class="text-3xl font-bold text-secondary-accent mb-2">ULTRA VIP PASS</h3>
-                                <p class="text-gray-500 mb-4">Priority entry, exclusive merch, and meet-and-greets.</p>
-                                <p class="text-5xl font-extrabold text-white mb-6">$250 <span class="text-xl text-gray-400">/ 3-Day</span></p>
-                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-secondary-accent text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300">
-                                    SECURE VIP PASS
+                            <div class="p-6 rounded-xl bg-black border-4 border-magenta shadow-xl transform scale-100">
+                                <span class="inline-block bg-yellow text-black text-sm font-bold px-3 py-1 rounded-full mb-3 font-['Orbitron']">PRIORITY LEVEL</span>
+                                <h3 class="text-3xl font-bold text-magenta mb-2 font-['Orbitron']">ULTRA VIP PASS</h3>
+                                <p class="text-gray-500 mb-4">Full priority entry, exclusive assets, and secure link-ups.</p>
+                                <p class="text-5xl font-extrabold text-white mb-6">$250 <span class="text-xl text-gray-400">/ 3-DAY</span></p>
+                                <button onclick="showMessage('Redirecting to secure payment portal...')" class="w-full bg-magenta text-black py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-magenta">
+                                    SECURE VIP ACCESS
                                 </button>
                             </div>
                         </div>
+                    </div>
+                `
+            },
+            'vendors': {
+                title: 'VENDOR DEPLOYMENT',
+                content: `
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">SECURE YOUR OPERATIONAL ZONE</h2>
+                        <p class="text-gray-300 text-lg">Acquire booth space for product showcasing and distribution.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-black border-2 border-green rounded-xl">
+                                <h3 class="text-2xl font-bold text-green mb-2 font-['Orbitron']">EXHIBITOR BOOTHS</h3>
+                                <p class="text-gray-400">High-traffic, premium deployment zones for major brands and manufacturers.</p>
+                                <a href="#" onclick="showMessage('Vendor application portal is opening in January.')" class="mt-4 inline-block text-magenta font-bold hover:underline font-['Orbitron']">APPLY NOW &rarr;</a>
+                            </div>
+                            <div class="p-5 bg-black border-2 border-yellow rounded-xl">
+                                <h3 class="text-2xl font-bold text-yellow mb-2 font-['Orbitron']">CREATOR ALLEY</h3>
+                                <p class="text-gray-400">Dedicated tables for independent art deployment, prints, and custom commissions.</p>
+                                <a href="#" onclick="showMessage('Artist Alley guidelines and contract are available for download.')" class="mt-4 inline-block text-primary-cyan font-bold hover:underline font-['Orbitron']">GUIDELINES &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'guests': {
+                title: 'GUEST MANIFEST',
+                content: `
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold text-primary-cyan mb-4 font-['Orbitron']">ICONS OF THE NETWORK</h2>
+                        <p class="text-gray-300 text-lg">Confirmed VIP personnel for interaction and signing sessions. Prepare your assets.</p>
+
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-black p-3 rounded-lg border border-magenta">
+                                <img src="https://placehold.co/100x100/FF00FF/0A0A0A?text=VA" class="rounded-full mx-auto mb-2 border-2 border-magenta">
+                                <p class="font-bold text-white">Sarah Chen</p>
+                                <p class="text-sm text-yellow">Voice Operator</p>
+                            </div>
+                            <div class="bg-black p-3 rounded-lg border border-primary-cyan">
+                                <img src="https://placehold.co/100x100/00FFFF/0A0A0A?text=Artist" class="rounded-full mx-auto mb-2 border-2 border-primary-cyan">
+                                <p class="font-bold text-white">Kenji Ito</p>
+                                <p class="text-sm text-green">Design Engineer</p>
+                            </div>
+                            <div class="bg-black p-3 rounded-lg border border-yellow">
+                                <img src="https://placehold.co/100x100/FFFF00/0A0A0A?text=Cosplay" class="rounded-full mx-auto mb-2 border-2 border-yellow">
+                                <p class="font-bold text-white">Nova Cosplay</p>
+                                <p class="text-sm text-magenta">Visual Specialist</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">AUTOGRAPH PROTOCOL</h3>
+                        <p class="text-gray-400">Interaction access passes are required. Check ticketing for timed deployment slots.</p>
                     </div>
                 `
             }
@@ -321,17 +444,41 @@
 
             const pageContentDiv = document.getElementById('page-content');
             
-            // ポップアップコンテンツを生成
+            // Generate popup content
             const htmlContent = `
                 <div class="text-center mb-6">
-                    <h1 class="text-5xl font-extrabold hero-title text-primary border-b-4 border-secondary-accent pb-2 mb-4">${data.title}</h1>
+                    <h1 class="text-5xl font-extrabold hero-title text-primary-cyan border-b-4 border-magenta pb-2 mb-4">${data.title}</h1>
                 </div>
                 ${data.content}
             `;
 
             pageContentDiv.innerHTML = htmlContent;
             
-            // ポップアップを表示
+            // Show popup
+            const messageBox = document.getElementById('message-box');
+            const messageContentBox = document.getElementById('message-content-box');
+            
+            // Show overlay
+            messageBox.classList.remove('hidden');
+            messageBox.classList.add('flex');
+            
+            // Scale animation
+            messageContentBox.classList.remove('scale-95');
+            messageContentBox.classList.add('scale-100');
+            
+            // Disable background scroll
+            document.body.classList.add('overflow-hidden');
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+
+        // Generic message display function (used for CTA buttons)
+        function showMessage(text) {
+            const pageContentDiv = document.getElementById('page-content');
+            pageContentDiv.innerHTML = `<div class="text-center py-10"><p class="text-2xl font-bold text-white">${text}</p></div>`;
+
             const messageBox = document.getElementById('message-box');
             const messageContentBox = document.getElementById('message-content-box');
             
@@ -340,13 +487,10 @@
             
             messageContentBox.classList.remove('scale-95');
             messageContentBox.classList.add('scale-100');
-            
-            // ポップアップを開いたときに、背景のスクロールを無効にする
             document.body.classList.add('overflow-hidden');
         }
 
-
-        // メッセージボックスのロジック (リッチなポップアップ表示のためにshowMessage関数は使用しない)
+        // Close message function (now triggered by clicking the overlay)
         function closeMessage() {
             const messageBox = document.getElementById('message-box');
             const messageContentBox = document.getElementById('message-content-box');
@@ -357,43 +501,23 @@
             setTimeout(() => {
                 messageBox.classList.remove('flex');
                 messageBox.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden'); // スクロールを元に戻す
+                document.body.classList.remove('overflow-hidden'); // Re-enable scroll
             }, 300);
         }
-
-        // 汎用的なメッセージ表示用関数 (CTAボタンなどで使用)
-        function showMessage(text) {
-            const pageContentDiv = document.getElementById('page-content');
-            pageContentDiv.innerHTML = `<p class="text-center text-2xl font-bold text-white">${text}</p>`;
-
-            const messageBox = document.getElementById('message-box');
-            const messageContentBox = document.getElementById('message-content-box');
-            
-            messageBox.classList.remove('hidden');
-            messageBox.classList.add('flex');
-            
-            messageContentBox.classList.remove('scale-95');
-            messageContentBox.classList.add('scale-100');
-            document.body.classList.add('overflow-hidden');
-        }
         
-        // モバイルメニューのトグル
+        /* --- Mobile Menu/Dropdown Logic --- */
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
             document.body.classList.toggle('overflow-hidden');
         });
 
-        // モバイルメニューのリンククリック時の動作
-        document.querySelectorAll('#mobile-menu a').forEach(item => {
-            item.addEventListener('click', () => {
-                // showPage()が呼ばれた後、メニューを閉じる
-                document.getElementById('mobile-menu').classList.add('hidden');
-                // showPage内でbody.classList.add('overflow-hidden')が呼ばれるため、ここでは何もしない
-            });
+        document.getElementById('mobile-event-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('mobile-event-submenu').classList.toggle('hidden');
         });
-
-        /* --- スクロール表示ロジック --- */
+        
+        /* --- Scroll Reveal Logic --- */
         const observerOptions = {
             root: null,
             rootMargin: "0px",
@@ -422,17 +546,6 @@
 
         document.addEventListener('DOMContentLoaded', setupScrollReveal);
         window.addEventListener('load', setupScrollReveal);
-
-        /* --- ヘッダースクロールエフェクト --- */
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
     </script>
 </body>
 </html>
