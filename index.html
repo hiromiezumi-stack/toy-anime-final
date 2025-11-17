@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- UPDATED TITLE to match user's custom CSS -->
     <title>ToyAnime Fest: Vivid Pop Multitone Edition</title>
     
-    <!-- Load Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles & Vivid Color Definitions --><style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@700;900&display=swap');
         
-
         /* Custom Colors - Vivid Pop Multitone Theme (6 colors + BG) */
         :root {
-            --color-primary-cyan: #00FFFF; /* Primary */
-            --color-secondary-magenta: #FF00FF; /* Accent 1 */
-            --color-accent-green: #00FF00; /* Accent 2 */
-            --color-accent-yellow: #FFFF00; /* Accent 3 */
-            --color-accent-orange: #FF8800; /* Accent 4 (New) */
-            --color-accent-purple: #9900FF; /* Accent 5 (New) */
+            --color-primary-cyan: #00FFFF; /* Primary Neon Cyan */
+            --color-secondary-magenta: #FF00FF; /* Accent 1 Neon Magenta */
+            --color-accent-green: #00FF00; /* Accent 2 Neon Green */
+            --color-accent-yellow: #FFFF00; /* Accent 3 Neon Yellow */
+            --color-accent-orange: #FF8800; /* Accent 4 Neon Orange */
+            --color-accent-purple: #9900FF; /* Accent 5 Neon Purple */
             --color-bg-light: #FFFFFF; /* White for content sections */
             --color-bg-dark: #222222; /* Deep Charcoal Gray (Base) */
             --color-bg-medium: #1A1A1A; /* Darker Gray for modal/header base */
@@ -54,21 +55,26 @@
         .text-dark { color: var(--color-text-dark); }
         .text-light { color: var(--color-text-light); }
         
-        /* Logo Style */
+        /* Logo Style (UPDATED FOR LARGE SIZE) */
         .logo-large {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Slightly larger base size */
             line-height: 1;
             letter-spacing: -0.05em;
             text-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        @media (min-width: 768px) {
+            .logo-large {
+                font-size: 3.5rem; /* Larger desktop size */
+            }
         }
 
         /* Hero Section Title Style */
         .hero-title {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            letter-spacing: -0.05em;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4); 
+            letter-spacing: 0.2em; /* Added spacing to emphasize separation */
+            text-shadow: 0 0 15px var(--color-primary-cyan), 0 0 5px var(--color-secondary-magenta); /* Enhanced neon glow */
         }
         .hero-subtitle {
             font-family: 'Orbitron', sans-serif;
@@ -142,13 +148,15 @@
             transform: translateY(0);
         }
         
-        /* Modal Content Styling for WHITE background sections */
-        #page-content {
-            background-color: var(--color-bg-light); 
-            color: var(--color-text-dark);
+        /* UPDATED SECTION STYLING: Dark content sections */
+        .dark-content-section {
+            background-color: var(--color-bg-medium); /* Darker gray background */
+            color: var(--color-text-light); /* Light text */
         }
-        #page-content .text-light {
-             color: var(--color-text-dark) !important;
+        
+        /* Styling for the content area on dark sections */
+        #content-area .text-dark {
+            color: var(--color-text-light) !important;
         }
 
         /* Header is fixed and always on top */
@@ -160,62 +168,48 @@
 </head>
 <body class="text-light">
 
-    <!-- Raw URL used for all images, assuming standard GitHub repository structure -->
-    <script>
-        const USER_RAW_URL_BASE = "https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/images/";
-        const USER_RAW_LOGO = "Anime BG ONLY.jpg"; // The uploaded image
-        
-        // Helper function to build the full Raw URL
-        function getImageUrl(filename) {
-            // Check if the filename is the root-level logo file
-            if (filename === "Anime BG ONLY.jpg") {
-                return `https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/Anime%20BG%20ONLY.jpg`;
-            }
-            // For other icons/mascots in the images folder
-            return `${USER_RAW_URL_BASE}${encodeURIComponent(filename)}`;
-        }
-    </script>
-
     <!-- Message Box (Used for CTA confirmation only) -->
     <div id="message-box" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000] p-4 hidden" onclick="closeMessage()">
-        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary-cyan page-modal bg-medium" id="message-content-box" onclick="event.stopPropagation()">
+        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-cyan page-modal bg-medium" id="message-content-box" onclick="event.stopPropagation()">
             <div id="message-text-content" class="p-8 text-center text-light">
-                <p class="text-2xl font-bold mb-4">Action Noted</p>
+                <p class="text-2xl font-bold mb-4 text-cyan">Action Noted</p>
                 <p id="confirmation-text" class="text-lg"></p>
                 <button onclick="closeMessage()" class="mt-6 bg-magenta text-dark px-6 py-2 rounded-full font-bold hover:opacity-90">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 transition-all duration-300" style="background-color: var(--color-bg-nav); backdrop-filter: blur(5px);">
+    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 transition-all duration-300 shadow-xl" style="background-color: var(--color-bg-medium); backdrop-filter: blur(5px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo/Title -->
+                <!-- Logo/Title and Icon -->
                 <div class="flex items-center">
-                    <!-- NEW ICON INTEGRATION -->
-                    <img id="header-icon" src="Anime BG ONLY.jpg" alt="Toy Anime Fest Icon" class="header-logo-icon rounded-full border-2 border-magenta hidden md:block">
                     
-                    <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-dark hover:text-cyan transition duration-300">
+                    <!-- NEW ICON: Placed next to logo, links to home -->
+                    <a href="javascript:void(0)" onclick="loadPage('home')" class="flex items-center hover:opacity-90 transition duration-300">
+                        <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-lg border-2 border-cyan" onerror="this.style.display='none';">
+                    </a>
+
+                    <!-- Nav Link 1: ABOUT (moved slightly to the right to accommodate the icon) -->
+                    <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-cyan hover:text-magenta transition duration-300 ml-4">
                         TOY ANIME <span class="text-magenta">FEST</span>
                     </a>
                 </div>
                 
                 <!-- Navigation Links (Desktop) -->
-                <nav class="hidden md:flex space-x-10 font-bold text-lg text-dark">
+                <nav class="hidden md:flex space-x-10 font-bold text-lg text-light">
                     <!-- Nav Link 1: ABOUT -->
                     <a href="javascript:void(0)" onclick="loadPage('about')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
-                        <img src="images/icon_nav_about.png" onerror="this.src='https://placehold.co/24x24/B0FFFF/1A1A1A?text=A'" alt="About Icon" class="nav-icon">
                         ABOUT
                     </a>
                     
                     <!-- Nav Link 2: EVENT Dropdown Container -->
                     <div class="relative group">
                         <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
-                            <img src="images/icon_nav_event.png" onerror="this.src='https://placehold.co/24x24/B0FFFF/1A1A1A?text=E'" alt="Event Icon" class="nav-icon">
                             EVENT
                         </a>
                         <!-- Submenu links load specific content within the Event page simulation -->
-                        <div class="absolute dropdown-menu bg-medium border-2 border-cyan shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
+                        <div class="absolute dropdown-menu border-2 border-cyan shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
                             <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS</a>
                             <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-green transition duration-150">VENDORS</a>
                             <a href="javascript:void(0)" onclick="loadPage('guests')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-yellow transition duration-150 rounded-b-md">GUESTS</a>
@@ -224,13 +218,11 @@
                     
                     <!-- Nav Link 3: MEDIA -->
                     <a href="javascript:void(0)" onclick="loadPage('media')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
-                         <img src="images/icon_nav_media.png" onerror="this.src='https://placehold.co/24x24/B0FFFF/1A1A1A?text=M'" alt="Media Icon" class="nav-icon">
                         MEDIA
                     </a>
                     
                     <!-- Nav Link 4: NEWS -->
                     <a href="javascript:void(0)" onclick="loadPage('news')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
-                         <img src="images/icon_nav_news.png" onerror="this.src='https://placehold.co/24x24/B0FFFF/1A1A1A?text=N'" alt="News Icon" class="nav-icon">
                         NEWS
                     </a>
                 </nav>
@@ -239,32 +231,32 @@
                     GET TICKETS
                 </a>
                 
-                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-dark hover:text-magenta focus:outline-none">
+                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-light hover:text-magenta focus:outline-none">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-medium border-t border-gray-400 pb-4" style="background-color: var(--color-bg-nav);">
-            <nav class="flex flex-col space-y-3 p-4 font-bold text-lg text-dark">
-                <a href="javascript:void(0)" onclick="loadPage('about')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">ABOUT</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-400 pb-4" style="background-color: var(--color-bg-medium);">
+            <nav class="flex flex-col space-y-3 p-4 font-bold text-lg text-light">
+                <a href="javascript:void(0)" onclick="loadPage('about')" class="block hover:bg-gray-800 p-3 rounded transition duration-300">ABOUT</a>
                 
                 <!-- Mobile Event Dropdown -->
                 <div>
-                    <a href="javascript:void(0)" id="mobile-event-link" class="block hover:bg-gray-200 p-3 rounded transition duration-300 flex justify-between items-center">
+                    <a href="javascript:void(0)" id="mobile-event-link" class="block hover:bg-gray-800 p-3 rounded transition duration-300 flex justify-between items-center">
                         EVENT
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
-                    <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 bg-gray-200 rounded-b-lg border-l-2 border-primary-cyan">
-                        <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-2 text-sm text-dark hover:text-magenta transition duration-150">TICKETS</a>
-                        <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-2 text-sm text-dark hover:text-green transition duration-150">VENDORS</a>
-                        <a href="javascript:void(0)" onclick="loadPage('guests')" class="block px-4 py-2 text-sm text-dark hover:text-yellow transition duration-150">GUESTS</a>
+                    <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 rounded-b-lg border-l-2 border-cyan" style="background-color: var(--color-bg-dark);">
+                        <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-2 text-sm text-light hover:text-magenta transition duration-150">TICKETS</a>
+                        <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-2 text-sm text-light hover:text-green transition duration-150">VENDORS</a>
+                        <a href="javascript:void(0)" onclick="loadPage('guests')" class="block px-4 py-2 text-sm text-light hover:text-yellow transition duration-150">GUESTS</a>
                     </div>
                 </div>
 
-                <a href="javascript:void(0)" onclick="loadPage('media')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">MEDIA</a>
-                <a href="javascript:void(0)" onclick="loadPage('news')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">NEWS</a>
+                <a href="javascript:void(0)" onclick="loadPage('media')" class="block hover:bg-gray-800 p-3 rounded transition duration-300">MEDIA</a>
+                <a href="javascript:void(0)" onclick="loadPage('news')" class="block hover:bg-gray-800 p-3 rounded transition duration-300">NEWS</a>
                 <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block bg-magenta text-dark text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">GET TICKETS</a>
             </nav>
         </div>
@@ -274,18 +266,43 @@
         <!-- Initial Home Page Content will be loaded here by loadPage('home') -->
     </main>
 
+    <footer class="py-12 shadow-inner" style="background-color: var(--color-bg-medium); border-top: 3px solid var(--color-primary-cyan);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-light">
+            <!-- Footer Mascot Icon -->
+            <img id="footer-mascot" src="images/mascot_char.png" alt="Mascot" class="w-12 h-12 rounded-full mx-auto mb-4 border-2 border-magenta" onerror="this.style.display='none';">
+
+            <h3 class="text-2xl font-bold mb-2 text-cyan font-['Orbitron']">TOY ANIME FEST</h3>
+            <p class="text-gray-400 mb-6">Contact Protocol: info@toyanimefest.com</p>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- Social Media Icons (Using the new neon colors) -->
+                <a href="javascript:void(0)" onclick="showMessage('Routing to X Network...')" class="text-gray-400 hover:text-cyan transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
+                </a>
+                <a href="javascript:void(0)" onclick="showMessage('Routing to Instagram Network...')" class="text-gray-400 hover:text-magenta transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58-1.28-.058-1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
+                </a>
+            </div>
+            <p class="text-sm text-gray-500">© 2026 Toy Anime Fest // All Access Protocols Reserved</p>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- PAGE CONTENT DATA STRUCTURE ---
+        
+        // --- PAGE CONTENT DATA STRUCTURE (Moved inside JS for dynamic loading) ---
         const pageContent = {
             'home': `
                 <!-- Hero Section (Mission and Map) -->
                 <section id="hero-home" class="relative overflow-hidden pt-36 pb-28 md:pt-48 md:pb-36 text-center" style="background-color: var(--color-bg-dark);">
                     <div class="max-w-6xl mx-auto px-4 relative z-10">
+                        <!-- UPDATED: Added space -->
                         <h1 class="hero-title text-8xl lg:text-9xl text-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
-                            TOY ANIME
+                            ANIME VERSE
                         </h1>
                         <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
-                            ーToy Anime Festー
+                            ーTOY ANIME FESTー
                         </p>
 
                         <div class="max-w-6xl mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
@@ -300,9 +317,9 @@
                                     </p>
                                 </div>
                                 
-                                <!-- Mascot Image (Using Raw URL helper) -->
+                                <!-- Mascot Image (Using working image path) -->
                                 <img 
-                                    src="Anime BG ONLY.jpg" 
+                                    src="images/mascot_char.png" 
                                     alt="Toy Anime Fest Official Mascot" 
                                     class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-magenta transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
                                     onerror="this.src='https://placehold.co/250x250/222222/FF8800?text=MAIN+MASCOT'"
@@ -334,27 +351,29 @@
                 </section>
             `,
             'about': `
-                <section id="about-page" class="white-section py-20 md:py-32 border-b-8 border-cyan">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT TOY ANIME FEST</h2>
+                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
+                <section id="about-page" class="py-20 md:py-32 border-b-8 border-cyan dark-content-section" style="background-color: var(--color-bg-medium);">
+                    <div class="max-w-6xl mx-auto px-4" id="page-content">
+                        <!-- Content text color is now light -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT TOY ANIME FEST</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                             <!-- Mascot Image in About -->
-                            <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/1000x300/FFFFFF/1A1A1A?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
+                            <!-- Mascot Image in About -->
+                            <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
                             
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                                 <div>
                                     <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">MISSION BRIEF: FES ORIGINS</h3>
-                                    <p class="text-dark text-lg leading-relaxed mt-4">
+                                    <p class="text-light text-lg leading-relaxed mt-4">
                                         Toy Anime Fest is the nexus point for pop culture synchronization. We execute the mission of unifying global fandoms, empowering creators, and deploying exclusive content. This initiative transcends mere entertainment; it is a critical operation to honor the legacy and future of Japanese visual arts and toy design worldwide.
                                     </p>
                                 </div>
                                 <div>
                                     <h3 class="text-3xl font-bold text-magenta mt-6 font-['Orbitron']">OPERATIONAL GOALS</h3>
-                                    <ul class="list-disc list-inside text-dark text-lg space-y-2 pl-4 mt-4">
-                                        <li class="text-dark"><span class="text-yellow">Unify Zone-A Fandoms:</span> Ensure high engagement and positive community interaction.</li>
-                                        <li class="text-dark"><span class="text-green">Creator Empowerment:</span> Offer a lucrative platform for independent artists.</li>
-                                        <li class="text-dark"><span class="text-magenta">Exclusive Content Deployment:</span> Guarantee access to unreleased products and premieres.</li>
+                                    <ul class="list-disc list-inside text-light text-lg space-y-2 pl-4 mt-4">
+                                        <li><span class="text-yellow">Unify Zone-A Fandoms:</span> Ensure high engagement and positive community interaction.</li>
+                                        <li><span class="text-green">Creator Empowerment:</span> Offer a lucrative platform for independent artists.</li>
+                                        <li><span class="text-magenta">Exclusive Content Deployment:</span> Guarantee access to unreleased products and premieres.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -398,27 +417,29 @@
                 </section>
             `,
             'tickets': `
-                <section id="tickets-page" class="white-section py-20 md:py-32 border-b-8 border-cyan">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ACCESS PROTOCOL: TICKETS</h2>
+                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
+                <section id="tickets-page" class="py-20 md:py-32 border-b-8 border-cyan dark-content-section" style="background-color: var(--color-bg-medium);">
+                    <div class="max-w-6xl mx-auto px-4" id="page-content">
+                        <!-- Content text color is now light -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ACCESS PROTOCOL: TICKETS</h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal">
-                            <!-- Pass 1: General -->
-                            <div class="p-6 rounded-xl bg-white border-4 border-green shadow-xl">
+                            <!-- Pass 1: General (Card changed to dark background for visibility) -->
+                            <div class="p-6 rounded-xl bg-dark border-4 border-green shadow-xl">
                                 <h3 class="text-3xl font-bold text-green mb-2 font-['Orbitron']">STANDARD ACCESS</h3>
-                                <p class="text-gray-600 mb-4">Daily permission for zone entry and main operations.</p>
-                                <p class="text-5xl font-extrabold text-dark mb-6">$65 <span class="text-xl text-gray-600">/ UNIT</span></p>
+                                <p class="text-gray-400 mb-4">Daily permission for zone entry and main operations.</p>
+                                <p class="text-5xl font-extrabold text-light mb-6">$65 <span class="text-xl text-gray-400">/ UNIT</span></p>
                                 <button onclick="showMessage('Ticket purchase initiated.')" class="w-full bg-green text-dark py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-green">
                                     BUY STANDARD PASS
                                 </button>
                             </div>
                             
-                            <!-- Pass 2: VIP -->
-                            <div class="p-6 rounded-xl bg-white border-4 border-magenta shadow-xl transform scale-100">
+                            <!-- Pass 2: VIP (Card changed to dark background for visibility) -->
+                            <div class="p-6 rounded-xl bg-dark border-4 border-magenta shadow-xl transform scale-100">
                                 <span class="inline-block bg-yellow text-dark text-sm font-bold px-3 py-1 rounded-full mb-3 font-['Orbitron']">PRIORITY LEVEL</span>
                                 <h3 class="text-3xl font-bold text-magenta mb-2 font-['Orbitron']">ULTRA VIP PASS</h3>
-                                <p class="text-gray-600 mb-4">Full priority entry, exclusive assets, and secure link-ups.</p>
-                                <p class="text-5xl font-extrabold text-dark mb-6">$250 <span class="text-xl text-gray-600">/ 3-DAY</span></p>
+                                <p class="text-gray-400 mb-4">Full priority entry, exclusive assets, and secure link-ups.</p>
+                                <p class="text-5xl font-extrabold text-light mb-6">$250 <span class="text-xl text-gray-400">/ 3-DAY</span></p>
                                 <button onclick="showMessage('VIP purchase initiated.')" class="w-full bg-magenta text-dark py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-magenta">
                                     SECURE VIP ACCESS
                                 </button>
@@ -448,29 +469,31 @@
                 </section>
             `,
             'guests': `
-                <section id="guests-page" class="white-section py-20 md:py-32 border-b-8 border-green">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">GUEST MANIFEST</h2>
+                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
+                <section id="guests-page" class="py-20 md:py-32 border-b-8 border-green dark-content-section" style="background-color: var(--color-bg-medium);">
+                    <div class="max-w-6xl mx-auto px-4" id="page-content">
+                        <!-- Content text color is now light -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">GUEST MANIFEST</h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center scroll-reveal">
-                            <!-- Guest Card 1 -->
-                            <div class="bg-white p-6 rounded-lg border border-magenta shadow-md">
-                                <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/100x100/FF00FF/FFFFFF?text=VA+ICON'" class="rounded-full mx-auto mb-3 border-2 border-magenta w-24 h-24 object-cover">
-                                <p class="font-bold text-dark text-xl">Sarah Chen</p>
+                            <!-- Guest Card 1 (Using mascot image) -->
+                            <div class="bg-dark p-6 rounded-lg border border-magenta shadow-md">
+                                <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/100x100/1A1A1A/FF00FF?text=VA+ICON'" class="rounded-full mx-auto mb-3 border-2 border-magenta w-24 h-24 object-cover">
+                                <p class="font-bold text-light text-xl">Sarah Chen</p>
                                 <p class="text-sm text-yellow">Voice Operator</p>
                                 <a href="javascript:void(0)" onclick="showMessage('Autograph passes required for interaction.')" class="mt-3 inline-block text-cyan hover:text-green text-sm font-bold">Protocol Info &rarr;</a>
                             </div>
-                            <!-- Guest Card 2 -->
-                            <div class="bg-white p-6 rounded-lg border border-cyan shadow-md">
-                                <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/100x100/00FFFF/FFFFFF?text=ART+ICON'" class="rounded-full mx-auto mb-3 border-2 border-cyan w-24 h-24 object-cover">
-                                <p class="font-bold text-dark text-xl">Kenji Ito</p>
+                            <!-- Guest Card 2 (Using mascot image) -->
+                            <div class="bg-dark p-6 rounded-lg border border-cyan shadow-md">
+                                <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/100x100/1A1A1A/00FFFF?text=ART+ICON'" class="rounded-full mx-auto mb-3 border-2 border-cyan w-24 h-24 object-cover">
+                                <p class="font-bold text-light text-xl">Kenji Ito</p>
                                 <p class="text-sm text-green">Design Engineer</p>
                                 <a href="javascript:void(0)" onclick="showMessage('Autograph passes required for interaction.')" class="mt-3 inline-block text-cyan hover:text-green text-sm font-bold">Protocol Info &rarr;</a>
                             </div>
-                            <!-- Guest Card 3 -->
-                            <div class="bg-white p-6 rounded-lg border border-yellow shadow-md">
-                                <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/100x100/FFFF00/FFFFFF?text=COS+ICON'" class="rounded-full mx-auto mb-3 border-2 border-yellow w-24 h-24 object-cover">
-                                <p class="font-bold text-dark text-xl">Nova Cosplay</p>
+                            <!-- Guest Card 3 (Using mascot image) -->
+                            <div class="bg-dark p-6 rounded-lg border border-yellow shadow-md">
+                                <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/100x100/1A1A1A/FFFF00?text=COS+ICON'" class="rounded-full mx-auto mb-3 border-2 border-yellow w-24 h-24 object-cover">
+                                <p class="font-bold text-light text-xl">Nova Cosplay</p>
                                 <p class="text-sm text-magenta">Visual Specialist</p>
                                 <a href="javascript:void(0)" onclick="showMessage('Autograph passes required for interaction.')" class="mt-3 inline-block text-cyan hover:text-green text-sm font-bold">Protocol Info &rarr;</a>
                             </div>
@@ -488,11 +511,11 @@
                             <div class="space-y-6">
                                 <h3 class="text-3xl font-bold text-cyan font-['Orbitron'] border-b border-gray-600 pb-2">SECURE NETWORK LINKS</h3>
                                 
-                                <a href="javascript:void(0)" onclick="showMessage('Opening X/Twitter feed...')" class="p-6 bg-medium border-4 border-green rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
+                                <a href="javascript:void(0)" onclick="showMessage('Routing to X Network...')" class="p-6 bg-medium border-4 border-green rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
                                     <p class="text-5xl text-green mr-4 font-['Orbitron']">X</p>
                                     <p class="text-2xl font-bold text-light">@ToyAnimeFest</p>
                                 </a>
-                                <a href="javascript:void(0)" onclick="showMessage('Opening Instagram page...')" class="p-6 bg-medium border-4 border-yellow rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
+                                <a href="javascript:void(0)" onclick="showMessage('Routing to Instagram Network...')" class="p-6 bg-medium border-4 border-yellow rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
                                     <p class="text-5xl text-yellow mr-4 font-['Orbitron']">IG</p>
                                     <p class="text-2xl font-bold text-light">/toyanimefest</p>
                                 </a>
@@ -513,26 +536,28 @@
                 </section>
             `,
             'news': `
-                <section id="news-page" class="white-section py-20 md:py-32 border-b-8 border-green">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">FEST NEWS BULLETIN</h2>
+                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
+                <section id="news-page" class="py-20 md:py-32 border-b-8 border-green dark-content-section" style="background-color: var(--color-bg-medium);">
+                    <div class="max-w-6xl mx-auto px-4" id="page-content">
+                        <!-- Content text color is now light -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">FEST NEWS BULLETIN</h2>
                         
                         <div class="space-y-6 scroll-reveal">
                             <!-- News Item 1 -->
-                            <div class="p-4 bg-white rounded-lg border-l-4 border-magenta shadow-md">
-                                <p class="text-lg font-bold text-dark">STATUS: Guest Acquisition Complete. The creator of 'Star Runner' is confirmed.</p>
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-magenta shadow-md">
+                                <p class="text-lg font-bold text-light">STATUS: Guest Acquisition Complete. The creator of 'Star Runner' is confirmed.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 28, 2025 // ACCESS LEVEL ALPHA</span>
                             </div>
 
                             <!-- News Item 2 -->
-                            <div class="p-4 bg-white rounded-lg border-l-4 border-cyan shadow-md">
-                                <p class="text-lg font-bold text-dark">DATA: Zone Map Released. New layout for Artist Alley deployment verified.</p>
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-cyan shadow-md">
+                                <p class="text-lg font-bold text-light">DATA: Zone Map Released. New layout for Artist Alley deployment verified.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 15, 2025 // ACCESS LEVEL BETA</span>
                             </div>
 
                             <!-- News Item 3 -->
-                            <div class="p-4 bg-white rounded-lg border-l-4 border-green shadow-md">
-                                <p class="text-lg font-bold text-dark">ALERT: Ticket Wave 2 Critical. Inventory decreasing rapidly. Recommend immediate procurement.</p>
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-green shadow-md">
+                                <p class="text-lg font-bold text-light">ALERT: Ticket Wave 2 Critical. Inventory decreasing rapidly. Recommend immediate procurement.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 1, 2025 // ACCESS LEVEL GAMMA</span>
                             </div>
                         </div>
@@ -570,25 +595,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadPage('home');
             
-            // --- Set Image Sources using Raw URL Helper ---
-            // Assuming default branch is 'main' for image loading reliability
-            const RAW_BASE = "https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/";
-            const ICON_URL = `${RAW_BASE}Anime%20BG%20ONLY.jpg`;
-            
+            // --- Set Image Sources for Header/Footer (Hardcoded working path) ---
+            const IMAGE_PATH_MASCOT = "images/mascot_char.png";
+            const IMAGE_PATH_ICON = "images/logo_icon.jpg";
+
             // 1. Header Icon
-            const headerIcon = document.getElementById('header-icon');
-            if (headerIcon) headerIcon.src = ICON_URL;
+            const headerIcon = document.getElementById('logo-icon');
+            if (headerIcon) headerIcon.src = IMAGE_PATH_ICON;
 
             // 2. Footer Mascot
             const footerMascot = document.getElementById('footer-mascot');
-            if (footerMascot) footerMascot.src = ICON_URL;
-            
-            // 3. Footer Social Icons (Placeholder replacement)
-            const socialX = document.getElementById('footer-x-icon');
-            if (socialX) socialX.src = `${RAW_BASE}images/footer_x_icon.png`;
-
-            const socialInsta = document.getElementById('footer-insta-icon');
-            if (socialInsta) socialInsta.src = `${RAW_BASE}images/footer_insta_icon.png`;
+            if (footerMascot) footerMascot.src = IMAGE_PATH_MASCOT;
         });
 
         /* --- General Message Box for CTA Confirmation --- */
@@ -628,11 +645,15 @@
             menu.classList.toggle('hidden');
             document.body.classList.toggle('overflow-hidden');
         });
-
-        document.getElementById('mobile-event-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('mobile-event-submenu').classList.toggle('hidden');
-        });
+        
+        // Handle Mobile Event Dropdown Click
+        const mobileEventLink = document.getElementById('mobile-event-link');
+        if (mobileEventLink) {
+            mobileEventLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('mobile-event-submenu').classList.toggle('hidden');
+            });
+        }
         
         // Hide mobile menu on link click (and loads new page)
         document.querySelectorAll('#mobile-menu a').forEach(link => {
@@ -671,12 +692,13 @@
             }, observerOptions);
 
             elements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) + 50) {
-                    el.classList.add('is-visible');
-                } else {
-                    currentObserver.observe(el);
-                }
+                 const rect = el.getBoundingClientRect();
+                 // Check if element is already in view (for page refresh/initial load)
+                 if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) + 50) {
+                     el.classList.add('is-visible');
+                 } else {
+                     currentObserver.observe(el);
+                 }
             });
         }
 
