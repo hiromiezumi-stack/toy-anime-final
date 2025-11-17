@@ -55,17 +55,17 @@
         .text-dark { color: var(--color-text-dark); }
         .text-light { color: var(--color-text-light); }
         
-        /* Logo Style (UPDATED FOR LARGE SIZE) */
+        /* Logo Style (REVERTED TO SMALLER SIZE) */
         .logo-large {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem; /* Slightly larger base size */
+            font-size: 2rem; /* Reverted to 2rem (approx. text-3xl) */
             line-height: 1;
             letter-spacing: -0.05em;
             text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
         @media (min-width: 768px) {
             .logo-large {
-                font-size: 3.5rem; /* Larger desktop size */
+                font-size: 2.5rem; /* Reverted to 2.5rem (approx. text-4xl) */
             }
         }
 
@@ -163,6 +163,16 @@
         #header {
             z-index: 50;
         }
+        
+        /* Custom Height for About Banner (INCREASED HEIGHT) */
+        .about-banner-h {
+            height: 20rem; /* Tailwind h-80 equivalent for mobile */
+        }
+        @media (min-width: 1024px) {
+            .about-banner-h {
+                height: 28rem; /* Custom larger height for desktop */
+            }
+        }
 
     </style>
 </head>
@@ -191,6 +201,7 @@
                     </a>
 
                     <!-- MAIN LOGO TEXT -->
+                    <!-- Updated class from logo-large to text-3xl for the desired size range, applying custom logo-large only to Orbitron font -->
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-cyan hover:text-magenta transition duration-300 ml-4">
                         TOY ANIME <span class="text-magenta">FEST</span>
                     </a>
@@ -277,7 +288,7 @@
             <div class="flex justify-center space-x-6 mb-6">
                 <!-- Social Media Icons (Using the new neon colors) -->
                 <a href="javascript:void(0)" onclick="showMessage('Routing to X Network...')" class="text-gray-400 hover:text-cyan transition duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.747-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.47-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
                 </a>
                 <a href="javascript:void(0)" onclick="showMessage('Routing to Instagram Network...')" class="text-gray-400 hover:text-magenta transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58-1.28-.058-1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
@@ -359,7 +370,8 @@
                         
                         <div class="space-y-10 scroll-reveal">
                             <!-- ABOUT BANNER IMAGE (Using LOGO ICON: logo_icon.jpg) -->
-                            <img src="images/logo_icon.jpg" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
+                            <!-- HEIGHT INCREASED and OBJECT-CONTAIN used -->
+                            <img src="images/logo_icon.jpg" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-contain" style="background-color: var(--color-bg-dark);">
                             
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                                 <div>
