@@ -185,12 +185,12 @@
                 <!-- Logo/Title and Icon -->
                 <div class="flex items-center">
                     
-                    <!-- NEW ICON: Placed next to logo, links to home -->
+                    <!-- LOGO ICON: Links to home -->
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="flex items-center hover:opacity-90 transition duration-300">
                         <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-lg border-2 border-cyan" onerror="this.style.display='none';">
                     </a>
 
-                    <!-- Nav Link 1: ABOUT (moved slightly to the right to accommodate the icon) -->
+                    <!-- MAIN LOGO TEXT -->
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-cyan hover:text-magenta transition duration-300 ml-4">
                         TOY ANIME <span class="text-magenta">FEST</span>
                     </a>
@@ -358,8 +358,8 @@
                         <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT TOY ANIME FEST</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                            <!-- Mascot Image in About -->
-                            <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
+                            <!-- ABOUT BANNER IMAGE (Using LOGO ICON) -->
+                            <img src="images/logo_icon.jpg" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
                             
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                                 <div>
@@ -606,6 +606,17 @@
             // 2. Footer Mascot
             const footerMascot = document.getElementById('footer-mascot');
             if (footerMascot) footerMascot.src = IMAGE_PATH_MASCOT;
+            
+            // 3. Update paths in pageContent after initial load
+            // This ensures dynamic content also uses the correct paths
+            for (const key in pageContent) {
+                if (pageContent.hasOwnProperty(key)) {
+                    let content = pageContent[key];
+                    content = content.replace(/images\/mascot_char\.png/g, `images/${IMAGE_PATH_MASCOT}`);
+                    content = content.replace(/images\/logo_icon\.jpg/g, `images/${IMAGE_PATH_ICON}`);
+                    pageContent[key] = content;
+                }
+            }
         });
 
         /* --- General Message Box for CTA Confirmation --- */
