@@ -21,7 +21,7 @@
             --color-accent-purple: #9900FF; /* Accent 5 (New) */
             --color-bg-light: #FFFFFF; /* White for content sections */
             --color-bg-dark: #222222; /* Deep Charcoal Gray (Base) */
-            --color-bg-medium: #1A1A1A; /* Darker Gray for accents */
+            --color-bg-medium: #1A1A1A; /* Darker Gray for modal/header base */
             --color-bg-nav: #B0FFFF; /* Lighter Cyan for visible header */
             --color-text-dark: #1A1A1A; /* Dark Text for Light Backgrounds */
             --color-text-light: #E5E7EB; /* Light Text for Dark Backgrounds */
@@ -29,16 +29,16 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--color-text-light);
+            color: var(--color-text-light); /* Light text on dark background (Hero/Body) */
+            /* UPDATED BACKGROUND: Deep Charcoal Gray base with subtle geometric pattern overlay */
             background-color: var(--color-bg-dark); 
             background-image: 
-                radial-gradient(circle at 1px 1px, #444444 1px, transparent 0),
-                linear-gradient(90deg, #333333 1px, transparent 0),
-                linear-gradient(180deg, #333333 1px, transparent 0);
+                radial-gradient(circle at 1px 1px, #444444 1px, transparent 0), /* Subtle noise */
+                linear-gradient(90deg, #333333 1px, transparent 0), /* Vertical grid */
+                linear-gradient(180deg, #333333 1px, transparent 0); /* Horizontal grid */
             background-size: 20px 20px; 
         }
 
-        /* Color Utility Classes */
         .text-cyan { color: var(--color-primary-cyan); }
         .bg-cyan { background-color: var(--color-primary-cyan); }
         .text-magenta { color: var(--color-secondary-magenta); }
@@ -54,13 +54,16 @@
         .text-dark { color: var(--color-text-dark); }
         .text-light { color: var(--color-text-light); }
         
-        /* Typography Styles */
+        /* Logo Style */
         .logo-large {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
             line-height: 1;
             letter-spacing: -0.05em;
+            text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
+
+        /* Hero Section Title Style */
         .hero-title {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
@@ -70,9 +73,20 @@
         .hero-subtitle {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
-        /* Layout and Component Styles */
+        /* Popup Styles (for CTA confirmation only) */
+        .page-modal {
+            max-width: 90vw;
+            width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: var(--color-bg-medium); 
+            color: var(--color-text-dark);
+        }
+        
+        /* Event Dropdown Hover Animation */
         .nav-link-dropdown {
             height: 80px;
             display: flex;
@@ -90,13 +104,21 @@
             opacity: 1;
             pointer-events: auto;
         }
+        
+        /* Icon Styling */
         .nav-icon {
             width: 24px;
             height: 24px;
             margin-right: 8px;
             object-fit: contain;
         }
-
+        .header-logo-icon {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+        
         /* Hero Section Map Box */
         .map-container-bg {
             background-color: rgba(153, 0, 255, 0.1); 
@@ -120,25 +142,43 @@
             transform: translateY(0);
         }
         
-        /* White Section Styling */
-        .white-section {
-            background-color: var(--color-bg-light);
+        /* Modal Content Styling for WHITE background sections */
+        #page-content {
+            background-color: var(--color-bg-light); 
             color: var(--color-text-dark);
         }
-        
-        /* FIX: Header is fixed (z-index 50) and content area is scrollable. */
+        #page-content .text-light {
+             color: var(--color-text-dark) !important;
+        }
+
+        /* Header is fixed and always on top */
         #header {
             z-index: 50;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
     </style>
 </head>
 <body class="text-light">
 
+    <!-- Raw URL used for all images, assuming standard GitHub repository structure -->
+    <script>
+        const USER_RAW_URL_BASE = "https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/images/";
+        const USER_RAW_LOGO = "Anime BG ONLY.jpg"; // The uploaded image
+        
+        // Helper function to build the full Raw URL
+        function getImageUrl(filename) {
+            // Check if the filename is the root-level logo file
+            if (filename === "Anime BG ONLY.jpg") {
+                return `https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/Anime%20BG%20ONLY.jpg`;
+            }
+            // For other icons/mascots in the images folder
+            return `${USER_RAW_URL_BASE}${encodeURIComponent(filename)}`;
+        }
+    </script>
+
     <!-- Message Box (Used for CTA confirmation only) -->
-    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[1000] p-4 hidden">
-        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary-cyan page-modal bg-dark" id="message-content-box" onclick="event.stopPropagation()">
+    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000] p-4 hidden" onclick="closeMessage()">
+        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-primary-cyan page-modal bg-medium" id="message-content-box" onclick="event.stopPropagation()">
             <div id="message-text-content" class="p-8 text-center text-light">
                 <p class="text-2xl font-bold mb-4">Action Noted</p>
                 <p id="confirmation-text" class="text-lg"></p>
@@ -153,7 +193,7 @@
                 <!-- Logo/Title -->
                 <div class="flex items-center">
                     <!-- NEW ICON INTEGRATION -->
-                    <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/48x48/B0FFFF/1A1A1A?text=ICON'" alt="Toy Anime Fest Icon" class="w-12 h-12 mr-3 object-cover rounded-full border-2 border-magenta hidden md:block">
+                    <img id="header-icon" src="Anime BG ONLY.jpg" alt="Toy Anime Fest Icon" class="header-logo-icon rounded-full border-2 border-magenta hidden md:block">
                     
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-dark hover:text-cyan transition duration-300">
                         TOY ANIME <span class="text-magenta">FEST</span>
@@ -175,7 +215,7 @@
                             EVENT
                         </a>
                         <!-- Submenu links load specific content within the Event page simulation -->
-                        <div class="absolute dropdown-menu bg-medium border-2 border-cyan shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
+                        <div class="absolute dropdown-menu bg-medium border-2 border-cyan shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
                             <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS</a>
                             <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-green transition duration-150">VENDORS</a>
                             <a href="javascript:void(0)" onclick="loadPage('guests')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-yellow transition duration-150 rounded-b-md">GUESTS</a>
@@ -195,7 +235,7 @@
                     </a>
                 </nav>
 
-                <!-- Tickets CTA Button (Loads tickets page) --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-dark px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
+                <!-- Tickets CTA Button --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-dark px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
                     GET TICKETS
                 </a>
                 
@@ -260,7 +300,7 @@
                                     </p>
                                 </div>
                                 
-                                <!-- Mascot Image (UPDATED PATH) -->
+                                <!-- Mascot Image (Using Raw URL helper) -->
                                 <img 
                                     src="Anime BG ONLY.jpg" 
                                     alt="Toy Anime Fest Official Mascot" 
@@ -299,7 +339,7 @@
                         <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT TOY ANIME FEST</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                             <!-- Replaced About Image with Mascot -->
+                             <!-- Mascot Image in About -->
                             <img src="Anime BG ONLY.jpg" onerror="this.src='https://placehold.co/1000x300/FFFFFF/1A1A1A?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full h-48 object-cover">
                             
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -312,9 +352,9 @@
                                 <div>
                                     <h3 class="text-3xl font-bold text-magenta mt-6 font-['Orbitron']">OPERATIONAL GOALS</h3>
                                     <ul class="list-disc list-inside text-dark text-lg space-y-2 pl-4 mt-4">
-                                        <li class="text-dark"><span class="text-yellow font-bold">Unify Zone-A Fandoms:</span> Ensure high engagement and positive community interaction.</li>
-                                        <li class="text-dark"><span class="text-green font-bold">Creator Empowerment:</span> Offer a lucrative platform for independent artists.</li>
-                                        <li class="text-dark"><span class="text-magenta font-bold">Exclusive Content Deployment:</span> Guarantee access to unreleased products and premieres.</li>
+                                        <li class="text-dark"><span class="text-yellow">Unify Zone-A Fandoms:</span> Ensure high engagement and positive community interaction.</li>
+                                        <li class="text-dark"><span class="text-green">Creator Empowerment:</span> Offer a lucrative platform for independent artists.</li>
+                                        <li class="text-dark"><span class="text-magenta">Exclusive Content Deployment:</span> Guarantee access to unreleased products and premieres.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -466,7 +506,7 @@
                                     <img src="https://placehold.co/200x200/00FFFF/FFFFFF?text=MERCH" alt="Photo 2" class="w-full h-full object-cover rounded-lg border-2 border-cyan">
                                     <img src="https://placehold.co/200x200/00FF00/FFFFFF?text=PANEL" alt="Photo 3" class="w-full h-full object-cover rounded-lg border-2 border-green">
                                 </div>
-                                <p class="text-sm text-gray-500 text-center">Clicking these icons will simulate navigating to the external social media pages.</p>
+                                <p class="text-sm text-gray-500 text-center pt-4">Clicking these icons will simulate navigating to the external social media pages.</p>
                             </div>
                         </div>
                     </div>
@@ -479,19 +519,19 @@
                         
                         <div class="space-y-6 scroll-reveal">
                             <!-- News Item 1 -->
-                            <div class="p-6 rounded-xl border-l-8 border-magenta shadow-md bg-white">
+                            <div class="p-4 bg-white rounded-lg border-l-4 border-magenta shadow-md">
                                 <p class="text-lg font-bold text-dark">STATUS: Guest Acquisition Complete. The creator of 'Star Runner' is confirmed.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 28, 2025 // ACCESS LEVEL ALPHA</span>
                             </div>
 
                             <!-- News Item 2 -->
-                            <div class="p-6 rounded-xl border-l-8 border-cyan shadow-md bg-white">
+                            <div class="p-4 bg-white rounded-lg border-l-4 border-cyan shadow-md">
                                 <p class="text-lg font-bold text-dark">DATA: Zone Map Released. New layout for Artist Alley deployment verified.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 15, 2025 // ACCESS LEVEL BETA</span>
                             </div>
 
                             <!-- News Item 3 -->
-                            <div class="p-6 rounded-xl border-l-8 border-green shadow-md bg-white">
+                            <div class="p-4 bg-white rounded-lg border-l-4 border-green shadow-md">
                                 <p class="text-lg font-bold text-dark">ALERT: Ticket Wave 2 Critical. Inventory decreasing rapidly. Recommend immediate procurement.</p>
                                 <span class="text-sm text-gray-500 text-yellow">October 1, 2025 // ACCESS LEVEL GAMMA</span>
                             </div>
@@ -510,17 +550,18 @@
             const newContent = pageContent[pageName];
 
             if (newContent) {
-                // Smooth transition (optional)
+                // Scroll to top of the content area for a clean page transition feel
+                window.scrollTo(0, 0); 
+
+                // Use fade transition
                 contentArea.style.opacity = 0;
                 setTimeout(() => {
                     contentArea.innerHTML = newContent;
-                    window.scrollTo(0, 0); // Scroll to top of the content area
                     contentArea.style.opacity = 1;
                     setupScrollReveal(); // Re-initialize scroll reveal for new content
                 }, 300); // Wait for fade out
                 
             } else if (pageName === 'home') {
-                 // Fallback if home is not defined (though it is)
                  window.location.reload();
             }
         }
@@ -528,6 +569,26 @@
         // Initial page load
         document.addEventListener('DOMContentLoaded', () => {
             loadPage('home');
+            
+            // --- Set Image Sources using Raw URL Helper ---
+            // Assuming default branch is 'main' for image loading reliability
+            const RAW_BASE = "https://raw.githubusercontent.com/hiromiezumi-stack/toy-anime-final/main/";
+            const ICON_URL = `${RAW_BASE}Anime%20BG%20ONLY.jpg`;
+            
+            // 1. Header Icon
+            const headerIcon = document.getElementById('header-icon');
+            if (headerIcon) headerIcon.src = ICON_URL;
+
+            // 2. Footer Mascot
+            const footerMascot = document.getElementById('footer-mascot');
+            if (footerMascot) footerMascot.src = ICON_URL;
+            
+            // 3. Footer Social Icons (Placeholder replacement)
+            const socialX = document.getElementById('footer-x-icon');
+            if (socialX) socialX.src = `${RAW_BASE}images/footer_x_icon.png`;
+
+            const socialInsta = document.getElementById('footer-insta-icon');
+            if (socialInsta) socialInsta.src = `${RAW_BASE}images/footer_insta_icon.png`;
         });
 
         /* --- General Message Box for CTA Confirmation --- */
