@@ -267,13 +267,13 @@
         
         /* Custom Height for About Banner (INCREASED HEIGHT) */
         .about-banner-h {
-            /* 2. Aboutページのバナーの高さを調整 (12rem -> 18rem) */
-            height: 18rem; 
+            /* 1. Aboutページのバナーの高さをさらに調整 (20remへ) */
+            height: 20rem; 
             max-height: 28rem;
         }
         @media (min-width: 1024px) {
             .about-banner-h {
-                height: 20rem; /* デスクトップでさらに縦長に (16rem -> 20rem) */
+                height: 22rem; /* デスクトップでさらに高く */
             }
         }
         
@@ -308,9 +308,9 @@
                 <div class="flex items-center">
                     
                     <!-- LOGO ICON: Links to home -->
+                    <!-- 3. ロゴアイコンを丸型に変更 -->
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="flex items-center hover:opacity-90 transition duration-300">
-                        <!-- 1. ロゴアイコンのクラスを更新 -->
-                        <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-lg border-2 border-new-cyan" onerror="this.src='https://placehold.co/32x32/1A1A1A/00FFFF?text=LOGO'">
+                        <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-full border-2 border-new-cyan" onerror="this.src='https://placehold.co/32x32/1A1A1A/00FFFF?text=LOGO'">
                     </a>
 
                     <!-- MAIN LOGO TEXT -->
@@ -532,7 +532,8 @@
                             </div>
                             <!-- END NEW SECTION -->
 
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                            <!-- MISSION AND GOALS - UPDATED TO STACK VERTICALLY ON ALL DEVICES (grid-cols-1) -->
+                            <div class="grid grid-cols-1 gap-10">
                                 <div>
                                     <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">OUR MISSION</h3>
                                     <p class="text-light text-lg leading-relaxed mt-4">
@@ -567,6 +568,7 @@
 
                             <!-- Event 1: Anime Market (Lavender Background - Text color set to Dark) -->
                             <div class="p-6 rounded-xl border border-cyan space-y-4" style="background-color: var(--color-lavender); color: var(--color-text-dark) !important;">
+                                <!-- 強制的にダークカラーを適用 -->
                                 <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']" style="border-color: var(--color-text-dark) !important; color: var(--color-text-dark) !important;">🍁 LATE NOVEMBER – DECEMBER 2025: ANIME MARKET</h3>
                                 <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Pop-up stalls featuring local anime artists, merch vendors, toy sellers, and food partners. A cozy year-end market filled with creativity.</p>
                             </div>
@@ -579,6 +581,7 @@
                             
                             <!-- Event 3: Anime Movie & Cosplay Nights (Lavender Background - Text color set to Dark) -->
                             <div class="p-6 rounded-xl border border-green space-y-4" style="background-color: var(--color-lavender); color: var(--color-text-dark) !important;">
+                                <!-- 強制的にダークカラーを適用 -->
                                 <h3 class="text-3xl font-bold text-green border-b pb-2 font-['Orbitron']" style="border-color: var(--color-text-dark) !important; color: var(--color-text-dark) !important;">🎬 JANUARY – FEBRUARY 2026: ANIME MOVIE & COSPLAY NIGHTS</h3>
                                 <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Outdoor movie screenings, cosplay contests, small workshops, and themed experiences under the LA sky.</p>
                             </div>
