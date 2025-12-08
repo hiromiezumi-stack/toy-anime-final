@@ -279,8 +279,9 @@
         
         /* Media Section Icons (for uniform font size) */
         .media-caption {
-            font-size: 1rem; 
-            font-weight: 700;
+            /* サイズを統一し、確実にボールドにする */
+            font-size: 1.1rem !important; 
+            font-weight: 900 !important;
             text-align: center;
             margin-top: 0.5rem;
         }
@@ -508,10 +509,10 @@
                         <div class="space-y-10 scroll-reveal">
                             <!-- ABOUT BANNER IMAGE (横長画像として調整) -->
                             <img src="images/about_main_banner.jpg" 
-                                onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ANIME+VERSE+BANNER'" 
+                                onerror="this.src='https://placehold.co/1000x300/FFFFFF/1A1A1A?text=ANIME+VERSE+BANNER'" 
                                 alt="About Image Banner" 
                                 class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-cover" 
-                                style="background-color: var(--color-bg-dark);">
+                                style="background-color: var(--color-bg-light); border-color: var(--color-magenta);">
                             <p class="text-xs text-center text-gray-400 mt-4">
                                 Placeholder: Upload the main banner image to /images/about_main_banner.jpg
                             </p>
@@ -564,29 +565,28 @@
                         <div class="space-y-8 scroll-reveal">
                             <p class="text-light text-xl text-center">Check back soon for confirmed dates and times!</p>
 
-                            <!-- Event 1: Anime Market -->
-                            <div class="bg-medium p-6 rounded-xl border border-cyan space-y-4">
-                                <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']">🍁 LATE NOVEMBER – DECEMBER 2025: ANIME MARKET</h3>
-                                <p class="text-light text-lg">Pop-up stalls featuring local anime artists, merch vendors, toy sellers, and food partners. A cozy year-end market filled with creativity.</p>
+                            <!-- Event 1: Anime Market (Lavender Background - Text color set to Dark) -->
+                            <div class="p-6 rounded-xl border border-cyan space-y-4" style="background-color: var(--color-lavender); color: var(--color-text-dark) !important;">
+                                <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']" style="border-color: var(--color-text-dark) !important; color: var(--color-text-dark) !important;">🍁 LATE NOVEMBER – DECEMBER 2025: ANIME MARKET</h3>
+                                <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Pop-up stalls featuring local anime artists, merch vendors, toy sellers, and food partners. A cozy year-end market filled with creativity.</p>
                             </div>
 
-                            <!-- Event 2: Farmer’s × Anime Market -->
+                            <!-- Event 2: Farmer’s × Anime Market (Dark Background - Default) -->
                             <div class="bg-medium p-6 rounded-xl border border-magenta space-y-4">
                                 <h3 class="text-3xl font-bold text-magenta border-b pb-2 font-['Orbitron']">🌱 MONTHLY (STARTING JANUARY 2026): FARMER’S × ANIME MARKET</h3>
                                 <p class="text-light text-lg">A unique collaboration mixing community farmer’s markets with anime-inspired goods, snacks, and mini-pop-ups.</p>
                             </div>
                             
-                            <!-- Event 3: Anime Movie & Cosplay Nights -->
-                            <div class="bg-medium p-6 rounded-xl border border-green space-y-4">
-                                <h3 class="text-3xl font-bold text-green border-b pb-2 font-['Orbitron']">🎬 JANUARY – FEBRUARY 2026: ANIME MOVIE & COSPLAY NIGHTS</h3>
-                                <p class="text-light text-lg">Outdoor movie screenings, cosplay contests, small workshops, and themed experiences under the LA sky.</p>
+                            <!-- Event 3: Anime Movie & Cosplay Nights (Lavender Background - Text color set to Dark) -->
+                            <div class="p-6 rounded-xl border border-green space-y-4" style="background-color: var(--color-lavender); color: var(--color-text-dark) !important;">
+                                <h3 class="text-3xl font-bold text-green border-b pb-2 font-['Orbitron']" style="border-color: var(--color-text-dark) !important; color: var(--color-text-dark) !important;">🎬 JANUARY – FEBRUARY 2026: ANIME MOVIE & COSPLAY NIGHTS</h3>
+                                <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Outdoor movie screenings, cosplay contests, small workshops, and themed experiences under the LA sky.</p>
                             </div>
 
-                            <!-- Event 4: Anime Expo (Anime Verse Edition) -->
+                            <!-- Event 4: Anime Expo (Anime Verse Edition) (Dark Background - Default) -->
                             <div class="bg-medium p-6 rounded-xl border border-yellow space-y-4">
                                 <h3 class="text-3xl font-bold text-yellow border-b pb-2 font-['Orbitron']">🎉 MARCH 2026: ANIME EXPO (ANIME VERSE EDITION)</h3>
                                 <p class="text-light text-lg">Our biggest event of the year — bringing together top vendors, special guests, community partners, performances, and more magical surprises.</p>
-                            </p>
                             </div>
                         </div>
                     </div>
@@ -731,7 +731,8 @@
                             </p>
                         </div>
                         
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 scroll-reveal">
+                        <!-- UPDATED: Grid layout removed to force vertical stacking on all screens -->
+                        <div class="grid grid-cols-1 gap-10 scroll-reveal">
                             <!-- Left: Social Links -->
                             <div class="space-y-6">
                                 <h3 class="text-3xl font-bold text-cyan font-['Orbitron'] border-b border-gray-600 pb-2">SECURE NETWORK LINKS</h3>
@@ -754,7 +755,7 @@
                             </div>
 
                             <!-- Right: Visuals -->
-                            <div class="space-y-6">
+                            <div class="space-y-6 mt-10"> 
                                 <h3 class="text-3xl font-bold text-magenta font-['Orbitron'] border-b border-gray-600 pb-2">ARCHIVED VISUALS</h3>
                                 <div class="grid grid-cols-3 gap-4">
                                     <div class="flex flex-col">
