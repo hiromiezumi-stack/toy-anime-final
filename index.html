@@ -267,13 +267,13 @@
         
         /* Custom Height for About Banner (INCREASED HEIGHT) */
         .about-banner-h {
-            /* 2. Aboutページのバナーの高さを調整 */
-            height: 12rem; /* 視覚的にロゴアイコンと区別しやすいサイズに縮小 */
+            /* 2. Aboutページのバナーの高さを調整 (12rem -> 18rem) */
+            height: 18rem; 
             max-height: 28rem;
         }
         @media (min-width: 1024px) {
             .about-banner-h {
-                height: 16rem; 
+                height: 20rem; /* デスクトップでさらに縦長に (16rem -> 20rem) */
             }
         }
         
@@ -506,8 +506,15 @@
                         <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT ANIME VERSE</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                            <!-- ABOUT BANNER IMAGE (Referencing Mascot Image to look like a banner) -->
-                            <img src="images/mascot_char.png" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-cover" style="background-color: var(--color-bg-dark);">
+                            <!-- ABOUT BANNER IMAGE (横長画像として調整) -->
+                            <img src="images/about_main_banner.jpg" 
+                                onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ANIME+VERSE+BANNER'" 
+                                alt="About Image Banner" 
+                                class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-cover" 
+                                style="background-color: var(--color-bg-dark);">
+                            <p class="text-xs text-center text-gray-400 mt-4">
+                                Placeholder: Upload the main banner image to /images/about_main_banner.jpg
+                            </p>
                             
                             <!-- NEW: Character Explanation Image Section -->
                             <div class="text-center py-6 scroll-reveal" style="transition-delay: 0.4s;">
