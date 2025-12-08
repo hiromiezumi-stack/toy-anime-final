@@ -3,52 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- UPDATED TITLE to reflect new theme -->
-    <title>ToyAnime Fest: Neon Cyber Pastel Edition</title>
+    <!-- UPDATED TITLE to match user's custom CSS -->
+    <title>ToyAnime Fest: Vivid Pop Multitone Edition</title>
     
     <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Custom Fonts: Inter, Orbitron (Tech), Dancing Script (Hero) -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@700;900&family=Dancing+Script:wght@700&display=swap');
+    <!-- Custom Styles & Vivid Color Definitions --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@700;900&display=swap');
         
-        /* Custom Colors - Neon Pastel Cyberpunk */
+        /* Custom Colors - Vivid Pop Multitone Theme (6 colors + BG) */
         :root {
-            --color-primary-cyan: #00FFFF; /* Primary Neon Cyan */
-            --color-secondary-magenta: #FF69B4; /* Pastel Neon Pink/Magenta */
-            --color-accent-purple: #BA55D3; /* Pastel Neon Purple */
-            --color-accent-green: #00FF00; /* Neon Green */
-            --color-accent-yellow: #FFFF00; /* Neon Yellow */
+            /* 1. ベースカラーを暗いテーマに戻す */
+            --color-primary-cyan: #00FFFF; /* Primary Neon Cyan (Anime Verse Title) */
+            --color-secondary-magenta: #FF00FF; /* Accent 1 Neon Magenta */
+            --color-accent-green: #00FF00; /* Accent 2 Neon Green */
+            --color-accent-yellow: #FFFF00; /* Accent 3 Neon Yellow */
+            --color-accent-orange: #FF8800; /* Accent 4 Neon Orange */
+            --color-accent-purple: #9900FF; /* Accent 5 Neon Purple */
             
-            --color-bg-dark: #1A1A1A; /* Base Dark Gray */
-            --color-bg-medium: #2A2A2A; /* Card/Header Darker Gray */
-            --color-text-light: #F0F0F0; /* Main Light Text */
-            --color-text-dark: #1A1A1A; /* Used for contrasting button text */
+            /* 2. 背景色を黒っぽく戻す */
+            --color-bg-light: #FFFFFF; /* White for content sections (Map Background) */
+            --color-bg-dark: #111111; /* DEEPER Charcoal Gray (Base) - 戻す */
+            --color-bg-medium: #1A1A1A; /* Darker Gray for modal/header base - 戻す */
+            --color-bg-nav: #B0FFFF; 
+            
+            /* 3. テキスト色を明るく戻す */
+            --color-text-dark: #1A1A1A; /* Dark Text (主に明るい背景上) */
+            --color-text-light: #F0F0F0; /* Light Text (主に暗い背景上) - 戻す */
+            
+            /* 4. 新しい強調色 */
+            --color-accent-new-cyan: #60FFFF; /* 元のシアンの代わり */
+            --color-lavender: #E6E6FA; /* ラベンダー色（メニューバー、フッター、Homeセクション内区切り背景） */
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--color-text-light);
+            color: var(--color-text-light); /* Light text on dark background (Hero/Body) */
+            /* UPDATED BACKGROUND: Deep Charcoal Gray base with subtle geometric pattern overlay */
             background-color: var(--color-bg-dark); 
-            /* Subtle dark grid background to match the visual style */
             background-image: 
-                radial-gradient(circle at 1px 1px, #333333 1px, transparent 0),
-                linear-gradient(90deg, #2A2A2A 1px, transparent 0),
-                linear-gradient(180deg, #2A2A2A 1px, transparent 0);
-            background-size: 25px 25px; 
+                radial-gradient(circle at 1px 1px, #333333 1px, transparent 0), /* Subtle noise */
+                linear-gradient(90deg, #2A2A2A 1px, transparent 0), /* Vertical grid */
+                linear-gradient(180deg, #2A2A2A 1px, transparent 0); /* Horizontal grid */
+            background-size: 20px 20px; 
         }
 
-        /* Utility Classes (Using NEON colors) */
         .text-cyan { color: var(--color-primary-cyan); }
         .bg-cyan { background-color: var(--color-primary-cyan); }
         .text-magenta { color: var(--color-secondary-magenta); }
         .bg-magenta { background-color: var(--color-secondary-magenta); }
+        .text-green { color: var(--color-accent-green); }
+        .bg-green { background-color: var(--color-accent-green); }
+        .text-yellow { color: var(--color-accent-yellow); }
+        .bg-yellow { background-color: var(--color-accent-yellow); }
+        .text-orange { color: var(--color-accent-orange); }
+        .bg-orange { background-color: var(--color-accent-orange); }
         .text-purple { color: var(--color-accent-purple); }
         .bg-purple { background-color: var(--color-accent-purple); }
-        .text-green { color: var(--color-accent-green); }
-        .bg-medium { background-color: var(--color-bg-medium); }
-        .bg-dark { background-color: var(--color-bg-dark); }
+        .text-dark { color: var(--color-text-dark); }
+        .text-light { color: var(--color-text-light); }
+        
+        /* カスタムシアンカラーのユーティリティ */
+        .text-new-cyan { color: var(--color-accent-new-cyan); }
+        .border-new-cyan { border-color: var(--color-accent-new-cyan); }
         
         /* Logo Style */
         .logo-large {
@@ -56,59 +74,193 @@
             font-size: 2rem; 
             line-height: 1;
             letter-spacing: -0.05em;
-            text-shadow: none;
+            text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
         @media (min-width: 768px) {
             .logo-large {
                 font-size: 2.5rem; 
             }
         }
-        .header-logo-icon {
-            width: 48px;
-            height: 48px;
-            margin-right: 12px;
-            object-fit: cover;
-        }
 
-        /* Hero Title Style (FLOWING SCRIPT FONT + NEON GLOW) */
+        /* Hero Section Title Style (ANIME VERSE) */
         .hero-title {
-            font-family: 'Dancing Script', cursive; /* Flowing script font */
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            font-size: 5rem; /* Larger font size */
-            /* Multi-color neon glow effect */
-            text-shadow: 
-                0 0 10px var(--color-primary-cyan), 
-                0 0 20px var(--color-secondary-magenta), 
-                0 0 30px var(--color-accent-purple); 
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.2em; 
+            color: var(--color-primary-cyan); 
+            text-shadow: 0 0 8px var(--color-primary-cyan), 0 0 3px var(--color-secondary-magenta); 
+        }
+        
+        /* Title responsiveness */
+        .hero-title-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
         }
         @media (min-width: 768px) {
             .hero-title {
                 font-size: 8rem;
             }
         }
+        /* Star Particle Animation (非表示に戻す) */
+        .star { display: none; }
+
+
         .hero-subtitle {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
-        /* Neon Card/Border Styling (Core of the new look) */
-        .neon-card {
-            background-color: var(--color-bg-medium);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 0 5px var(--color-secondary-magenta);
+        /* ======================================= */
+        /* Header Style (Lavender Background) */
+        /* ======================================= */
+        #header {
+            background-color: var(--color-lavender) !important; /* ラベンダーに設定 */
+            color: var(--color-text-dark); /* テキスト色をダークに */
+            z-index: 50;
+        }
+        /* Navigation Links: テキスト色をダークに設定 */
+        #header .nav-link, 
+        #header .logo-large {
+            color: var(--color-text-dark) !important;
+        }
+        /* ロゴのFEST部分（magenta）はそのまま維持 */
+        #header .logo-large .text-magenta {
+            color: var(--color-secondary-magenta) !important;
+        }
+        /* ホバー色は元のシアンに戻す */
+        #header .hover\:text-cyan:hover {
+            color: var(--color-primary-cyan) !important;
+        }
+        /* Mobile Menu Link Color */
+        #mobile-menu {
+            background-color: var(--color-lavender) !important; /* ラベンダーに設定 */
+        }
+        #mobile-menu a, #mobile-menu button {
+            color: var(--color-text-dark) !important;
+        }
+        #mobile-menu .hover\:bg-gray-800:hover { /* モバイルメニューのホバーをライトに変更 */
+            background-color: #DCDCDC !important;
+        }
+        /* Header Icon Border */
+        .header-logo-icon.border-2.border-new-cyan {
+            border-color: var(--color-text-dark) !important; /* 黒っぽい枠線に */
+        }
+
+        /* ドロップダウンメニュー: デフォルト非表示、ホバー時のみ表示 */
+        .dropdown-menu {
+            display: none; /* <-- デフォルトで非表示に設定 */
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .group:hover .dropdown-menu {
+            display: block; /* <-- ホバー時に表示 */
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* ======================================= */
+        /* Footer Style (Lavender Background) */
+        /* ======================================= */
+        footer {
+            background-color: var(--color-lavender) !important; /* ラベンダーに設定 */
+            border-top: 3px solid var(--color-primary-cyan);
+        }
+        footer .text-light, footer .text-gray-400 {
+            color: var(--color-text-dark) !important; /* フッターのベーステキストをダークに */
+        }
+        /* Footer Contact Protocol: 強調色を新しいシアンに */
+        footer .text-new-cyan {
+            color: var(--color-accent-new-cyan) !important;
+        }
+        footer .hover\:text-new-cyan:hover {
+             color: var(--color-accent-new-cyan) !important;
+        }
+
+        /* ======================================= */
+        /* Content Section Styles (ストライプ調整) */
+        /* ======================================= */
+
+        /* 全てのセクションの基本背景は Dark に統一 */
+        #about-page, #events-page, #competition-page, #vendors-page, #tickets-page, #news-page {
+            background-color: var(--color-bg-dark) !important;
+            color: var(--color-text-light) !important;
+            /* 境界線のスタイルを統一 */
+            border-color: var(--color-primary-cyan); 
+        }
+
+        /* Mediaセクションの背景は Lavender に設定 (ストライプ調整のため) */
+        /* Mediaも黒に戻すため、カスタムスタイルを削除 */
+        #media-page {
+            background-color: var(--color-bg-dark) !important;
+            color: var(--color-text-light) !important;
+            border-color: var(--color-primary-cyan); 
+        }
+
+        /* Homeセクション内の要素の色調整 */
+        .home-content-lavender-bg {
+            background-color: var(--color-lavender);
+            color: var(--color-text-dark) !important;
+        }
+        .home-content-dark-bg {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light) !important;
+        }
+        
+        /* Homeセクションのラベンダー部分のテキスト色上書き */
+        #home-page .home-content-lavender-bg * {
+            color: var(--color-text-dark) !important;
+        }
+        #home-page .home-content-lavender-bg .text-magenta {
+            color: var(--color-secondary-magenta) !important;
+        }
+        #home-page .home-content-lavender-bg .text-green {
+            color: var(--color-accent-green) !important;
+        }
+
+        /* Mediaセクション内のテキスト色上書き (黒背景上なのでライトに戻す) */
+        #media-page * { 
+            color: var(--color-text-light) !important; 
+        }
+        #media-page .text-cyan { color: var(--color-primary-cyan) !important; }
+        #media-page .text-magenta { color: var(--color-secondary-magenta) !important; }
+        #media-page .text-yellow { color: var(--color-accent-yellow) !important; }
+        #media-page .text-green { color: var(--color-accent-green) !important; }
+        #media-page .bg-medium * { color: var(--color-text-light) !important; } /* カード内の色はライト維持 */
+        
+        /* Cards in Dark Sections: テキスト色をライトに統一 */
+        #content-area .bg-medium *,
+        #content-area .bg-dark * {
+            color: var(--color-text-light) !important;
+        }
+        
+        /* Hero Section Map Box (Map BG to White) */
+        .map-container-bg {
+             /* マップコンテナの背景を白に設定 */
+            background-color: var(--color-bg-light) !important; 
+            border: 3px solid var(--color-accent-purple);
+            box-shadow: 0 0 10px rgba(153, 0, 255, 0.5); /* シャドウを抑える */
             transition: all 0.3s ease;
         }
-        .neon-card:hover {
-            box-shadow: 0 0 25px var(--color-primary-cyan), 0 0 10px var(--color-secondary-magenta);
-        }
-        .border-neon {
-            border: 2px solid var(--color-secondary-magenta);
-            box-shadow: 0 0 10px var(--color-secondary-magenta);
-        }
 
-        /* About Banner Height */
+        /* Scroll Reveal (for visual appeal) */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Height for About Banner (INCREASED HEIGHT) */
         .about-banner-h {
             height: 20rem; 
         }
@@ -118,20 +270,12 @@
             }
         }
         
-        /* Media Caption Style (Adjusted for dark background) */
+        /* Media Section Icons (for uniform font size) */
         .media-caption {
             font-size: 1rem; 
             font-weight: 700;
             text-align: center;
             margin-top: 0.5rem;
-            color: var(--color-text-light); 
-        }
-
-        /* Header Style */
-        #header {
-            background-color: var(--color-bg-medium); 
-            z-index: 50;
-            border-bottom: 1px solid var(--color-accent-purple);
         }
 
     </style>
@@ -140,16 +284,16 @@
 
     <!-- Message Box (Used for CTA confirmation only) -->
     <div id="message-box" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[1000] p-4 hidden" onclick="closeMessage()">
-        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-cyan page-modal" id="message-content-box" onclick="event.stopPropagation()">
-            <div id="message-text-content" class="p-8 text-center text-light" style="background-color: var(--color-bg-medium);">
-                <p class="text-2xl font-bold mb-4 text-cyan">ACTION NOTED</p>
+        <div class="rounded-xl shadow-2xl transform transition-all duration-300 scale-95 border-4 border-cyan page-modal bg-medium" id="message-content-box" onclick="event.stopPropagation()">
+            <div id="message-text-content" class="p-8 text-center text-light">
+                <p class="text-2xl font-bold mb-4 text-cyan">Action Noted</p>
                 <p id="confirmation-text" class="text-lg"></p>
                 <button onclick="closeMessage()" class="mt-6 bg-magenta text-dark px-6 py-2 rounded-full font-bold hover:opacity-90">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 transition-all duration-300 shadow-xl">
+    <!-- Header (Sticky Navigation) --><header id="header" class="sticky top-0 transition-all duration-300 shadow-xl" style="background-color: var(--color-lavender); backdrop-filter: blur(5px);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo/Title and Icon -->
@@ -157,17 +301,19 @@
                     
                     <!-- LOGO ICON: Links to home -->
                     <a href="javascript:void(0)" onclick="loadPage('home')" class="flex items-center hover:opacity-90 transition duration-300">
-                        <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-lg border-2 border-cyan" onerror="this.src='https://placehold.co/48x48/1A1A1A/00FFFF?text=LOGO'">
+                        <!-- アイコンの枠線をダークに設定 -->
+                        <img id="logo-icon" src="images/logo_icon.jpg" alt="Toy Anime Fest Logo Icon" class="header-logo-icon rounded-lg border-2 border-new-cyan" onerror="this.src='https://placehold.co/48x48/1A1A1A/00FFFF?text=LOGO'">
                     </a>
 
                     <!-- MAIN LOGO TEXT -->
-                    <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-cyan hover:text-magenta transition duration-300 ml-4">
+                    <!-- ロゴテキストをダークに設定 -->
+                    <a href="javascript:void(0)" onclick="loadPage('home')" class="logo-large font-extrabold text-dark hover:text-magenta transition duration-300 ml-4">
                         TOY ANIME <span class="text-magenta">FEST</span>
                     </a>
                 </div>
                 
                 <!-- Navigation Links (Desktop) -->
-                <nav class="hidden md:flex space-x-10 font-bold text-lg text-light">
+                <nav class="hidden md:flex space-x-10 font-bold text-lg text-dark">
                     <!-- Nav Link 1: ABOUT -->
                     <a href="javascript:void(0)" onclick="loadPage('about')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
                         ABOUT
@@ -179,11 +325,11 @@
                             EVENT
                         </a>
                         <!-- Submenu links load specific content within the Event page simulation -->
-                        <div class="absolute dropdown-menu border-2 border-cyan shadow-xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50 bg-medium">
-                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-dark hover:text-magenta transition duration-150 rounded-t-md">TICKETS (TBD)</a>
-                            <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-3 text-sm text-light hover:bg-dark hover:text-cyan transition duration-150">SCHEDULE (TBD)</a>
-                            <a href="javascript:void(0)" onclick="loadPage('competition')" class="block px-4 py-3 text-sm text-light hover:bg-dark hover:text-orange transition duration-150">COMPETITION</a>
-                            <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-3 text-sm text-light hover:bg-dark hover:text-green transition duration-150 rounded-b-md">VENDORS</a>
+                        <div class="absolute dropdown-menu border-2 border-dark shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
+                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS (TBD)</a>
+                            <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-cyan transition duration-150">SCHEDULE (TBD)</a>
+                            <a href="javascript:void(0)" onclick="loadPage('competition')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-orange transition duration-150">COMPETITION</a>
+                            <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-green transition duration-150 rounded-b-md">VENDORS</a>
                         </div>
                     </div>
                     
@@ -198,28 +344,29 @@
                     </a>
                 </nav>
 
-                <!-- Tickets CTA Button --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-light px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
+                <!-- Tickets CTA Button --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-dark px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
                     TICKETS (TBD)
                 </a>
                 
-                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-light hover:text-magenta focus:outline-none">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-dark hover:text-magenta focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2300/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-700 pb-4 bg-medium">
-            <nav class="flex flex-col space-y-3 p-4 font-bold text-lg text-light">
-                <a href="javascript:void(0)" onclick="loadPage('about')" class="block hover:bg-dark p-3 rounded transition duration-300">ABOUT</a>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-400 pb-4" style="background-color: var(--color-lavender);">
+            <nav class="flex flex-col space-y-3 p-4 font-bold text-lg text-dark">
+                <a href="javascript:void(0)" onclick="loadPage('about')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">ABOUT</a>
                 
                 <!-- Mobile Event Dropdown -->
                 <div>
-                    <a href="javascript:void(0)" id="mobile-event-link" class="block hover:bg-dark p-3 rounded transition duration-300 flex justify-between items-center">
+                    <a href="javascript:void(0)" id="mobile-event-link" class="block hover:bg-gray-200 p-3 rounded transition duration-300 flex justify-between items-center">
                         EVENT
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
-                    <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 rounded-b-lg border-l-2 border-cyan bg-dark">
+                    <!-- ドロップダウンの枠線もダークに設定 -->
+                    <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 rounded-b-lg border-l-2 border-dark" style="background-color: var(--color-bg-medium);">
                         <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-2 text-sm text-light hover:text-magenta transition duration-150">TICKETS (TBD)</a>
                         <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-2 text-sm text-light hover:text-cyan transition duration-150">SCHEDULE (TBD)</a>
                         <a href="javascript:void(0)" onclick="loadPage('competition')" class="block px-4 py-2 text-sm text-light hover:text-orange transition duration-150">COMPETITION</a>
@@ -227,9 +374,9 @@
                     </div>
                 </div>
 
-                <a href="javascript:void(0)" onclick="loadPage('media')" class="block hover:bg-dark p-3 rounded transition duration-300">MEDIA</a>
-                <a href="javascript:void(0)" onclick="loadPage('news')" class="block hover:bg-dark p-3 rounded transition duration-300">NEWS</a>
-                <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block bg-magenta text-light text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">TICKETS (TBD)</a>
+                <a href="javascript:void(0)" onclick="loadPage('media')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">MEDIA</a>
+                <a href="javascript:void(0)" onclick="loadPage('news')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">NEWS</a>
+                <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block bg-magenta text-dark text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">TICKETS (TBD)</a>
             </nav>
         </div>
     </header>
@@ -238,30 +385,34 @@
         <!-- Initial Home Page Content will be loaded here by loadPage('home') -->
     </main>
 
-    <footer class="py-12 shadow-inner bg-medium" style="border-top: 3px solid var(--color-primary-cyan);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-light">
+    <footer class="py-12 shadow-inner" style="background-color: var(--color-lavender); border-top: 3px solid var(--color-primary-cyan);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-dark">
             <!-- Footer Mascot Icon -->
             <img id="footer-mascot" src="images/mascot_char.png" alt="Mascot" class="w-12 h-12 rounded-full mx-auto mb-4 border-2 border-magenta" onerror="this.src='https://placehold.co/48x48/1A1A1A/FF00FF?text=ICON'">
 
-            <h3 class="text-2xl font-bold mb-2 text-cyan font-['Orbitron']">TOY ANIME FEST</h3>
-            <p class="text-gray-400 mb-6">Contact Protocol: info@toyanimefest.com</p>
+            <!-- TOY ANIME FESTのロゴをダークに設定 -->
+            <h3 class="text-2xl font-bold mb-2 text-dark font-['Orbitron']">TOY ANIME FEST</h3>
+            
+            <!-- Contact Protocol: 新しいシアンを適用 -->
+            <p class="mb-6 text-new-cyan">Contact Protocol: <span class="underline">info@toyanimefest.com</span></p>
             
             <div class="flex justify-center space-x-6 mb-6">
-                <!-- Social Media Icons (Using the new neon colors) -->
-                <!-- X/Twitter -->
-                <a href="javascript:void(0)" onclick="showMessage('Routing to X Network: https://twitter.com/toy_animefest')" class="text-gray-400 hover:text-cyan transition duration-300">
+                <!-- Social Media Icons: Direct Links Added -->
+                
+                <!-- X/Twitter (Updated for direct link) -->
+                <a href="https://twitter.com/toy_animefest" target="_blank" class="text-gray-500 hover:text-new-cyan transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.052 17.513c-.156.417-.547.747-.999.747h-10.092c-.452 0-.843-.33-.999-.47-.156-.417-.184-.913-.075-1.349.421-1.758 1.487-3.238 2.87-4.225.267-.187.568-.31.884-.37.33-.064.673-.083 1.018-.083.345 0 .688.019 1.018.083.316.06.617.183.884.37 1.383.987 2.449 2.467 2.87 4.225.109.436.081.932-.075 1.349zM12 7c2.209 0 4 1.791 4 4s-1.791 4-4 4-4-1.791-4-4 1.791-4 4-4z"/></svg>
                 </a>
-                <!-- Instagram -->
-                <a href="javascript:void(0)" onclick="showMessage('Routing to Instagram Network: https://www.instagram.com/toy_animefest/')" class="text-gray-400 hover:text-magenta transition duration-300">
+                <!-- Instagram (Updated for direct link) -->
+                <a href="https://www.instagram.com/toy_animefest/" target="_blank" class="text-gray-500 hover:text-magenta transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.27.058 1.83.249 2.27.426.44.178.78.412 1.12.75 1.06 1.06 1.39 2.54 1.39 4.25v6.592c0 1.71-.33 3.19-1.39 4.25-.34.338-.68.572-1.12.75-.44.177-1 .368-2.27.426-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.85-.07-1.27-.058-1.83-.249-2.27-.426-.44-.178-.78-.412-1.12-.75-1.06-1.06-1.39-2.54-1.39-4.25V7.636c0-1.71.33-3.19 1.39-4.25.34-.338.68-.572 1.12-.75.44-.177 1-.368 2.27-.426 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.25 0-3.668.014-4.949.072-1.32.06-2.25.267-3.04.582-1.07.419-1.85 1.082-2.58 1.812-.73.73-1.39 1.51-1.81 2.58-.315.79-.522 1.72-.58 3.04-.058 1.28-.072 1.697-.072 4.95s.014 3.668.072 4.95c.058 1.32.265 2.25.58 3.04.42 1.07 1.08 1.85 1.81 2.58.73.73 1.51 1.39 2.58 1.81.79.315 1.72.522 3.04.58 1.28.058 1.697.072 4.95.072s3.668-.014 4.95-.072c1.32-.058 2.25-.265 3.04-.58 1.07-.42 1.85-1.08 2.58-1.81.73-.73 1.51-1.39 2.58-1.81.79-.315 1.72-.522 3.04-.58-1.28-.058-1.697-.072-4.95-.072zm0 5.836c-2.316 0-4.197 1.88-4.197 4.197s1.88 4.197 4.197 4.197 4.197-1.88 4.197-4.197-1.88-4.197-4.197-4.197zm0 6.836c-1.455 0-2.639-1.184-2.639-2.639s1.184-2.639 2.639-2.639 2.639 1.184 2.639 2.639-1.184 2.639-2.639 2.639zm3.93-7.53c0 .546-.443.989-.989.989s-.989-.443-.989-.989.443-.989.989-.989.989.443.989.989z"/></svg>
                 </a>
-                <!-- Facebook -->
-                <a href="javascript:void(0)" onclick="showMessage('Routing to Facebook Network: https://www.facebook.com/profile.php?id=61583080624548')" class="text-gray-400 hover:text-cyan transition duration-300">
+                <!-- Facebook (Updated for direct link) -->
+                <a href="https://www.facebook.com/profile.php?id=61583080624548" target="_blank" class="text-gray-500 hover:text-new-cyan transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.5c-.75 0-1.5.75-1.5 1.5v1.5h3l-.5 3h-2.5v7h-3v-7h-2v-3h2v-2c0-1.7 1.3-3 3-3h2v2z"/></svg>
                 </a>
-                <!-- TikTok -->
-                <a href="javascript:void(0)" onclick="showMessage('Routing to TikTok Network: https://www.tiktok.com/@animeverse_2026')" class="text-gray-400 hover:text-magenta transition duration-300">
+                <!-- TikTok (Updated for direct link) -->
+                <a href="https://www.tiktok.com/@animeverse_2026" target="_blank" class="text-gray-400 hover:text-magenta transition duration-300">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.5 16h-2.5v-7h2.5v7zm3.5-7h-2.5v7h2.5v-7zm3.5 0h-2.5v7h2.5v-7z"/></svg>
                 </a>
             </div>
@@ -276,87 +427,112 @@
         // --- PAGE CONTENT DATA STRUCTURE (Moved inside JS for dynamic loading) ---
         const pageContent = {
             'home': `
-                <!-- Hero Section (Mission and Map) -->
-                <section id="hero-home" class="relative overflow-hidden pt-36 pb-28 md:pt-48 md:pb-36 text-center" style="background-color: var(--color-bg-dark);">
-                    <div class="max-w-6xl mx-auto px-4 relative z-10">
-                        <!-- UPDATED: Added space -->
+                <!-- Hero Section (Title Area + Core Operative: Dark Background) -->
+                <section id="hero-home" class="relative overflow-hidden pt-0 pb-0 text-center" style="background-color: var(--color-bg-dark);">
+                    
+                    <!-- Title Area -->
+                    <!-- pt-48: メニューバーの下からAnimeのスペースを確保 -->
+                    <div class="max-w-7xl mx-auto px-4 relative z-10 pt-48 pb-0 md:pt-48">
                         <h1 class="hero-title text-8xl lg:text-9xl text-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
                             ANIME VERSE
                         </h1>
                         <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
                             ーTOY ANIME FESTー
                         </p>
+                    </div>
 
-                        <div class="max-w-6xl mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                    <!-- Core Operative Card (Dark BG) -->
+                    <!-- mt-32: Toy anime festの下からCore Operativeの四角のスペースを確保 -->
+                    <div class="max-w-4xl mx-auto px-4 mb-20 scroll-reveal mt-32" style="transition-delay: 0.3s;">
+                        <div class="p-6 border-4 border-cyan shadow-2xl w-full rounded-none" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
+                            <!-- UPDATED TEXT -->
+                            <h2 class="text-2xl font-bold text-magenta mb-3 uppercase font-['Orbitron']">WHERE ANIME WORLDS COME TO LIFE.</h2>
+                            <p class="text-light text-lg md:text-xl font-light leading-relaxed">
+                                Toy Anime Fest powered by Anime Verse —
+                                bringing fans, creators, and colorful pop-culture magic together in one place.
+                            </p>
+                            <h3 class="text-xl font-bold text-cyan mt-4 font-['Orbitron']">Our Mission</h3>
+                            <p class="text-light text-lg md:text-xl font-light leading-relaxed mt-2">
+                                To create warm, fun, and exciting anime events that connect fans of all ages. From vendor markets to cosplay nights and outdoor anime screenings, Anime Verse celebrates creativity, community, and the joy of Japanese pop culture.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Mascot & Map Split Section (画面幅いっぱいに分割) -->
+                    <div class="w-full grid grid-cols-1 lg:grid-cols-2">
+                        
+                        <!-- Left: Mascot/CTA (Lavender Background) -->
+                        <div class="flex flex-col items-center scroll-reveal py-20 px-4 home-content-lavender-bg">
                             
-                            <!-- Left: Mascot, Mission, CTA -->
-                            <div class="flex flex-col items-center scroll-reveal">
-                                <!-- Mission Statement -->
-                                <div class="mb-8 p-6 border-4 border-cyan rounded-2xl shadow-xl w-full" style="background-color: var(--color-bg-medium);">
-                                    <h2 class="text-2xl font-bold text-magenta mb-3 uppercase font-['Orbitron']">CORE OPERATIVE</h2>
-                                    <p class="text-lg md:text-xl text-dark font-light leading-relaxed">
-                                        Initiate culture sync: Unify global fans, empower next-gen creators, and deploy exclusive content. This is a high-priority mission.
-                                    </p>
-                                </div>
-                                
-                                <!-- Mascot Image (Using working image path: mascot_char.png) -->
-                                <img 
-                                    src="images/mascot_char.png" 
-                                    alt="Toy Anime Fest Official Mascot" 
-                                    class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-magenta transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
-                                    onerror="this.src='https://placehold.co/250x250/F0F0F0/1A1A1A?text=MAIN+MASCOT'"
-                                >
+                            <!-- Mascot Image -->
+                            <img 
+                                src="images/mascot_char.png" 
+                                alt="Toy Anime Fest Official Mascot" 
+                                class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-magenta transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
+                                onerror="this.src='https://placehold.co/250x250/222222/FF8800?text=MAIN+MASCOT'"
+                            >
 
-                                <!-- Tickets CTA (Main) -->
-                                <a href="javascript:void(0)" onclick="loadPage('tickets')" class="mt-8 bg-green text-dark px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
-                                    TICKETS (TBD)
-                                </a>
-                            </div>
+                            <!-- Tickets CTA (Main) -->
+                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="mt-8 bg-green text-dark px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
+                                TICKETS (TBD)
+                            </a>
+                        </div>
 
-                            <!-- Right: Map -->
-                            <div class="scroll-reveal lg:mt-0 mt-10 p-6 rounded-2xl map-container-bg" style="transition-delay: 0.5s;">
-                                <h2 class="text-3xl font-bold text-cyan mb-4 uppercase text-left font-['Orbitron']">DEPLOYMENT ZONE</h2>
-                                <p class="text-dark text-lg mb-4 text-left">Location: Tokyo International Convention Center. Target coordinates locked.</p>
-                                <div class="aspect-video w-full h-80 rounded-xl overflow-hidden border-4 border-secondary-magenta shadow-2xl">
-                                    <iframe 
-                                        src="https://maps.google.com/maps?q=Tokyo%20International%20Convention%20Center&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                                        width="100%" 
-                                        height="100%" 
-                                        style="border:0;" 
-                                        allowfullscreen="" 
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
+                        <!-- Right: Map/Deployment (Dark Background) -->
+                        <div class="flex flex-col items-center scroll-reveal py-20 px-4 home-content-dark-bg" style="transition-delay: 0.5s;">
+                            <!-- マップ関連のテキストをライトカラーに設定 -->
+                            <h2 class="text-3xl font-bold text-cyan mb-4 uppercase text-left font-['Orbitron']">DEPLOYMENT ZONE</h2> 
+                            <p class="text-light text-lg mb-4 text-left font-bold">Location: TBD (Details coming soon).</p>
+                            <div class="aspect-video w-full h-80 rounded-xl overflow-hidden border-4 border-secondary-magenta shadow-2xl flex items-center justify-center font-['Orbitron']" style="background-color: var(--color-bg-light);">
+                                <span class="text-5xl text-dark font-extrabold">MAP TBD</span>
                             </div>
+                            <p class="text-xs text-center text-gray-400 mt-2">Target coordinates locked. Check back for map data deployment status.</p>
                         </div>
                     </div>
                 </section>
             `,
             'about': `
-                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
-                <section id="about-page" class="py-20 md:py-32 border-b-8 border-cyan dark-content-section" style="background-color: var(--color-bg-medium);">
-                    <div class="max-w-6xl mx-auto px-4" id="page-content">
-                        <!-- Content text color is now light -->
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT TOY ANIME FEST</h2>
+                <!-- About Section: Dark Background (黒) -->
+                <section id="about-page" class="py-20 md:py-32 border-b-8 border-cyan" style="background-color: var(--color-bg-dark);">
+                    <div class="max-w-6xl mx-auto px-4 text-light" id="page-content">
+                        <!-- UPDATED TEXT -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT ANIME VERSE</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                            <!-- ABOUT BANNER IMAGE (Using LOGO ICON: logo_icon.jpg) -->
-                            <!-- HEIGHT INCREASED and OBJECT-CONTAIN used -->
-                            <img src="images/logo_icon.jpg" onerror="this.src='https://placehold.co/1000x300/F0F0F0/1A1A1A?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-contain" style="background-color: var(--color-bg-dark);">
+                            <!-- ABOUT BANNER IMAGE -->
+                            <img src="images/logo_icon.jpg" onerror="this.src='https://placehold.co/1000x300/1A1A1A/FFFFFF?text=ABOUT+IMAGE'" alt="About Image" class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-contain" style="background-color: var(--color-bg-dark);">
                             
+                            <!-- NEW: Character Explanation Image Section -->
+                            <div class="text-center py-6 scroll-reveal" style="transition-delay: 0.4s;">
+                                <h3 class="text-3xl font-bold text-yellow font-['Orbitron'] mb-4">CHARACTER INTRODUCTION</h3>
+                                <img 
+                                    src="images/character_explanation.jpg" 
+                                    alt="Anime Verse Main Character Explanation" 
+                                    class="w-full max-w-xl mx-auto h-auto object-cover rounded-xl shadow-2xl border-4 border-green transition duration-500 hover:scale-[1.02]"
+                                    onerror="this.src='https://placehold.co/600x350/00FF00/111111?text=MAIN+CHARACTER+EXPLANATION'"
+                                >
+                                <p class="text-sm text-gray-400 mt-4">
+                                    Placeholder: Upload the character explanation image to /images/character_explanation.jpg
+                                </p>
+                            </div>
+                            <!-- END NEW SECTION -->
+
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                                 <div>
-                                    <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">MISSION BRIEF: FES ORIGINS</h3>
-                                    <p class="text-dark text-lg leading-relaxed mt-4">
-                                        Toy Anime Fest is the nexus point for pop culture synchronization. We execute the mission of unifying global fandoms, empowering creators, and deploying exclusive content. This initiative transcends mere entertainment; it is a critical operation to honor the legacy and future of Japanese visual arts and toy design worldwide.
+                                    <h3 class="text-3xl font-bold text-green mt-6 font-['Orbitron']">OUR MISSION</h3>
+                                    <p class="text-light text-lg leading-relaxed mt-4">
+                                        Anime Verse brings people together through anime-centered events filled with creativity, community, and fun.
+                                        <br><br>
+                                        Our flagship series, <span class="text-magenta font-bold">Toy Anime Fest</span>, celebrates the heart of Japanese pop culture—anime, art, toys, cosplay, and the passionate fans who love them. We aim to create a welcoming space where fans of all ages (10s to 50s and beyond!) can enjoy unique experiences, shop from amazing vendors, discover new creators, and make unforgettable memories.
                                     </p>
                                 </div>
                                 <div>
-                                    <h3 class="text-3xl font-bold text-magenta mt-6 font-['Orbitron']">OPERATIONAL GOALS</h3>
-                                    <ul class="list-disc list-inside text-dark text-lg space-y-2 pl-4 mt-4">
-                                        <li><span class="text-yellow">Unify Zone-A Fandoms:</span> Ensure high engagement and positive community interaction.</li>
-                                        <li><span class="text-green">Creator Empowerment:</span> Offer a lucrative platform for independent artists.</li>
-                                        <li><span class="text-magenta">Exclusive Content Deployment:</span> Guarantee access to unreleased products and premieres.</li>
+                                    <h3 class="text-3xl font-bold text-magenta mt-6 font-['Orbitron']">OUR GOALS</h3>
+                                    <ul class="list-disc list-inside text-light text-lg space-y-3 pl-4 mt-4">
+                                        <li><span class="text-yellow">Build a Friendly Anime Community:</span> Connect anime fans across LA and beyond through inclusive, exciting events.</li>
+                                        <li><span class="text-green">Support Creators & Vendors:</span> Give artists, crafters, merch sellers, and toy designers a fun and profitable place to showcase their work.</li>
+                                        <li><span class="text-magenta">Celebrate Japanese Pop Culture:</span> Share the creativity, color, and imagination of anime with fans of all backgrounds.</li>
+                                        <li><span class="text-cyan">Create Events for Everyone:</span> From markets and cosplay nights to food collabs and open-air movie events—there’s something for every fan.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -365,71 +541,95 @@
                 </section>
             `,
             'events_schedule': `
+                <!-- Events Section: Dark Background (黒) -->
                 <section id="events-page" class="py-20 md:py-32 border-b-8 border-magenta" style="background-color: var(--color-bg-dark);">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">FEST EVENT SCHEDULE</h2>
+                    <div class="max-w-6xl mx-auto px-4 text-light">
+                        <!-- UPDATED TEXT -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">UPCOMING & POSSIBLE EVENTS</h2>
                         
                         <div class="space-y-8 scroll-reveal">
-                            <p class="text-dark text-xl text-center">Check the schedule or navigate directly to Tickets, Vendors, or Guests using the menu above.</p>
+                            <p class="text-light text-xl text-center">Check back soon for confirmed dates and times!</p>
 
+                            <!-- Event 1: Anime Market -->
                             <div class="bg-medium p-6 rounded-xl border border-cyan space-y-4">
-                                <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']">DAY 1: OPENING SALVO</h3>
-                                <div class="flex justify-between text-dark border-b border-gray-300 pb-2">
-                                    <p class="font-bold text-yellow">TBD</p>
-                                    <p>Main Stage: Protocol Start & Exclusive Toy Reveal (TBD)</p>
-                                </div>
-                                <div class="flex justify-between text-dark">
-                                    <p class="font-bold text-yellow">TBD</p>
-                                    <p>Panel: Voice Actor Meetup (TBD)</p>
-                                </div>
+                                <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']">🍁 LATE NOVEMBER – DECEMBER 2025: ANIME MARKET</h3>
+                                <p class="text-light text-lg">Pop-up stalls featuring local anime artists, merch vendors, toy sellers, and food partners. A cozy year-end market filled with creativity.</p>
                             </div>
 
+                            <!-- Event 2: Farmer’s × Anime Market -->
                             <div class="bg-medium p-6 rounded-xl border border-magenta space-y-4">
-                                <h3 class="text-3xl font-bold text-magenta border-b pb-2 font-['Orbitron']">DAY 2: FIELD OPERATIONS</h3>
-                                <div class="flex justify-between text-dark border-b border-gray-300 pb-2">
-                                    <p class="font-bold text-yellow">TBD</p>
-                                    <p>Gallery Hall: Live Sketch Battle Final Round (TBD)</p>
-                                </div>
-                                <div class="flex justify-between text-dark">
-                                    <p class="font-bold text-yellow">TBD</p>
-                                    <p>Main Stage: Grand Cosplay Championship Deployment (TBD)</p>
-                                </div>
+                                <h3 class="text-3xl font-bold text-magenta border-b pb-2 font-['Orbitron']">🌱 MONTHLY (STARTING JANUARY 2026): FARMER’S × ANIME MARKET</h3>
+                                <p class="text-light text-lg">A unique collaboration mixing community farmer’s markets with anime-inspired goods, snacks, and mini-pop-ups.</p>
+                            </div>
+                            
+                            <!-- Event 3: Anime Movie & Cosplay Nights -->
+                            <div class="bg-medium p-6 rounded-xl border border-green space-y-4">
+                                <h3 class="text-3xl font-bold text-green border-b pb-2 font-['Orbitron']">🎬 JANUARY – FEBRUARY 2026: ANIME MOVIE & COSPLAY NIGHTS</h3>
+                                <p class="text-light text-lg">Outdoor movie screenings, cosplay contests, small workshops, and themed experiences under the LA sky.</p>
+                            </div>
+
+                            <!-- Event 4: Anime Expo (Anime Verse Edition) -->
+                            <div class="bg-medium p-6 rounded-xl border border-yellow space-y-4">
+                                <h3 class="text-3xl font-bold text-yellow border-b pb-2 font-['Orbitron']">🎉 MARCH 2026: ANIME EXPO (ANIME VERSE EDITION)</h3>
+                                <p class="text-light text-lg">Our biggest event of the year — bringing together top vendors, special guests, community partners, performances, and more magical surprises.</p>
+                            </p>
                             </div>
                         </div>
                     </div>
                 </section>
             `,
             'competition': `
-                <section id="competition-page" class="py-20 md:py-32 border-b-8 border-orange dark-content-section" style="background-color: var(--color-bg-medium);">
-                    <div class="max-w-6xl mx-auto px-4" id="page-content">
-                        <!-- Content text color is now light -->
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ANIME CHARACTER CONTEST</h2>
+                <!-- Competition Section: Dark Background (黒) -->
+                <section id="competition-page" class="py-20 md:py-32 border-b-8 border-orange" style="background-color: var(--color-bg-dark);">
+                    <div class="max-w-6xl mx-auto px-4 text-light" id="page-content">
+                        <!-- UPDATED TEXT -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">🎨 CHARACTER DESIGN COMPETITION</h2>
+                        
+                        <!-- Image Section Added for Competition -->
+                        <div class="text-center mb-12 scroll-reveal" style="transition-delay: 0.3s;">
+                            <img 
+                                src="images/competition_image.jpg" 
+                                alt="Character Design Contest Promotional Art" 
+                                class="w-full max-w-lg mx-auto h-auto object-cover rounded-xl shadow-2xl border-4 border-cyan transition duration-500 hover:scale-[1.02]"
+                                onerror="this.src='https://placehold.co/800x400/FF8800/111111?text=CHI+CHARACTER+DESIGN+CONTEST'"
+                            >
+                            <p class="text-sm text-gray-400 mt-4">
+                                Placeholder: Upload your image to /images/competition_image.jpg
+                            </p>
+                        </div>
                         
                         <div class="space-y-8 scroll-reveal">
+                            <p class="text-3xl font-bold text-orange text-center mb-6">Design a humanoid friend for Chi!</p>
+
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                                <!-- Competition Overview -->
-                                <div class="bg-dark p-6 rounded-xl border-4 border-orange shadow-xl">
-                                    <h3 class="text-3xl font-bold text-orange mb-4 font-['Orbitron']">MISSION: CREATE AN ICON</h3>
-                                    <p class="text-light text-lg leading-relaxed">
-                                        We are searching for the next iconic character design to represent the ANIME VERSE. Submissions are open to all forms of visual art. The winning design will be featured in next year's promotional campaign and receive a cash prize.
-                                    </p>
-                                    <ul class="list-disc list-inside text-light text-lg space-y-2 pl-4 mt-6">
-                                        <li><span class="text-cyan">PRIZE POOL:</span> $5,000 USD</li>
-                                        <li><span class="text-magenta">DEADLINE:</span> TBD (Information Coming Soon)</li>
-                                        <li><span class="text-yellow">JUDGING:</span> Panel of industry professionals.</li>
+                                <!-- Competition Overview (Dark Card) -->
+                                <div class="bg-dark p-6 rounded-xl border-4 border-orange shadow-2xl">
+                                    <h3 class="text-3xl font-bold text-purple mb-4 font-['Orbitron']">REQUIREMENTS</h3>
+                                    <p class="text-light text-lg leading-relaxed mb-6">Let your creativity shine!</p>
+                                    <ul class="list-disc list-inside text-light text-lg space-y-3 pl-4">
+                                        <li><span class="text-cyan font-bold">Illustration:</span> PNG or JPG file.</li>
+                                        <li><span class="text-magenta font-bold">Resolution:</span> 300dpi minimum.</li>
+                                        <li><span class="text-yellow font-bold">Background:</span> Transparent background preferred.</li>
+                                        <li><span class="text-green font-bold">Content:</span> Humanoid & SFW (Safe For Work).</li>
+                                        <li><span class="text-orange font-bold">Theme:</span> Any theme is welcome — cute, cool, magical, sci-fi, anything!</li>
                                     </ul>
                                 </div>
 
-                                <!-- Submission Rules/CTA -->
-                                <div class="bg-dark p-6 rounded-xl border-4 border-purple shadow-xl flex flex-col justify-between">
+                                <!-- Submission Rules/CTA (Dark Card) -->
+                                <div class="bg-dark p-6 rounded-xl border-4 border-purple shadow-2xl flex flex-col justify-between">
                                     <div>
-                                        <h3 class="text-3xl font-bold text-purple mb-4 font-['Orbitron']">SUBMISSION PROTOCOL</h3>
-                                        <p class="text-light text-lg mb-6">
-                                            All detailed rules and submission guidelines are currently being finalized. Please check back soon for the official competition rulebook.
-                                        </p>
+                                        <h3 class="text-3xl font-bold text-purple mb-4 font-['Orbitron']">PRIZE & DEADLINE</h3>
+                                        <div class="text-light text-lg mb-6 space-y-3">
+                                            <p class="font-bold text-green text-2xl">WINNER RECEIVES:</p>
+                                            <ul class="list-disc list-inside pl-4">
+                                                <li>✨ 2 Free Admissions OR a Free Vendor Booth</li>
+                                            </ul>
+                                            <p class="font-bold text-yellow text-2xl mt-4">SUBMISSION DEADLINE:</p>
+                                            <p class="text-magenta text-xl">📅 December 30 (Current Year)</p>
+                                        </div>
                                     </div>
-                                    <a href="javascript:void(0)" onclick="showMessage('Competition rules will be available here soon.')" class="w-full bg-orange text-dark text-center py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-orange">
-                                        RULEBOOK (TBD)
+                                    <a href="javascript:void(0)" onclick="showMessage('Submission portal link will be available soon. Deadline: December 30.')" class="w-full bg-orange text-dark text-center py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-orange">
+                                        SUBMIT (TBD)
                                     </a>
                                 </div>
                             </div>
@@ -438,19 +638,20 @@
                 </section>
             `,
             'vendors': `
+                <!-- Vendors Section: Dark Background (黒) -->
                 <section id="vendors-page" class="py-20 md:py-32 border-b-8 border-magenta" style="background-color: var(--color-bg-dark);">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">VENDOR DEPLOYMENT ZONE</h2>
+                    <div class="max-w-6xl mx-auto px-4 text-light">
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">VENDOR DEPLOYMENT ZONE</h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal">
-                            <div class="p-6 rounded-xl bg-medium border-4 border-green shadow-xl text-dark">
+                            <div class="p-6 rounded-xl bg-medium border-4 border-green shadow-xl text-light">
                                 <h3 class="text-3xl font-bold text-green mb-2 font-['Orbitron']">EXHIBITOR BOOTHS</h3>
-                                <p class="text-gray-600">High-traffic, premium deployment zones for major brands and manufacturers.</p>
+                                <p class="text-gray-400">High-traffic, premium deployment zones for major brands and manufacturers.</p>
                                 <a href="javascript:void(0)" onclick="showMessage('Vendor application portal is opening in January.')" class="mt-4 inline-block text-magenta font-bold hover:underline font-['Orbitron']">APPLY NOW &rarr;</a>
                             </div>
-                            <div class="p-6 rounded-xl bg-medium border-4 border-yellow shadow-xl text-dark">
+                            <div class="p-6 rounded-xl bg-medium border-4 border-yellow shadow-xl text-light">
                                 <h3 class="text-3xl font-bold text-yellow mb-2 font-['Orbitron']">CREATOR ALLEY</h3>
-                                <p class="text-gray-600">Dedicated tables for independent art deployment, prints, and custom commissions.</p>
+                                <p class="text-gray-400">Dedicated tables for independent art deployment, prints, and custom commissions.</p>
                                 <a href="javascript:void(0)" onclick="showMessage('Artist Alley guidelines and contract are available for download.')" class="mt-4 inline-block text-cyan font-bold hover:underline font-['Orbitron']">GUIDELINES &rarr;</a>
                             </div>
                         </div>
@@ -458,14 +659,14 @@
                 </section>
             `,
             'tickets': `
-                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
-                <section id="tickets-page" class="py-20 md:py-32 border-b-8 border-cyan dark-content-section" style="background-color: var(--color-bg-medium);">
-                    <div class="max-w-6xl mx-auto px-4" id="page-content">
-                        <!-- Content text color is now light -->
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">ACCESS PROTOCOL: TICKETS</h2>
+                <!-- Tickets Section: Dark Background -->
+                <section id="tickets-page" class="py-20 md:py-32 border-b-8 border-cyan" style="background-color: var(--color-bg-dark);">
+                    <div class="max-w-6xl mx-auto px-4 text-light" id="page-content">
+                        <!-- テキストをライトに設定 -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ACCESS PROTOCOL: TICKETS</h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal">
-                            <!-- Pass 1: General (Card changed to dark background for visibility) -->
+                            <!-- Pass 1: General (Dark Card) -->
                             <div class="p-6 rounded-xl bg-dark border-4 border-green shadow-xl">
                                 <h3 class="text-3xl font-bold text-green mb-2 font-['Orbitron']">STANDARD ACCESS</h3>
                                 <p class="text-gray-400 mb-4">Daily permission for zone entry and main operations.</p>
@@ -475,7 +676,7 @@
                                 </button>
                             </div>
                             
-                            <!-- Pass 2: VIP (Card changed to dark background for visibility) -->
+                            <!-- Pass 2: VIP (Dark Card) -->
                             <div class="p-6 rounded-xl bg-dark border-4 border-magenta shadow-xl transform scale-100">
                                 <span class="inline-block bg-yellow text-dark text-sm font-bold px-3 py-1 rounded-full mb-3 font-['Orbitron']">PRIORITY LEVEL</span>
                                 <h3 class="text-3xl font-bold text-magenta mb-2 font-['Orbitron']">ULTRA VIP PASS</h3>
@@ -493,89 +694,98 @@
                 <!-- GUESTS PAGE IS REMOVED FROM NAV BUT KEPT FOR REFERENCE -->
                 <section id="guests-page" class="py-20 md:py-32 border-b-8 border-green dark-content-section" style="background-color: var(--color-bg-medium);">
                     <div class="max-w-6xl mx-auto px-4" id="page-content">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">GUEST MANIFEST (TBD)</h2>
-                        <p class="text-dark text-center text-xl">
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">GUEST MANIFEST (TBD)</h2>
+                        <p class="text-light text-center text-xl">
                             Guest acquisition protocol is still underway. Please check back later for the official manifest and scheduling details.
                         </p>
                     </div>
                 </section>
             `,
             'media': `
+                <!-- Media Section: Dark Background (黒) -->
                 <section id="media-page" class="py-20 md:py-32 border-b-8 border-yellow" style="background-color: var(--color-bg-dark);">
-                    <div class="max-w-6xl mx-auto px-4">
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">MEDIA DEPLOYMENT</h2>
+                    <div class="max-w-6xl mx-auto px-4 text-light">
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">MEDIA DEPLOYMENT</h2>
+                        
+                        <!-- NEW SECTION: Follow Our Journey -->
+                        <div class="text-center mb-12 scroll-reveal" style="transition-delay: 0.1s;">
+                            <h3 class="text-3xl font-bold text-magenta font-['Orbitron'] border-b border-gray-600 pb-2 mb-4">FOLLOW OUR JOURNEY</h3>
+                            <p class="text-light text-lg mb-4 max-w-2xl mx-auto">
+                                Check out photos, videos, and announcements from Anime Verse and Toy Anime Fest.
+                                <br>
+                                From vendor sneak peeks to cosplay showcases and behind-the-scenes prep — everything lives here!
+                            </p>
+                        </div>
                         
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 scroll-reveal">
                             <!-- Left: Social Links -->
                             <div class="space-y-6">
-                                <h3 class="text-3xl font-bold text-cyan font-['Orbitron'] border-b border-gray-400 pb-2">SECURE NETWORK LINKS</h3>
+                                <h3 class="text-3xl font-bold text-cyan font-['Orbitron'] border-b border-gray-600 pb-2">SECURE NETWORK LINKS</h3>
                                 
-                                <!-- Updated Social Link Descriptions to reflect real URLs -->
-                                <a href="javascript:void(0)" onclick="showMessage('Routing to X Network: https://twitter.com/toy_animefest')" class="p-6 bg-medium border-4 border-green shadow-xl text-dark">
-                                    <p class="text-5xl text-green mr-4 font-['Orbitron']">X</p>
-                                    <p class="text-2xl font-bold text-dark">@ToyAnimeFest</p>
-                                </a>
-                                <a href="javascript:void(0)" onclick="showMessage('Routing to Instagram Network: https://www.instagram.com/toy_animefest/')" class="p-6 bg-medium border-4 border-yellow shadow-xl text-dark">
+                                <!-- Instagram (Updated for direct link) -->
+                                <a href="https://www.instagram.com/toy_animefest/" target="_blank" class="p-6 bg-medium border-4 border-yellow rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
                                     <p class="text-5xl text-yellow mr-4 font-['Orbitron']">IG</p>
-                                    <p class="text-2xl font-bold text-dark">/toyanimefest</p>
+                                    <p class="text-2xl font-bold text-light">/toyanimefest</p>
                                 </a>
-                                <a href="javascript:void(0)" onclick="showMessage('Routing to TikTok Network: https://www.tiktok.com/@animeverse_2026')" class="p-6 bg-medium border-4 border-magenta shadow-xl text-dark">
+                                <!-- TikTok (Updated for direct link) -->
+                                <a href="https://www.tiktok.com/@animeverse_2026" target="_blank" class="p-6 bg-medium border-4 border-magenta rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
                                     <p class="text-5xl text-magenta mr-4 font-['Orbitron']">TT</p>
-                                    <p class="text-2xl font-bold text-dark">/animeverse_2026</p>
+                                    <p class="text-2xl font-bold text-light">/animeverse_2026</p>
                                 </a>
-                                <a href="javascript:void(0)" onclick="showMessage('Routing to Facebook Network: https://www.facebook.com/profile.php?id=61583080624548')" class="p-6 bg-medium border-4 border-cyan shadow-xl text-dark">
+                                <!-- Facebook (Updated for direct link) -->
+                                <a href="https://www.facebook.com/profile.php?id=61583080624548" target="_blank" class="p-6 bg-medium border-4 border-cyan rounded-xl text-center flex items-center justify-center hover:scale-[1.02] transition duration-300">
                                     <p class="text-5xl text-cyan mr-4 font-['Orbitron']">FB</p>
-                                    <p class="text-2xl font-bold text-dark">/ToyAnimeFest</p>
+                                    <p class="text-2xl font-bold text-light">/ToyAnimeFest</p>
                                 </a>
                             </div>
 
                             <!-- Right: Visuals -->
                             <div class="space-y-6">
-                                <h3 class="text-3xl font-bold text-magenta font-['Orbitron'] border-b border-gray-400 pb-2">ARCHIVED VISUALS</h3>
+                                <h3 class="text-3xl font-bold text-magenta font-['Orbitron'] border-b border-gray-600 pb-2">ARCHIVED VISUALS</h3>
                                 <div class="grid grid-cols-3 gap-4">
                                     <div class="flex flex-col">
                                         <img src="https://placehold.co/200x200/FF00FF/FFFFFF?text=COSPLAY" alt="Photo 1" class="w-full h-full object-cover rounded-lg border-2 border-magenta">
-                                        <span class="media-caption text-dark">COSPLAY</span>
+                                        <span class="media-caption text-light">COSPLAY</span>
                                     </div>
                                     <div class="flex flex-col">
                                         <img src="https://placehold.co/200x200/00FFFF/FFFFFF?text=MERCH" alt="Photo 2" class="w-full h-full object-cover rounded-lg border-2 border-cyan">
-                                        <span class="media-caption text-dark">MERCH</span>
+                                        <span class="media-caption text-light">MERCH</span>
                                     </div>
                                     <div class="flex flex-col">
                                         <img src="https://placehold.co/200x200/00FF00/FFFFFF?text=PANEL" alt="Photo 3" class="w-full h-full object-cover rounded-lg border-2 border-green">
-                                        <span class="media-caption text-dark">PANEL</span>
+                                        <span class="media-caption text-light">PANEL</span>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-600 text-center pt-4">Clicking these icons will simulate navigating to the external social media pages.</p>
+                                <p class="text-sm text-gray-500 text-center pt-4">Clicking these icons will simulate navigating to the external social media pages.</p>
                             </div>
                         </div>
                     </div>
                 </section>
             `,
             'news': `
-                <!-- UPDATED BACKGROUND to dark theme color: medium gray -->
-                <section id="news-page" class="py-20 md:py-32 border-b-8 border-green dark-content-section" style="background-color: var(--color-bg-medium);">
-                    <div class="max-w-6xl mx-auto px-4" id="page-content">
-                        <!-- Content text color is now light -->
-                        <h2 class="text-5xl font-extrabold text-dark text-center mb-16 font-['Orbitron'] scroll-reveal">FEST NEWS BULLETIN</h2>
+                <!-- News Section: Dark Background -->
+                <section id="news-page" class="py-20 md:py-32 border-b-8 border-green" style="background-color: var(--color-bg-dark);">
+                    <div class="max-w-6xl mx-auto px-4 text-light">
+                        <!-- UPDATED TEXT -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">LATEST UPDATES</h2>
                         
                         <div class="space-y-6 scroll-reveal">
-                            <!-- News Item 1 -->
-                            <div class="p-4 bg-dark rounded-lg border-l-4 border-magenta shadow-xl">
-                                <p class="text-lg font-bold text-light">STATUS: Guest Acquisition Complete. The creator of 'Star Runner' is confirmed.</p>
-                                <span class="text-sm text-gray-300 text-yellow">October 28, 2025 // ACCESS LEVEL ALPHA</span>
+                            <!-- News Item 1 (Dark Card) -->
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-magenta shadow-md">
+                                <p class="text-lg font-bold text-light">Anime Verse is preparing multiple community-friendly anime events across LA!</p>
+                                <span class="text-sm text-gray-500 text-yellow">Current Status // OCTOBER 2025</span>
                             </div>
 
-                            <!-- News Item 2 -->
-                            <div class="p-4 bg-dark rounded-lg border-l-4 border-cyan shadow-xl">
-                                <p class="text-lg font-bold text-light">DATA: Zone Map Released. New layout for Artist Alley deployment verified.</p>
-                                <span class="text-sm text-gray-300 text-yellow">October 15, 2025 // ACCESS LEVEL BETA</span>
+                            <!-- News Item 2 (Dark Card) -->
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-cyan shadow-md">
+                                <p class="text-lg font-bold text-light">We’re currently developing: New vendor markets, Collaborative food events, Cosplay-themed meetups, Outdoor anime movie nights, and a major Anime Expo-style festival in early 2026.</p>
+                                <span class="text-sm text-gray-500 text-yellow">Development Phase // TBD</span>
                             </div>
 
-                            <!-- News Item 3 -->
-                            <div class="p-4 bg-dark rounded-lg border-l-4 border-green shadow-xl">
-                                <p class="text-lg font-bold text-light">ALERT: Ticket Wave 2 Critical. Inventory decreasing rapidly. Recommend immediate procurement.</p>
-                                <span class="text-sm text-gray-300 text-yellow">October 1, 2025 // ACCESS LEVEL GAMMA</span>
+                            <!-- News Item 3 (Dark Card) -->
+                            <div class="p-4 bg-dark rounded-lg border-l-4 border-green shadow-md">
+                                <p class="text-lg font-bold text-light">Stay tuned for announcements, applications, and vendor sign-ups!</p>
+                                <span class="text-sm text-gray-500 text-yellow">Action Required // FOLLOW US</span>
                             </div>
                         </div>
                     </div>
@@ -626,6 +836,7 @@
         });
 
         /* --- General Message Box for CTA Confirmation --- */
+        // NOTE: The showMessage function is kept for non-social media CTA buttons (like TICKETS/RULES)
         function showMessage(text) {
             const messageText = document.getElementById('confirmation-text');
             const messageBox = document.getElementById('message-box');
