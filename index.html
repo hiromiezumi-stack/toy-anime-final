@@ -327,15 +327,15 @@
                         ABOUT
                     </a>
                     
-                    <!-- Nav Link 2: EVENT Dropdown Container -->
+                    <!-- Nav Link 2: EVENT Dropdown Container (TBD削除) -->
                     <div class="relative group">
                         <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="nav-link hover:text-cyan transition duration-300 nav-link-dropdown flex items-center">
                             EVENT
                         </a>
-                        <!-- Submenu links load specific content within the Event page simulation -->
+                        <!-- Submenu links (TBD削除) -->
                         <div class="absolute dropdown-menu border-2 border-dark shadow-2xl min-w-[200px] mt-0 left-1/2 transform -translate-x-1/2 rounded-lg z-50" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
-                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS (TBD)</a>
-                            <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-cyan transition duration-150">SCHEDULE (TBD)</a>
+                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-magenta transition duration-150 rounded-t-md">TICKETS</a>
+                            <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-cyan transition duration-150">SCHEDULE</a>
                             <a href="javascript:void(0)" onclick="loadPage('competition')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-orange transition duration-150">COMPETITION</a>
                             <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-3 text-sm text-light hover:bg-gray-800 hover:text-green transition duration-150 rounded-b-md">VENDORS</a>
                         </div>
@@ -352,11 +352,12 @@
                     </a>
                 </nav>
 
-                <!-- Tickets CTA Button --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-dark px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
-                    TICKETS (TBD)
+                <!-- Tickets CTA Button (TBD削除) --><a href="javascript:void(0)" onclick="loadPage('tickets')" class="hidden md:block bg-magenta text-dark px-6 py-3 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 cta-button border-2 border-magenta">
+                    TICKETS
                 </a>
                 
-                <!-- Mobile Menu Button --><button id="mobile-menu-btn" class="md:hidden text-dark hover:text-magenta focus:outline-none">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-dark hover:text-magenta focus:outline-none">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
@@ -373,10 +374,10 @@
                         EVENT
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
-                    <!-- ドロップダウンの枠線もダークに設定 -->
+                    <!-- ドロップダウンの枠線もダークに設定 (TBD削除) -->
                     <div id="mobile-event-submenu" class="hidden flex flex-col pl-6 rounded-b-lg border-l-2 border-dark" style="background-color: var(--color-bg-medium);">
-                        <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-2 text-sm text-light hover:text-magenta transition duration-150">TICKETS (TBD)</a>
-                        <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-2 text-sm text-light hover:text-cyan transition duration-150">SCHEDULE (TBD)</a>
+                        <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block px-4 py-2 text-sm text-light hover:text-magenta transition duration-150">TICKETS</a>
+                        <a href="javascript:void(0)" onclick="loadPage('events_schedule')" class="block px-4 py-2 text-sm text-light hover:text-cyan transition duration-150">SCHEDULE</a>
                         <a href="javascript:void(0)" onclick="loadPage('competition')" class="block px-4 py-2 text-sm text-light hover:text-orange transition duration-150">COMPETITION</a>
                         <a href="javascript:void(0)" onclick="loadPage('vendors')" class="block px-4 py-2 text-sm text-light hover:text-green transition duration-150">VENDORS</a>
                     </div>
@@ -384,7 +385,7 @@
 
                 <a href="javascript:void(0)" onclick="loadPage('media')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">MEDIA</a>
                 <a href="javascript:void(0)" onclick="loadPage('news')" class="block hover:bg-gray-200 p-3 rounded transition duration-300">NEWS</a>
-                <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block bg-magenta text-dark text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">TICKETS (TBD)</a>
+                <a href="javascript:void(0)" onclick="loadPage('tickets')" class="block bg-magenta text-dark text-center py-3 rounded-lg font-bold mt-4 shadow-lg border-2 border-magenta">TICKETS</a>
             </nav>
         </div>
     </header>
@@ -433,6 +434,14 @@
     <script>
         
         // --- PAGE CONTENT DATA STRUCTURE (Moved inside JS for dynamic loading) ---
+        // Google Form Link for Competition Submission
+        const COMPETITION_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdFwbYialZVFAF77G64Ke_CT119dRBMKSeGpLDYQeRnF9NQBw/viewform?usp=header';
+        
+        // Function to open the Google Form link
+        function openCompetitionForm() {
+            window.open(COMPETITION_FORM_URL, '_blank');
+        }
+
         const pageContent = {
             'home': `
                 <!-- Hero Section (Title Area + Core Operative: Dark Background) -->
@@ -482,7 +491,7 @@
 
                             <!-- Tickets CTA (Main) -->
                             <a href="javascript:void(0)" onclick="loadPage('tickets')" class="mt-8 bg-green text-dark px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
-                                TICKETS (TBD)
+                                TICKETS
                             </a>
                         </div>
 
@@ -554,11 +563,18 @@
                 <!-- Events Section: Dark Background (黒) -->
                 <section id="events-page" class="py-20 md:py-32 border-b-8 border-magenta" style="background-color: var(--color-bg-dark);">
                     <div class="max-w-6xl mx-auto px-4 text-light">
-                        <!-- UPDATED TEXT -->
-                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">UPCOMING & POSSIBLE EVENTS</h2>
+                        <!-- UPDATED TEXT (POSSIBLE削除) -->
+                        <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">UPCOMING EVENTS</h2>
                         
                         <div class="space-y-8 scroll-reveal">
                             <p class="text-light text-xl text-center">Check back soon for confirmed dates and times!</p>
+
+                            <!-- NEW EVENT: Contest Information (MOVED TO TOP) -->
+                            <div class="bg-medium p-6 rounded-xl border border-orange space-y-4">
+                                <h3 class="text-3xl font-bold text-orange border-b pb-2 font-['Orbitron']">🏆 DEADLINE DECEMBER 30: CHARACTER DESIGN CONTEST</h3>
+                                <p class="text-light text-lg">Unleash your creativity and design a companion for our mascot, Chi! The winner gets 2 Free Admissions or a Free Vendor Booth at the next major event.</p>
+                                <a href="javascript:void(0)" onclick="loadPage('competition')" class="mt-2 inline-block text-cyan font-bold hover:underline">View Contest Details &rarr;</a>
+                            </div>
 
                             <!-- Event 1: Anime Market (Lavender Background - Text color set to Dark) -->
                             <div class="p-6 rounded-xl border border-cyan space-y-4" style="background-color: var(--color-lavender); color: var(--color-text-dark) !important;">
@@ -566,7 +582,7 @@
                                 <h3 class="text-3xl font-bold text-cyan border-b pb-2 font-['Orbitron']" style="border-color: var(--color-text-dark) !important; color: var(--color-text-dark) !important;">🍁 LATE NOVEMBER – DECEMBER 2025: ANIME MARKET</h3>
                                 <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Pop-up stalls featuring local anime artists, merch vendors, toy sellers, and food partners. A cozy year-end market filled with creativity.</p>
                             </div>
-
+                            
                             <!-- Event 2: Farmer’s × Anime Market (Dark Background - Default) -->
                             <div class="bg-medium p-6 rounded-xl border border-magenta space-y-4">
                                 <h3 class="text-3xl font-bold text-magenta border-b pb-2 font-['Orbitron']">🌱 MONTHLY (STARTING JANUARY 2026): FARMER’S × ANIME MARKET</h3>
@@ -580,9 +596,9 @@
                                 <p class="text-dark text-lg" style="color: var(--color-text-dark) !important;">Outdoor movie screenings, cosplay contests, small workshops, and themed experiences under the LA sky.</p>
                             </div>
 
-                            <!-- Event 4: Anime Expo (Anime Verse Edition) (Dark Background - Default) -->
+                            <!-- Event 4: Anime Expo (Name changed) -->
                             <div class="bg-medium p-6 rounded-xl border border-yellow space-y-4">
-                                <h3 class="text-3xl font-bold text-yellow border-b pb-2 font-['Orbitron']">🎉 MARCH 2026: ANIME EXPO (ANIME VERSE EDITION)</h3>
+                                <h3 class="text-3xl font-bold text-yellow border-b pb-2 font-['Orbitron']">🎉 MARCH 2026: Toy Anime Festival (ANIME VERSE EDITION)</h3>
                                 <p class="text-light text-lg">Our biggest event of the year — bringing together top vendors, special guests, community partners, performances, and more magical surprises.</p>
                             </div>
                         </div>
@@ -637,8 +653,9 @@
                                             <p class="text-magenta text-xl">📅 December 30 (Current Year)</p>
                                         </div>
                                     </div>
-                                    <a href="javascript:void(0)" onclick="showMessage('Submission portal link will be available soon. Deadline: December 30.')" class="w-full bg-orange text-dark text-center py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-orange">
-                                        SUBMIT (TBD)
+                                    <!-- UPDATED: Google Form Link (openCompetitionForm)を呼び出すように変更 -->
+                                    <a href="javascript:void(0)" onclick="openCompetitionForm()" class="w-full bg-orange text-dark text-center py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-orange">
+                                        SUBMIT
                                     </a>
                                 </div>
                             </div>
@@ -674,6 +691,11 @@
                         <!-- テキストをライトに設定 -->
                         <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ACCESS PROTOCOL: TICKETS</h2>
                         
+                        <!-- 追記: Coming Soonメッセージ -->
+                        <p class="text-3xl font-bold text-magenta text-center mb-12 scroll-reveal">
+                            <span class="inline-block bg-yellow text-dark text-lg font-bold px-4 py-2 rounded-full shadow-lg">COMING SOON</span>
+                        </p>
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-reveal">
                             <!-- Pass 1: General (Dark Card) -->
                             <div class="p-6 rounded-xl bg-dark border-4 border-green shadow-xl">
@@ -681,7 +703,7 @@
                                 <p class="text-gray-400 mb-4">Daily permission for zone entry and main operations.</p>
                                 <p class="text-5xl font-extrabold text-light mb-6">TBD <span class="text-xl text-gray-400">/ UNIT</span></p>
                                 <button onclick="showMessage('Ticket access protocol will be updated soon.')" class="w-full bg-green text-dark py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-green">
-                                    TICKETS (TBD)
+                                    TICKETS
                                 </button>
                             </div>
                             
@@ -692,7 +714,7 @@
                                 <p class="text-gray-400 mb-4">Full priority entry, exclusive assets, and secure link-ups.</p>
                                 <p class="text-5xl font-extrabold text-light mb-6">TBD <span class="text-xl text-gray-400">/ 3-DAY</span></p>
                                 <button onclick="showMessage('Ticket access protocol will be updated soon.')" class="w-full bg-magenta text-dark py-3 rounded-lg text-lg font-bold hover:scale-[1.03] transition duration-300 border-2 border-magenta">
-                                    TICKETS (TBD)
+                                    TICKETS
                                 </button>
                             </div>
                         </div>
