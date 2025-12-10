@@ -97,11 +97,39 @@
             display: inline-block;
             margin-bottom: 20px;
         }
+        
+        /* モバイルでのみヒーロータイトルを2段にし、サイズを調整 */
+        .hero-title-mobile-break {
+            /* モバイルデフォルト (sm未満) */
+            font-size: 3.5rem; 
+            line-height: 1.1;
+            /* デスクトップで適用されないように調整 */
+            font-size: 8rem; /* デスクトップのデフォルト値 */
+        }
+        /* モバイルのみに適用されるフォントサイズを定義 */
+        @media (max-width: 767px) {
+            .hero-title-mobile-break {
+                font-size: 3.5rem; 
+                letter-spacing: 0.1em;
+            }
+        }
+        @media (min-width: 640px) and (max-width: 767px) {
+             .hero-title-mobile-break {
+                font-size: 4.5rem;
+            }
+        }
+        /* デスクトップ (md以上) では元のサイズに戻す (Tailwindのユーティリティクラスで処理) */
         @media (min-width: 768px) {
             .hero-title {
                 font-size: 8rem;
+                letter-spacing: 0.2em; 
+            }
+            .hero-title-mobile-break {
+                font-size: 8rem;
+                line-height: 1;
             }
         }
+
         /* Star Particle Animation (非表示に戻す) */
         .star { display: none; }
 
@@ -140,6 +168,11 @@
         #mobile-menu a, #mobile-menu button {
             color: var(--color-text-dark) !important;
         }
+        /* Fix visibility of links inside the dark mobile event submenu (修正) */
+        #mobile-event-submenu a {
+            color: var(--color-text-light) !important; /* ライトカラーに変更 */
+        }
+        /* Mobile menu links (lavender BG) hover */
         #mobile-menu .hover\:bg-gray-800:hover { /* モバイルメニューのホバーをライトに変更 */
             background-color: #DCDCDC !important;
         }
