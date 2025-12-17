@@ -106,8 +106,15 @@
             /* デスクトップで適用されないように調整 */
             font-size: 8rem; /* デスクトップのデフォルト値 */
         }
+        
         /* モバイルのみに適用されるフォントサイズを定義 */
         @media (max-width: 767px) {
+            /* ユーザーの要望: モバイルで「Anime Verse」の文字サイズを小さくする (4.5remに調整) */
+            .hero-title {
+                font-size: 4.5rem !important; 
+                line-height: 1.1;
+                letter-spacing: 0.1em;
+            }
             .hero-title-mobile-break {
                 font-size: 3.5rem; 
                 letter-spacing: 0.1em;
