@@ -492,12 +492,17 @@
                         
                         <!-- Left: Title Area -->
                         <div class="text-center md:text-left flex-1">
-                            <h1 class="hero-title text-8xl lg:text-9xl text-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
-                                ANIME VERSE
-                            </h1>
-                            <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
-                                ーTOY ANIME FESTー
-                            </p>
+                            <!-- 修正: Verseを基準にAnimeを重ねるレイアウト (タイトル自体は左寄せ) -->
+                            <div class="inline-flex flex-col items-center scroll-reveal" style="transition-delay: 0.1s;">
+                                <!-- ANIME (Verseとほぼ同じサイズ、同じ色で上に配置) -->
+                                <span class="hero-title text-7xl md:text-8xl lg:text-9xl leading-none mb-1">ANIME</span>
+                                <!-- VERSE (メインタイトル) -->
+                                <h1 class="hero-title text-7xl md:text-8xl lg:text-9xl leading-none">VERSE</h1>
+                                <!-- TOY ANIME FEST (Verseの下に中央揃え) -->
+                                <p class="hero-subtitle text-lg md:text-xl lg:text-2xl font-bold text-magenta uppercase tracking-widest mt-4">
+                                    ーTOY ANIME FESTー
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Right: Large Transparent Mascot -->
