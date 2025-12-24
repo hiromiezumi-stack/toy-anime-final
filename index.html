@@ -305,15 +305,15 @@
             transform: translateY(0);
         }
         
-        /* Custom Height for About Banner (INCREASED HEIGHT) */
-        .about-banner-h {
-            /* 1. Aboutページのバナーの高さをさらに調整 (20remへ) */
-            height: 20rem; 
-            max-height: 28rem;
+        /* Custom Height for About Banner (Logo version) */
+        .about-logo-size {
+            width: 14rem;
+            height: 14rem;
         }
-        @media (min-width: 1024px) {
-            .about-banner-h {
-                height: 22rem; /* デスクトップでさらに高く */
+        @media (min-width: 768px) {
+            .about-logo-size {
+                width: 18rem;
+                height: 18rem;
             }
         }
         
@@ -564,12 +564,14 @@
                         <h2 class="text-5xl font-extrabold text-light text-center mb-16 font-['Orbitron'] scroll-reveal">ABOUT ANIME VERSE</h2>
                         
                         <div class="space-y-10 scroll-reveal">
-                            <!-- ABOUT BANNER IMAGE (横長画像として調整) -->
-                            <img src="images/about_main_banner.jpg" 
-                                onerror="this.src='https://placehold.co/1000x300/FFFFFF/1A1A1A?text=ANIME+VERSE+BANNER'" 
-                                alt="About Image Banner" 
-                                class="rounded-xl shadow-lg border border-magenta w-full about-banner-h object-contain" 
-                                style="background-color: var(--color-bg-light); border-color: var(--color-magenta);">
+                            <!-- NEW: Center Circular Logo (Replaced wide banner) -->
+                            <div class="flex justify-center py-6 scroll-reveal" style="transition-delay: 0.2s;">
+                                <img src="images/about_main_banner.jpg" 
+                                    onerror="this.src='https://placehold.co/300x300/1A1A1A/00FFFF?text=LOGO'" 
+                                    alt="About Logo" 
+                                    class="about-logo-size object-cover rounded-full shadow-2xl border-4 border-magenta transform transition duration-500 hover:scale-105" 
+                                    style="border-color: var(--color-magenta);">
+                            </div>
                             
                             <!-- NEW: Character Explanation Image Section -->
                             <div class="text-center py-6 scroll-reveal" style="transition-delay: 0.4s;">
