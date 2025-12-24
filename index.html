@@ -484,25 +484,36 @@
 
         const pageContent = {
             'home': `
-                <!-- Hero Section (Title Area + Core Operative: Dark Background) -->
-                <section id="hero-home" class="relative overflow-hidden pt-0 pb-0 text-center" style="background-color: var(--color-bg-dark);">
+                <!-- Hero Section (Title Area + Mascot Relocation) -->
+                <section id="hero-home" class="relative overflow-hidden pt-0 pb-0" style="background-color: var(--color-bg-dark);">
                     
-                    <!-- Title Area -->
-                    <!-- pt-48: メニューバーの下からAnimeのスペースを確保 -->
-                    <div class="max-w-7xl mx-auto px-4 relative z-10 pt-48 pb-0 md:pt-48">
-                        <h1 class="hero-title text-8xl lg:text-9xl text-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
-                            ANIME VERSE
-                        </h1>
-                        <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
-                            ーTOY ANIME FESTー
-                        </p>
+                    <!-- Title & Mascot Split Container -->
+                    <div class="max-w-7xl mx-auto px-4 relative z-10 pt-48 pb-0 md:pt-48 flex flex-col md:flex-row items-center justify-between gap-8">
+                        
+                        <!-- Left: Title Area -->
+                        <div class="text-center md:text-left flex-1">
+                            <h1 class="hero-title text-8xl lg:text-9xl text-cyan leading-none scroll-reveal" style="transition-delay: 0.1s;">
+                                ANIME VERSE
+                            </h1>
+                            <p class="hero-subtitle text-4xl font-bold text-magenta uppercase tracking-widest mb-16 scroll-reveal" style="transition-delay: 0.2s;">
+                                ーTOY ANIME FESTー
+                            </p>
+                        </div>
+
+                        <!-- Right: Large Transparent Mascot -->
+                        <div class="flex-shrink-0 scroll-reveal" style="transition-delay: 0.3s;">
+                            <img 
+                                src="images/hero-mascot.png" 
+                                alt="Toy Anime Fest Official Mascot" 
+                                class="w-64 md:w-80 lg:w-[450px] h-auto object-contain transform transition duration-500 hover:rotate-2 hover:scale-105"
+                                onerror="this.src='https://placehold.co/500x500/111111/00FFFF?text=HERO+MASCOT'"
+                            >
+                        </div>
                     </div>
 
                     <!-- Core Operative Card (Dark BG) -->
-                    <!-- mt-32: Toy anime festの下からCore Operativeの四角のスペースを確保 -->
-                    <div class="max-w-4xl mx-auto px-4 mb-20 scroll-reveal mt-32" style="transition-delay: 0.3s;">
+                    <div class="max-w-4xl mx-auto px-4 mb-20 scroll-reveal mt-20" style="transition-delay: 0.4s;">
                         <div class="p-6 border-4 border-cyan shadow-2xl w-full rounded-none" style="background-color: var(--color-bg-medium); color: var(--color-text-light);">
-                            <!-- UPDATED TEXT -->
                             <h2 class="text-2xl font-bold text-magenta mb-3 uppercase font-['Orbitron']">WHERE ANIME WORLDS COME TO LIFE.</h2>
                             <p class="text-light text-lg md:text-xl font-light leading-relaxed">
                                 Toy Anime Fest powered by Anime Verse —
@@ -515,29 +526,21 @@
                         </div>
                     </div>
 
-                    <!-- Mascot & Map Split Section (画面幅いっぱいに分割) -->
+                    <!-- Split Section (Bottom Layout adjustment) -->
                     <div class="w-full grid grid-cols-1">
                         
-                        <!-- Left: Mascot/CTA (Lavender Background) -->
-                        <div class="flex flex-col items-center scroll-reveal py-20 px-4 home-content-lavender-bg">
-                            
-                            <!-- Mascot Image -->
-                            <img 
-                                src="images/mascot_char.png" 
-                                alt="Toy Anime Fest Official Mascot" 
-                                class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-magenta transform transition duration-500 hover:rotate-3 hover:scale-110 shadow-2xl"
-                                onerror="this.src='https://placehold.co/250x250/222222/FF8800?text=MAIN+MASCOT'"
-                            >
-
-                            <!-- Tickets CTA (Main) -->
-                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="mt-8 bg-green text-dark px-8 py-4 rounded-full text-xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
+                        <!-- Tickets CTA Section (Lavender Background) -->
+                        <div class="flex flex-col items-center scroll-reveal py-16 px-4 home-content-lavender-bg">
+                            <h2 class="text-3xl font-bold text-dark mb-4 uppercase font-['Orbitron']">READY FOR DEPLOYMENT?</h2>
+                            <p class="text-dark text-lg mb-8 text-center max-w-lg">Join the mission and secure your access protocols for the upcoming Toy Anime Fest events.</p>
+                            <!-- Tickets CTA -->
+                            <a href="javascript:void(0)" onclick="loadPage('tickets')" class="bg-green text-dark px-10 py-5 rounded-full text-2xl font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-green">
                                 TICKETS
                             </a>
                         </div>
 
-                        <!-- Right: Map/Deployment (Dark Background) -->
+                        <!-- Deployment Zone / Map (Dark Background) -->
                         <div class="flex flex-col items-center scroll-reveal py-20 px-4 home-content-dark-bg" style="transition-delay: 0.5s;">
-                            <!-- マップ関連のテキストをライトカラーに設定 -->
                             <h2 class="text-3xl font-bold text-cyan mb-4 uppercase text-left font-['Orbitron']">DEPLOYMENT ZONE</h2> 
                             <p class="text-light text-lg mb-4 text-left font-bold">Location: TBD (Details coming soon).</p>
                             <div class="aspect-video w-full h-80 rounded-xl overflow-hidden border-4 border-secondary-magenta shadow-2xl flex items-center justify-center font-['Orbitron']" style="background-color: var(--color-bg-light);">
